@@ -1,1 +1,1 @@
-export type { Character, GalleryImage, Platform } from './character';
+export type { Character, GalleryCategory, GalleryImage, Platform } from './character';

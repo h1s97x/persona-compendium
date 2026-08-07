@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import CharacterCard from "@/components/features/character/CharacterCard";
-import { CHARACTERS } from "@/lib/constants";
+import CharacterSearch from "@/components/features/character/CharacterSearch";
+import CharacterList from "@/components/features/character/CharacterList";
 
 export const metadata: Metadata = {
   title: "角色介绍",
-  description: "心之怪盗团全体成员介绍，点击角色卡片查看详细信息。",
+  description: "心之怪盗团全体成员介绍，支持按名称搜索与阿尔卡那筛选，点击角色卡片查看详细信息。",
 };
 
 export default function CharactersPage() {
@@ -13,14 +13,11 @@ export default function CharactersPage() {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-p5r-red mb-4">心之怪盗团</h1>
-          <p className="text-white text-xl">点击角色卡片查看详细信息</p>
+          <p className="text-white text-xl">搜索或筛选角色，点击卡片查看详细信息</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {CHARACTERS.map((character, index) => (
-            <CharacterCard key={character.id} character={character} index={index} />
-          ))}
-        </div>
+        <CharacterSearch />
+        <CharacterList />
       </div>
     </div>
   );

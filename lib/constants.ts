@@ -1,4 +1,4 @@
-import { Character, Platform } from '@/types';
+import { Character, GalleryImage, Platform } from '@/types';
 
 export const CHARACTERS: Character[] = [
   {
@@ -220,6 +220,51 @@ export const CHARACTERS: Character[] = [
     },
     skills: ['Brave Step', 'Masquerade', 'Sword Dance'],
     story: '秀尽学园对其表现有着很高的期待。优雅而坚强，追求完美。',
+  },
+];
+
+export const GALLERY_CATEGORIES = [
+  { value: 'all', label: '全部' },
+  { value: 'scene', label: '游戏中的各种纪念照' },
+  { value: 'battle', label: '战斗处决动画' },
+] as const;
+
+export const GALLERY_IMAGES: GalleryImage[] = [
+  {
+    id: 'screenshot1',
+    src: '/images/gallery/screenshot1.webp',
+    alt: '游戏截图 1',
+    category: 'scene',
+  },
+  {
+    id: 'screenshot2',
+    src: '/images/gallery/screenshot2.webp',
+    alt: '游戏截图 2',
+    category: 'scene',
+  },
+  {
+    id: 'screenshot3',
+    src: '/images/gallery/screenshot3.webp',
+    alt: '游戏截图 3',
+    category: 'scene',
+  },
+  {
+    id: 'screenshot4',
+    src: '/images/gallery/screenshot4.webp',
+    alt: '游戏截图 4',
+    category: 'scene',
+  },
+  {
+    id: 'screenshot5',
+    src: '/images/gallery/screenshot5.webp',
+    alt: '战斗处决动画 1',
+    category: 'battle',
+  },
+  {
+    id: 'screenshot6',
+    src: '/images/gallery/screenshot6.webp',
+    alt: '战斗处决动画 2',
+    category: 'battle',
   },
 ];
 

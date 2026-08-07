@@ -21,11 +21,13 @@ export interface Character {
   story: string;
 }
 
+export type GalleryCategory = 'scene' | 'battle';
+
 export interface GalleryImage {
   id: string;
   src: string;
   alt: string;
-  category: 'character' | 'scene' | 'artwork';
+  category: GalleryCategory;
 }
 
 export interface Platform {
