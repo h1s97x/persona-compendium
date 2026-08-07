@@ -1,5 +1,7 @@
 # Persona 5 Royal - 角色介绍网站
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 基于 Next.js 14 + React 18 + TypeScript 构建的《女神异闻录5 皇家版》角色介绍网站。
 
 ## ✨ 功能特性
@@ -30,10 +32,10 @@
 
 ```bash
 # 克隆项目
-git clone <repository-url>
+git clone https://cnb.cool/h1s97x/NextPersona.git
 
 # 进入项目目录
-cd P5R/p5r-next
+cd NextPersona
 
 # 安装依赖
 npm install
@@ -211,9 +213,10 @@ theme: {
 
 ## 📄 许可
 
-本项目为个人学习项目，与 ATLUS 和 SEGA 无关。
+本项目基于 [MIT License](LICENSE) 开源发布，版权归 [h1s97x](https://cnb.cool/h1s97x) 所有。
 
-©ATLUS ©SEGA All rights reserved.
+> 本项目为个人学习项目，与 ATLUS 和 SEGA 无关。
+> ©ATLUS ©SEGA All rights reserved.
 
 ## 👨‍💻 开发者
 
