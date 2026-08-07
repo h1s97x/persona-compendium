@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>⟪女神异闻录:5 皇家版⟫角色介绍</title>
+		<link rel="icon" href="img/alibabaicon.png" sizes="16x16">
+		<script src="js/script.js"></script>
+		<link rel="stylesheet" href="css/styles.css" />
+		<style>
+			html,
+			body {
+				margin: 0;
+				font-family: Arial, sans-serif;
+				background-color: black;
+				text-align: center;
+				background-image: url(img/reddot.png);
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				overflow-x: hidden;
+			}
+
+			header {
+				padding: 1px;
+				text-align: left;
+				color: #ecf0f1;
+				background-image: url(img/bg_header.png);
+				background-size: auto;
+				background-position: left bottom;
+				background-repeat: repeat-x;
+				display: flex;
+			}
+
+			#totop {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				width: 64px;
+				height: 64px;
+				transition: all 0.1s ease-in-out;
+				background: url(img/totop.png);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+				z-index: 3;
+			}
+
+			.buttons {
+				text-align: center;
+				padding: 8px;
+				width: 128px;
+				text-decoration: none;
+				color: black;
+				background: url(img/buttonbg.png);
+				background-repeat: no-repeat;
+				transition: all 0.2s ease-in-out;
+			}
+
+			.buttons:hover {
+				transform: scale(1.1);
+				transition: all 0.2s ease-in-out;
+				opacity: 0.5;
+			}
+
+			#poster {
+				margin: auto;
+				background-image: url(img/poster.png);
+				background-repeat: no-repeat;
+				background-position: center top;
+				position: relative;
+				height: 700px;
+			}
+
+			#logo {
+				max-width: 256px;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			.text1 {
+				height: 500px;
+				width: 1024px;
+				margin: auto;
+				margin-bottom: -150px;
+				background: url(img/red.png);
+				background-size: contain;
+				background-position-x: 70%;
+				background-repeat: no-repeat;
+				padding-top: 64px;
+			}
+
+			.spec {
+				width: 800px;
+				height: auto;
+				margin: auto;
+				margin-top: 128px;
+				background: url(img/bg_spec.png);
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				display: flex;
+				justify-content: space-between;
+				padding: 64px;
+			}
+
+			.about {
+				margin-top: 64px;
+				width: 100%;
+				height: 800px;
+				background: url(img/bg_bottom.png);
+				display: flex;
+			}
+
+			.abouttext p {
+				background: url(img/bottom_info_text.png);
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				color: white;
+				padding-top: 16px;
+				text-align: left;
+				height: 340px;
+				width: 620px;
+				padding: 100px;
+				padding-left: 64px;
+				padding-top: 32px;
+				font-size: 22px;
+				margin-top: -32px;
+				margin-bottom: -128px;
+			}
+
+			.characterimgs {
+				display: flex;
+				background-color: aqua;
+				position: relative;
+				width: 800px;
+				height: 512px;
+				background: url(img/bg_slider_text1.png);
+				background-size: contain;
+				background-repeat: no-repeat;
+				margin: auto;
+			}
+
+			.buynow {
+				position: absolute;
+				bottom: 128px;
+				right: 100px;
+				height: 128px;
+				width: 256px;
+				background: url(img/buynow.png);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+				z-index: 3;
+				transition: opacity 0.1s ease-in-out;
+				opacity: 1;
+			}
+
+			.buynow:hover {
+				transition: opacity 0.1s ease-in-out;
+				opacity: 0.8;
+			}
+
+			.pv {
+				width: 303px;
+				height: 202px;
+				background: url(img/pv.png);
+				position: absolute;
+				left: 64px;
+				bottom: 128px;
+			}
+
+			.pv video {
+				position: absolute;
+				right: 8px;
+				bottom: 8px;
+				width: 251px;
+				height: 141px;
+			}
+
+			#x {
+				height: 64px;
+				position: absolute;
+				right: 12%;
+				top: 10%;
+			}
+
+			#openbtn {
+				position: absolute;
+				z-index: 999;
+				bottom: 8px;
+				right: 8px;
+				width: 251px;
+				height: 141px;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<a id="totop" class="out1"></a>
+		<header>
+			<h1 class="titletext">Persona 5 Royal</h1>
+			<div class="buttonarea">
+				<a href="https://asia.sega.com/persona-remaster/p5r/cht/" class="buttons">官方网站</a>
+				<a href="buy.html" class="buttons">购买</a>
+				<a href="gallery.html" class="buttons">画廊</a>
+			</div>
+		</header>
+		<div class="overlaytext">
+			<img class="floattext" src="img/text1.png" alt="" />
+			<img class="floattext" src="img/text2.png" alt="" />
+		</div>
+		<div class="main">
+			<div id="poster">
+				<img id="logo" src="img/p5r.png" alt="P5R Logo" />
+				<a href="buy.html" class="buynow"></a>
+				<div class="pv">
+					<video autoplay muted onclick="Popup()">
+						<source src="assets/p5r_pv.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<button id="openbtn" onclick="Popup()"></button>
+				</div>
+			</div>
+			<div class="popup" id="popupv">
+				<div>
+					<video id="pv_main" controls>
+						<source src="assets/p5r_pv.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<img src="img/x.png" onclick="closePopup()" alt="" id="x" />
+				</div>
+			</div>
+			<div class="text1">
+				<img src="img/intro_title.png" alt="" />
+				<p>少年主角因某个缘由转学到“东京”的高中后，开始做起了奇异的梦。<br />——你确实是命运之『囚』啊。<br />少年被告知不久之后他就会迎来毁灭。<br /><br /></p>
+				<p>为了完成赋予他的“更生”任务，也为了将人们从邪恶欲望中拯救出来，<br />成为怪盗的主角与各种人邂逅，结下羁绊。<br />在度过了宝贵的一年后，等待你的将是……？</p>
+			</div>
+			<div class="characters">
+				<img class="charatitle" src="img/chara_title.png" alt="" />
+				<div id="div1" class="in">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Joker.png" alt="" />
+						<img class="personaimg" src="img/Arsene.png" alt="" />
+						<img class="charaname" src="img/chara1_name.png" alt="" />
+						<h2>少年主人公因为某个理由转学到「东京」的高中，同时他也开始做起奇怪的梦。──你正是命运的「囚徒」。不远的将来，你将面临毁灭。</h2>
+					</div>
+				</div>
+				<div id="div2" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Skull.png" alt="" />
+						<img class="personaimg" src="img/Kidd.png" alt="" />
+						<img class="charaname" src="img/chara2_name.png" alt="" />
+						<h2>私立秀尽学园的二年级学生，父母已离婚，心之怪盗团的冲锋队长。粗暴的言语行动非常引人注目，学校内的“问题儿”，平时就经常被学园的教员与指导员“关照”，似乎品行很有问题。<h2>
+					</div>
+				</div>
+				<div id="div3" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Carmen.png" alt="" />
+						<img class="personaimg" src="img/Panther.png" alt="" />
+						<img class="charaname" src="img/chara3_name.png" alt="" />
+						<h2>私立秀尽学园的二年级学生，主人公的同班同学，心之怪盗团的女演员。美国混血的日本归国子女，能说出一口流利的英语。性格天真率直，由于拥有模特儿的身材及亮丽的样貎，使同学们对她产生距离感而被孤立。
+						</h2>
+					</div>
+				</div>
+				<div id="div4" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="Naviimg" src="img/Queen.png" alt="" />
+						<img class="Necronomiconimg" src="img/Johanna.png" alt="" />
+						<img class="charaname" src="img/chara4_name.png" alt="" />
+						<h2>私立秀尽学园的三年级生，和奥村春同年级，是主人公、坂本龙司、高卷杏的学姐，学校的学生会长。品行端正、文武双全，有着一本正经绝不妥协的优等生气质，但也因此，站在学生会长的立场上有些飘忽不定。某些时候意外的容易受惊。
+						</h2>
+					</div>
+				</div>
+				<div id="div5" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Noir.png" alt="" />
+						<img class="personaimg" src="img/Milady.png" alt="" />
+						<img class="charaname" src="img/chara5_name.png" alt="" />
+						<h2>私立秀尽学园的三年级生，和新岛真同年级，是主人公、坂本龙司、高卷杏的学姐。奥村集团的社长奥村邦和的女儿，出身于上流社会，拥有良好的教育和修养。</h2>
+					</div>
+				</div>
+				<div id="div6" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Cendrillon.png" alt="" />
+						<img class="personaimg" src="img/Violet.png" alt="" />
+						<img class="charaname" src="img/chara6_name.png" alt="" />
+						<h2>私立秀尽学园的一年级转校生，怪盗团新成员。体育特长生，是一位成绩优异的艺术体操选手，秀尽学园对其表现有着很高的期待。</h2>
+					</div>
+				</div>
+				<div id="div7" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Mona.png" alt="" />
+						<img class="personaimg" src="img/Zorro.png" alt="" />
+						<img class="charaname" src="img/chara7_name.png" alt="" />
+						<h2>心之怪盗团的精神支柱。拥有变身能力，在现实世界以一只普通的黑猫姿态示人，还会利用黑猫的姿态为怪盗团进行刺探的工作。</h2>
+					</div>
+				</div>
+				<div id="div8" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/Goemon.png" alt="" />
+						<img class="personaimg" src="img/Fox.png" alt="" />
+						<img class="charaname" src="img/chara8_name.png" alt="" />
+						<h2>公立洸星高校的二年级生，擅长绘画和节能派料理，兴趣是以节省车费为目的的散步和人类观察。</h2>
+					</div>
+				</div>
+				<div id="div9" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="Naviimg" src="img/Navi.png" alt="" />
+						<img class="Necronomiconimg" src="img/Necronomicon.png" alt="" />
+						<img class="charaname" src="img/chara9_name.png" alt="" />
+						<h2>勒布朗咖啡店老板佐仓惣治郎的隐瞒了存在感的养女。天才少女，精通心理学，情报学，程序设计，尤其是黑客技术。爱好是点心、电子游戏和动画——以及朋友。</h2>
+					</div>
+				</div>
+				<div id="div10" class="out">
+					<div class="characterimgs">
+						<img class="charastar" src="img/chara_star.png" alt="" />
+						<img class="kaitouimg" src="img/RobinHood.png" alt="" />
+						<img class="personaimg" src="img/Crow.png" alt="" />
+						<img class="charaname" src="img/chara10_name.png" alt="" />
+						<h2>高中生侦探，“侦探王子”，协助警方调查“废人化”和“怪盗团”事件。经常参加电视访谈节目，拥有很高的人气，被认为是正义的化身。自称侦探工作和电视节目给他的学校出勤造成了不小的麻烦，所谓“优秀的人也有自己的烦恼”。
+						</h2>
+					</div>
+				</div>
+			</div>
+			<div class="changebar">
+				<div>
+					<img src="img/changebtn1.png" onclick="switchTo('div1')" alt="" />
+					<img src="img/changebtn2.png" onclick="switchTo('div2')" alt="" />
+					<img src="img/changebtn3.png" onclick="switchTo('div3')" alt="" />
+					<img src="img/changebtn4.png" onclick="switchTo('div4')" alt="" />
+					<img src="img/changebtn5.png" onclick="switchTo('div5')" alt="" />
+				</div>
+				<div>
+					<img src="img/changebtn6.png" onclick="switchTo('div6')" alt="" />
+					<img src="img/changebtn7.png" onclick="switchTo('div7')" alt="" />
+					<img src="img/changebtn8.png" onclick="switchTo('div8')" alt="" />
+					<img src="img/changebtn9.png" onclick="switchTo('div9')" alt="" />
+					<img src="img/changebtn10.png" onclick="switchTo('div10')" alt="" />
+				</div>
+			</div>
+			<div class="spec">
+				<div class="speccontent">
+					<img class="specimg" src="img/spec.png" alt="" />
+					<div class="spectext">
+						<h2 class="buttons">游戏名称</h2>
+						<h3> 女神异闻录 5 皇家版</h3>
+					</div>
+					<strong>
+						<div class="spectext">
+							<h2 class="buttons">游戏类型</h2>
+							<h3> JRPG</h3>
+						</div>
+					</strong>
+					<div class="spectext">
+						<h2 class="buttons">支持平台</h2>
+						<h3>Xbox Game Pass<br>Xbox Series X|S<br>PlayStation®5<br>Nintendo Switch™<br>Steam <br />
+							Windows</h3>
+					</div>
+					<div class="spectext">
+						<h2 class="buttons">支持语言</h2>
+						<h3>多语言字幕/日语语音</h3>
+					</div>
+				</div>
+				<img class="cover" src="img/cover.png" alt="cover" />
+			</div>
+			<img src="img/system_requirements.png" alt="" class="sr" />
+			<div class="about">
+				<div class="abouttext">
+					<img src="img/bottom_info_title.png" alt="" />
+					<p>『女神异闻录』为青少年侠盗RPG系列游戏，以现代日本都市为舞台，玩家在体验校园生活、友情、恋爱等生活小事的同时，须挺身面对不可思议的谣言、都市传说等超自然事件。描写主角与觉醒「人格面具能力」的少年少女相遇，并对抗重重困难，逐渐成长的故事。近年亦将触角伸至电视动画、剧场版动画、武道馆Live音乐会、舞台剧、漫画等媒体，每天不断地扩展其魅力。作品中的「人格面具」指的是沉睡於自身体内的「另一个人格」化身成「自古以来的神或恶魔」的样貌现身的个体，是一种拥有强大力量的「另一个自己」
+					</p>
+					<img src="img/serise.png" alt="" />
+				</div>
+				<div class="aboutimg">
+					<img src="img/bottom_info_ss1.png" alt="" />
+					<img src="img/bottom_info_ss2.png" alt="" />
+				</div>
+			</div>
+			<div class="end">
+				<div class="logos">
+					<img src="img/sega_logo_s.png" alt="" />
+					<img src="img/p_studio_logo.png" alt="" />
+					<img src="img/atlus_logo.png" alt="" />
+					<img src="img/electrome.png" alt="" />
+				</div>
+				<p>本页面为个人网页设计作业，与ATLUS无关，与SEGA无关</p>
+				<p>ElectroME 2023年12月25日</p>
+				<div class="logos">
+					<img src="img/ps5_logo.png" alt="" />
+					<img src="img/steam_logo.png" alt="" />
+					<img src="img/switch_logo.png" alt="" />
+					<img src="img/xbox_xs_logo.png" alt="" />
+					<img src="img/xbox_one_logo.png" alt="" />
+				</div>
+				<p>Microsoft Xbox Series X, Xbox Series S, Xbox One and related Xbox logos are trademarks and/or
+					registered trademarks of Microsoft Corporation and the Microsoft group of companies. <br /></p>
+				<p>""PlayStation", "PS4" and "PS5" are trademarks and/or registered trademarks of Sony Interactive
+					Entertainment Inc. <br /></p>
+				<p>The Nintendo Switch LOGO, Nintendo Switch is a trademark of Nintendo. <br /></p>
+				<p>©2021 Valve Corporation. Steam is trademarks and/or registered trademarks of Valve Corporation in the
+					U.S. and/or other countries. <br /></p>
+				<p>©ATLUS ©SEGA All rights reserved.</p>
+			</div>
+		</div>
+	</body>
+</html>

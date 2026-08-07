@@ -1,0 +1,52 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import AudioPlayer from "@/components/effects/AudioPlayer";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import ParticleBackground from "@/components/effects/ParticleBackground";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "女神异闻录5 皇家版 - 角色介绍",
+  description: "心之怪盗团角色介绍网站",
+  keywords: ["Persona 5 Royal", "女神异闻录5", "P5R", "角色介绍"],
+  openGraph: {
+    title: "女神异闻录5 皇家版",
+    description: "心之怪盗团角色介绍网站",
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="zh-CN">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+      >
+        <ParticleBackground />
+        <Header />
+        <ScrollProgress />
+        <main className="min-h-screen pt-16 relative z-10">
+          {children}
+        </main>
+        <Footer />
+        <AudioPlayer />
+      </body>
+    </html>
+  );
+}

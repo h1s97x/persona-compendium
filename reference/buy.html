@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Persona 5 Royal购买</title>
+		<link rel="icon" href="img/alibabaicon.png" sizes="16x16">
+		<link rel="stylesheet" href="css/styles.css" />
+		<style>
+			html,
+			body {
+				margin: 0;
+				font-family: Arial, sans-serif;
+				background-color: black;
+				text-align: center;
+				background-image: url(img/reddot.png);
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				overflow-x: hidden;
+			}
+
+			header {
+				padding: 1px;
+				text-align: left;
+				color: #ecf0f1;
+				background-image: url(img/bg_header.png);
+				background-size: auto;
+				background-position: left bottom;
+				background-repeat: repeat-x;
+				display: flex;
+			}
+
+			.buttons {
+				text-align: center;
+				padding: 8px;
+				width: 128px;
+				text-decoration: none;
+				color: black;
+				background: url(img/buttonbg.png);
+				background-repeat: no-repeat;
+				transition: all 0.2s ease-in-out;
+			}
+
+			.buttons:hover {
+				transform: scale(1.1);
+				transition: all 0.2s ease-in-out;
+				opacity: 0.5;
+			}
+
+			.buttons:hover {
+				transition: opacity 0.1s ease-in-out;
+				opacity: 0.5;
+			}
+
+			.height512 {
+				height: 512px;
+			}
+
+			.buydl {
+				position: absolute;
+				left: 50%;
+				transform: translate(-50%);
+				margin-top: 64px;
+			}
+
+			.divx {
+				display: flex;
+				width: 100%;
+			}
+
+			.buybtns {
+				width: auto;
+				height: auto;
+				width: 256px;
+				margin: 8px;
+				background-color: black;
+				transition: all 0.2s ease-in-out;
+			}
+
+			.buybtns:hover {
+				transform: scale(1.1);
+				transition: all 0.2s ease-in-out;
+			}
+
+			form {
+				width: 400px;
+				margin: 0 auto;
+			}
+
+			label {
+				display: block;
+				color: white;
+				width: 100%;
+				text-align: left;
+			}
+
+			input,
+			select {
+				width: 100%;
+				padding: 4px;
+				box-sizing: border-box;
+				border-radius: 0;
+				border-color: gold;
+				background-color: black;
+				color: white;
+				margin: 4px;
+			}
+
+			.tips {
+				color: white;
+				opacity: 0.5;
+				width: 100%;
+				text-align: left;
+			}
+
+			.buyform {
+				display: flex;
+				position: absolute;
+				left: 50%;
+				transform: translate(-50%);
+				padding: 32px;
+				background: url(img/bottom_info_text.png);
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+
+			.buyform img {
+				height: 300px;
+				margin-left: 32px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1 class="titletext">Shop Guide</h1>
+			<div class="buttonarea">
+				<a href="https://asia.sega.com/persona-remaster/p5r/cht/" class="buttons">官方网站</a>
+				<a href="gallery.html" class="buttons">画廊</a>
+				<a href="index.html" class="buttons">返回首页</a>
+			</div>
+		</header>
+		<div class="main">
+			<img src="img/shopguide_title.png" alt="" />
+			<div class="height512">
+				<img src="img/st.png" alt="" />
+				<div class="buyform">
+					<form id="Form">
+						<label for="name">姓名:</label>
+						<input type="text" id="name" name="name" required>
+
+						<label for="email">邮箱:</label>
+						<input type="email" id="email" name="email" required>
+
+						<label for="address">地址:</label>
+						<input type="text" id="address" name="address" required>
+
+						<label for="product">选择版本:</label>
+						<select id="product" name="product" required>
+							<option value="product1">PlayStation©版本</option>
+							<option value="product2">Nintendo Switch版本</option>
+							<!-- 添加更多产品选项 -->
+						</select>
+						<p class="tips">※数量有限，每人限购一份</p>
+						<button class="buttons" type="submit">提交订单</button>
+					</form>
+					<img src="img/cover.png" alt="" />
+				</div>
+			</div>
+			<div class="height512">
+				<div class="buydl">
+					<img src="img/dl.png" class="dl" alt="" />
+					<div class="divx">
+						<a
+							href="https://www.microsoft.com/zh-hk/p/%e5%a5%b3%e7%a5%9e%e5%bc%82%e9%97%bb%e5%bd%95%ef%bc%95-%e7%9a%87%e5%ae%b6%e7%89%88/9nzdhxl9sjj8?activetab=pivot:overviewtab"><img
+								class="buybtns" src="img/xbox_xs_btn.png" alt="" /></a>
+						<a
+							href="https://www.microsoft.com/zh-hk/p/%e5%a5%b3%e7%a5%9e%e5%bc%82%e9%97%bb%e5%bd%95%ef%bc%95-%e7%9a%87%e5%ae%b6%e7%89%88/9nzdhxl9sjj8?activetab=pivot:overviewtab"><img
+								class="buybtns" src="img/xbox_one_btn.png" alt="" /></a>
+						<a
+							href="https://www.microsoft.com/zh-hk/p/%e5%a5%b3%e7%a5%9e%e5%bc%82%e9%97%bb%e5%bd%95%ef%bc%95-%e7%9a%87%e5%ae%b6%e7%89%88/9nzdhxl9sjj8?activetab=pivot:overviewtab"><img
+								class="buybtns" src="img/windows_btn.png" alt="" /></a>
+					</div>
+					<div class="divx">
+						<a href="https://store.playstation.com/zh-hans-hk/concept/10002771"><img class="buybtns"
+								src="img/ps5_btn.png" alt="" /></a>
+						<a href="https://store.steampowered.com/app/1687950/5/"><img class="buybtns"
+								src="img/steam_btn.png" alt="" /></a>
+						<a href="https://store.nintendo.com.hk/70010000043098"><img class="buybtns"
+								src="img/switch_btn.png" alt="" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="end">
+			<div class="logos">
+				<img src="img/sega_logo_s.png" alt="" />
+				<img src="img/p_studio_logo.png" alt="" />
+				<img src="img/atlus_logo.png" alt="" />
+				<img src="img/electrome.png" alt="" />
+			</div>
+			<p>本页面为个人网页设计作业，与ATLUS无关，与SEGA无关</p>
+			<p>ElectroME 2023年12月25日</p>
+			<div class="logos">
+				<img src="img/ps5_logo.png" alt="" />
+				<img src="img/steam_logo.png" alt="" />
+				<img src="img/switch_logo.png" alt="" />
+				<img src="img/xbox_xs_logo.png" alt="" />
+				<img src="img/xbox_one_logo.png" alt="" />
+			</div>
+			<p>Microsoft Xbox Series X, Xbox Series S, Xbox One and related Xbox logos are trademarks and/or
+				registered trademarks of Microsoft Corporation and the Microsoft group of companies. <br /></p>
+			<p>""PlayStation", "PS4" and "PS5" are trademarks and/or registered trademarks of Sony Interactive
+				Entertainment Inc. <br /></p>
+			<p>The Nintendo Switch LOGO, Nintendo Switch is a trademark of Nintendo. <br /></p>
+			<p>©2021 Valve Corporation. Steam is trademarks and/or registered trademarks of Valve Corporation in the
+				U.S. and/or other countries. <br /></p>
+			<p>©ATLUS ©SEGA All rights reserved.</p>
+		</div>
+		<script>
+			document.getElementById('Form').addEventListener('submit', function(event) {
+				// 阻止默认表单提交行为
+				event.preventDefault();
+
+				// 在这里执行您想要的操作，例如发送数据到服务器、显示消息等
+				alert('您的订单已收到，我们将在24小时内联系您！');
+				window.location.href = 'index.html';
+
+				// 如果需要将表单数据发送到服务器，可以使用Ajax等方式
+				// 例如，使用fetch API：
+				// fetch('your-server-endpoint', {
+				//   method: 'POST',
+				//   body: new FormData(event.target)
+				// })
+				// .then(response => response.json())
+				// .then(data => console.log(data))
+				// .catch(error => console.error('Error:', error));
+			});
+		</script>
+	</body>
+</html>
