@@ -11,15 +11,13 @@ export default function AudioPlayer() {
 
   useEffect(() => {
     // 创建音频元素
-    audioRef.current = new Audio('/audio/bgm.mp3');
-    audioRef.current.loop = true;
-    audioRef.current.volume = volume;
+    const audio = new Audio('/audio/bgm.mp3');
+    audio.loop = true;
+    audioRef.current = audio;
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      audio.pause();
+      audioRef.current = null;
     };
   }, []);
 

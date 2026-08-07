@@ -1,0 +1,172 @@
+# =============================================================================
+# NextPersona  CNB 流水线配置
+#
+# 设计说明（参考 h1s97x 其他仓库的通用模板）：
+#   1. 质量检查：main push / PR 时执行 install + lint + build，
+#      确保合并前代码质量与构建通过（参考 hexo-theme-almagest / venera 的 CI）。
+#   2. GitHub 同步：main push 后用官方 tencentcom/git-sync 插件推送到 GitHub，
+#      敏感凭据（GITHUB_USERNAME / GITHUB_TOKEN）存放在密钥仓库 secret-env。
+#   3. Issue / PR 自动分配：
+#      - issue.open          -> 自动把处理人设置为仓库维护者 h1s97x
+#      - pull_request.target -> 自动分配 PR 处理人（目标分支代码执行，更安全）
+#   4. Tag 发布：打 v* 标签后构建产物并创建 Release、上传附件（参考 sduthesis 模板）。
+#
+# 说明：
+#   - issue.* / tag_push 等仓库级事件必须挂在 $ 兜底分支下（平台约束）。
+#   - PR 类事件 CNB_TOKEN 权限受限，敏感操作（GitHub 同步）放在 push 事件下。
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# main 分支
+# -----------------------------------------------------------------------------
+main:
+  push:
+    # ---- 质量检查：依赖安装 + 代码检查 + 生产构建 ----
+    - name: quality-check
+      docker:
+        image: node:22
+      stages:
+        - name: install-deps
+          script: |
+            set -e
+            npm ci --no-audit --no-fund
+        - name: lint
+          script: |
+            set -e
+            npm run lint
+        - name: build
+          script: |
+            set -e
+            npm run build
+
+    # ---- GitHub 同步：每次 push 到 main 后推送到 GitHub ----
+    - name: sync-to-github
+      # 敏感信息（GITHUB_USERNAME / GITHUB_TOKEN）存放在密钥仓库 secret-env，通过 imports 引用
+      imports:
+        - https://cnb.cool/h1s97x/secret-env/-/blob/main/env.yml
+      stages:
+        - name: sync to github
+          image: tencentcom/git-sync
+          settings:
+            target_url: https://github.com/h1s97x/Nextpersonas.git
+            auth_type: https
+            username: ${GITHUB_USERNAME}
+            password: ${GITHUB_TOKEN}
+            branch: main
+            force: true
+
+  # ---- PR 质量检查：确保合并前代码质量与构建通过 ----
+  pull_request:
+    - name: quality-check
+      docker:
+        image: node:22
+      stages:
+        - name: install-deps
+          script: |
+            set -e
+            npm ci --no-audit --no-fund
+        - name: lint
+          script: |
+            set -e
+            npm run lint
+        - name: build
+          script: |
+            set -e
+            npm run build
+
+  # ---- PR 处理人自动分配（目标分支代码执行，更安全）----
+  pull_request.target:
+    - name: auto-assign-pr-owner
+      stages:
+        - name: assign pr to owner
+          type: git:reviewer
+          options:
+            type: add-assignee
+            reviewers: h1s97x
+
+# -----------------------------------------------------------------------------
+# $ 兜底分支：仓库级事件（issue.* / tag_push）
+# -----------------------------------------------------------------------------
+$:
+  # ---- Issue 自动分配处理人（参考其他项目通用模板）----
+  issue.open:
+    - name: auto-assign-issue-owner
+      docker:
+        image: python:3.12-slim
+      env:
+        ISSUE_ASSIGNEE: h1s97x
+      stages:
+        - name: assign issue to owner
+          script: |
+            set -e
+            python3 - <<'PYEOF'
+            import json
+            import os
+            import urllib.request
+
+            repo = os.environ["CNB_REPO_SLUG"]
+            number = os.environ["CNB_ISSUE_IID"]
+            owner = os.environ["ISSUE_ASSIGNEE"]
+            token = os.environ["CNB_TOKEN"]
+            api = os.environ.get("CNB_API_ENDPOINT", "https://api.cnb.cool").rstrip("/")
+            base = f"{api}/{repo}/-/issues/{number}/assignees"
+
+            def request(path, method="GET", data=None):
+                headers = {
+                    "Authorization": f"Bearer {token}",
+                    "Accept": "application/json",
+                }
+                body = None
+                if data is not None:
+                    body = json.dumps(data).encode()
+                    headers["Content-Type"] = "application/json"
+                req = urllib.request.Request(path, data=body, method=method, headers=headers)
+                with urllib.request.urlopen(req) as resp:
+                    return resp.status, resp.read().decode()
+
+            # 1. 查询当前处理人，已分配则跳过
+            try:
+                _, raw = request(base)
+                assignees = json.loads(raw) if raw else []
+                names = [a.get("username") for a in assignees] if isinstance(assignees, list) else []
+                if owner in names:
+                    print(f"[skip] issue already assigned to {owner}")
+                    raise SystemExit(0)
+            except SystemExit:
+                raise
+            except Exception as e:
+                print(f"[warn] query assignees failed: {e}")
+
+            # 2. 添加处理人
+            status, _ = request(base, method="POST", data={"assignees": [owner]})
+            print(f"[ok] assigned {owner} to issue #{number}, status={status}")
+            PYEOF
+
+  # ---- Tag 发布：质量检查 + 构建产物 + 创建 Release + 上传附件 ----
+  tag_push:
+    - name: release
+      docker:
+        image: node:22
+      stages:
+        - name: install-deps
+          script: |
+            set -e
+            npm ci --no-audit --no-fund
+        - name: lint
+          script: |
+            set -e
+            npm run lint
+        - name: build
+          script: |
+            set -e
+            npm run build
+        - name: create release
+          type: git:release
+          options:
+            title: $CNB_BRANCH
+            description: "Release $CNB_BRANCH"
+        - name: upload build artifacts
+          image: cnbcool/attachments:latest
+          settings:
+            attachments:
+              - "./.next/**"

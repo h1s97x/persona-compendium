@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars -- 以下函数由 reference/index.html 的内联 onclick 事件调用 */
 var nowShowing = "div1";
 
 function switchTo(target) {
