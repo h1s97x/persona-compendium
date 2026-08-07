@@ -9,9 +9,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Fool',
     description: '少年主人公因为某个理由转学到「东京」的高中，同时他也开始做起奇怪的梦。──你正是命运的「囚徒」。不远的将来，你将面临毁灭。',
     images: {
-      character: '/images/characters/Joker.png',
-      persona: '/images/personas/Arsene.png',
-      icon: '/images/icons/changebtn1.png',
+      character: '/images/characters/Joker.webp',
+      persona: '/images/personas/Arsene.webp',
+      icon: '/images/icons/changebtn1.webp',
     },
     stats: {
       strength: 85,
@@ -31,9 +31,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Chariot',
     description: '私立秀尽学园的二年级学生，父母已离婚，心之怪盗团的冲锋队长。粗暴的言语行动非常引人注目，学校内的"问题儿"。',
     images: {
-      character: '/images/characters/Skull.png',
-      persona: '/images/personas/Kidd.png',
-      icon: '/images/icons/changebtn2.png',
+      character: '/images/characters/Skull.webp',
+      persona: '/images/personas/Kidd.webp',
+      icon: '/images/icons/changebtn2.webp',
     },
     stats: {
       strength: 95,
@@ -53,9 +53,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Lovers',
     description: '私立秀尽学园的二年级学生，主人公的同班同学，心之怪盗团的女演员。美国混血的日本归国子女，能说出一口流利的英语。',
     images: {
-      character: '/images/characters/Panther.png',
-      persona: '/images/personas/Carmen.png',
-      icon: '/images/icons/changebtn3.png',
+      character: '/images/characters/Panther.webp',
+      persona: '/images/personas/Carmen.webp',
+      icon: '/images/icons/changebtn3.webp',
     },
     stats: {
       strength: 70,
@@ -75,9 +75,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Emperor',
     description: '公立洸星高校的二年级生，擅长绘画和节能派料理，兴趣是以节省车费为目的的散步和人类观察。',
     images: {
-      character: '/images/characters/Fox.png',
-      persona: '/images/personas/Goemon.png',
-      icon: '/images/icons/changebtn8.png',
+      character: '/images/characters/Fox.webp',
+      persona: '/images/personas/Goemon.webp',
+      icon: '/images/icons/changebtn8.webp',
     },
     stats: {
       strength: 88,
@@ -97,9 +97,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Priestess',
     description: '私立秀尽学园的三年级生，学校的学生会长。品行端正、文武双全，有着一本正经绝不妥协的优等生气质。',
     images: {
-      character: '/images/characters/Queen.png',
-      persona: '/images/personas/Johanna.png',
-      icon: '/images/icons/changebtn4.png',
+      character: '/images/characters/Queen.webp',
+      persona: '/images/personas/Johanna.webp',
+      icon: '/images/icons/changebtn4.webp',
     },
     stats: {
       strength: 82,
@@ -119,9 +119,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Hermit',
     description: '勒布朗咖啡店老板佐仓惣治郎的隐瞒了存在感的养女。天才少女，精通心理学，情报学，程序设计，尤其是黑客技术。',
     images: {
-      character: '/images/characters/Navi.png',
-      persona: '/images/personas/Necronomicon.png',
-      icon: '/images/icons/changebtn9.png',
+      character: '/images/characters/Navi.webp',
+      persona: '/images/personas/Necronomicon.webp',
+      icon: '/images/icons/changebtn9.webp',
     },
     stats: {
       strength: 50,
@@ -141,9 +141,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Empress',
     description: '私立秀尽学园的三年级生，奥村集团的社长奥村邦和的女儿，出身于上流社会，拥有良好的教育和修养。',
     images: {
-      character: '/images/characters/Noir.png',
-      persona: '/images/personas/Milady.png',
-      icon: '/images/icons/changebtn5.png',
+      character: '/images/characters/Noir.webp',
+      persona: '/images/personas/Milady.webp',
+      icon: '/images/icons/changebtn5.webp',
     },
     stats: {
       strength: 80,
@@ -163,9 +163,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Magician',
     description: '心之怪盗团的精神支柱。拥有变身能力，在现实世界以一只普通的黑猫姿态示人。',
     images: {
-      character: '/images/characters/Mona.png',
-      persona: '/images/personas/Zorro.png',
-      icon: '/images/icons/changebtn7.png',
+      character: '/images/characters/Mona.webp',
+      persona: '/images/personas/Zorro.webp',
+      icon: '/images/icons/changebtn7.webp',
     },
     stats: {
       strength: 72,
@@ -185,9 +185,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Justice',
     description: '高中生侦探，"侦探王子"，协助警方调查"废人化"和"怪盗团"事件。经常参加电视访谈节目，拥有很高的人气。',
     images: {
-      character: '/images/characters/Crow.png',
-      persona: '/images/personas/RobinHood.png',
-      icon: '/images/icons/changebtn10.png',
+      character: '/images/characters/Crow.webp',
+      persona: '/images/personas/RobinHood.webp',
+      icon: '/images/icons/changebtn10.webp',
     },
     stats: {
       strength: 85,
@@ -207,9 +207,9 @@ export const CHARACTERS: Character[] = [
     arcana: 'Faith',
     description: '私立秀尽学园的一年级转校生，怪盗团新成员。体育特长生，是一位成绩优异的艺术体操选手。',
     images: {
-      character: '/images/characters/Violet.png',
-      persona: '/images/personas/Cendrillon.png',
-      icon: '/images/icons/changebtn6.png',
+      character: '/images/characters/Violet.webp',
+      persona: '/images/personas/Cendrillon.webp',
+      icon: '/images/icons/changebtn6.webp',
     },
     stats: {
       strength: 78,
@@ -226,22 +226,22 @@ export const CHARACTERS: Character[] = [
 export const PLATFORMS: Platform[] = [
   {
     name: 'PlayStation 5',
-    logo: '/images/platforms/ps5_logo.png',
+    logo: '/images/platforms/ps5_logo.webp',
     link: 'https://store.playstation.com',
   },
   {
     name: 'Xbox Series X|S',
-    logo: '/images/platforms/xbox_xs_logo.png',
+    logo: '/images/platforms/xbox_xs_logo.webp',
     link: 'https://www.xbox.com',
   },
   {
     name: 'Nintendo Switch',
-    logo: '/images/platforms/switch_logo.png',
+    logo: '/images/platforms/switch_logo.webp',
     link: 'https://www.nintendo.com',
   },
   {
     name: 'Steam',
-    logo: '/images/platforms/steam_logo.png',
+    logo: '/images/platforms/steam_logo.webp',
     link: 'https://store.steampowered.com',
   },
 ];

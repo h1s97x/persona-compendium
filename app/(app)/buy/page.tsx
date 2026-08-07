@@ -6,7 +6,7 @@ import { PLATFORMS } from '@/lib/constants';
 
 export default function BuyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-[#1a0000] to-black py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -14,7 +14,7 @@ export default function BuyPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold text-[#E60012] mb-4">购买游戏</h1>
+          <h1 className="text-5xl font-bold text-p5r-red mb-4">购买游戏</h1>
           <p className="text-white text-xl">选择您的平台</p>
         </motion.div>
 
@@ -23,20 +23,21 @@ export default function BuyPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gradient-to-br from-[#1a0000] to-black border-2 border-[#E60012] rounded-lg p-8 mb-12"
+          className="bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-8 mb-12"
         >
           <div className="grid md:grid-cols-2 gap-8">
             <div className="relative h-96">
               <Image
-                src="/images/cover.png"
+                src="/images/cover.webp"
                 alt="游戏封面"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain"
               />
             </div>
 
             <div className="text-white space-y-6">
-              <h2 className="text-3xl font-bold text-[#E60012]">游戏信息</h2>
+              <h2 className="text-3xl font-bold text-p5r-red">游戏信息</h2>
               
               <div>
                 <h3 className="text-xl font-bold mb-2">游戏名称</h3>
@@ -74,7 +75,7 @@ export default function BuyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-[#E60012] text-center mb-8">选择购买平台</h2>
+          <h2 className="text-3xl font-bold text-p5r-red text-center mb-8">选择购买平台</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {PLATFORMS.map((platform, index) => (
               <motion.a
@@ -86,13 +87,14 @@ export default function BuyPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-br from-[#1a0000] to-black border-2 border-[#E60012] rounded-lg p-6 hover:border-[#ff0015] transition-colors"
+                className="bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-6 hover:border-p5r-red-hover transition-colors"
               >
                 <div className="relative h-24 mb-4">
                   <Image
                     src={platform.logo}
                     alt={platform.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-contain"
                   />
                 </div>
@@ -107,12 +109,12 @@ export default function BuyPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 bg-gradient-to-br from-[#1a0000] to-black border-2 border-[#E60012] rounded-lg p-8"
+          className="mt-16 bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-8"
         >
-          <h2 className="text-3xl font-bold text-[#E60012] mb-6">系统需求 (PC)</h2>
+          <h2 className="text-3xl font-bold text-p5r-red mb-6">系统需求 (PC)</h2>
           <div className="grid md:grid-cols-2 gap-8 text-white">
             <div>
-              <h3 className="text-xl font-bold text-[#E60012] mb-4">最低配置</h3>
+              <h3 className="text-xl font-bold text-p5r-red mb-4">最低配置</h3>
               <ul className="space-y-2 text-gray-300">
                 <li><span className="text-white font-bold">操作系统:</span> Windows 10 (64-bit)</li>
                 <li><span className="text-white font-bold">处理器:</span> Intel Core i7-4790 / AMD Ryzen 5 1500X</li>
@@ -122,7 +124,7 @@ export default function BuyPage() {
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-[#E60012] mb-4">推荐配置</h3>
+              <h3 className="text-xl font-bold text-p5r-red mb-4">推荐配置</h3>
               <ul className="space-y-2 text-gray-300">
                 <li><span className="text-white font-bold">操作系统:</span> Windows 10 (64-bit)</li>
                 <li><span className="text-white font-bold">处理器:</span> Intel Core i7-4790 / AMD Ryzen 5 1500X</li>

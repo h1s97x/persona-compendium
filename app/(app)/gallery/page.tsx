@@ -5,19 +5,19 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const galleryImages = [
-  { id: 1, src: '/images/gallery/screenshot1.png', alt: '游戏截图 1' },
-  { id: 2, src: '/images/gallery/screenshot2.png', alt: '游戏截图 2' },
-  { id: 3, src: '/images/gallery/screenshot3.png', alt: '游戏截图 3' },
-  { id: 4, src: '/images/gallery/screenshot4.png', alt: '游戏截图 4' },
-  { id: 5, src: '/images/gallery/screenshot5.png', alt: '游戏截图 5' },
-  { id: 6, src: '/images/gallery/screenshot6.png', alt: '游戏截图 6' },
+  { id: 1, src: '/images/gallery/screenshot1.webp', alt: '游戏截图 1' },
+  { id: 2, src: '/images/gallery/screenshot2.webp', alt: '游戏截图 2' },
+  { id: 3, src: '/images/gallery/screenshot3.webp', alt: '游戏截图 3' },
+  { id: 4, src: '/images/gallery/screenshot4.webp', alt: '游戏截图 4' },
+  { id: 5, src: '/images/gallery/screenshot5.webp', alt: '游戏截图 5' },
+  { id: 6, src: '/images/gallery/screenshot6.webp', alt: '游戏截图 6' },
 ];
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-[#1a0000] to-black py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -25,7 +25,7 @@ export default function GalleryPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold text-[#E60012] mb-4">游戏画廊</h1>
+          <h1 className="text-5xl font-bold text-p5r-red mb-4">游戏画廊</h1>
           <p className="text-white text-xl">点击图片查看大图</p>
         </motion.div>
 
@@ -41,11 +41,12 @@ export default function GalleryPage() {
               className="cursor-pointer"
               onClick={() => setSelectedImage(index)}
             >
-              <div className="relative h-64 bg-black border-2 border-[#E60012] rounded-lg overflow-hidden">
+              <div className="relative h-64 bg-black border-2 border-p5r-red rounded-lg overflow-hidden">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover"
                 />
               </div>
@@ -61,7 +62,7 @@ export default function GalleryPage() {
           >
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white text-4xl hover:text-[#E60012] transition-colors z-10"
+              className="absolute top-4 right-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
             >
               ×
             </button>
@@ -71,7 +72,7 @@ export default function GalleryPage() {
                 e.stopPropagation();
                 setSelectedImage((prev) => (prev! > 0 ? prev! - 1 : galleryImages.length - 1));
               }}
-              className="absolute left-4 text-white text-4xl hover:text-[#E60012] transition-colors z-10"
+              className="absolute left-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
             >
               ‹
             </button>
@@ -81,7 +82,7 @@ export default function GalleryPage() {
                 e.stopPropagation();
                 setSelectedImage((prev) => (prev! < galleryImages.length - 1 ? prev! + 1 : 0));
               }}
-              className="absolute right-4 text-white text-4xl hover:text-[#E60012] transition-colors z-10"
+              className="absolute right-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
             >
               ›
             </button>
@@ -91,6 +92,7 @@ export default function GalleryPage() {
                 src={galleryImages[selectedImage].src}
                 alt={galleryImages[selectedImage].alt}
                 fill
+                sizes="(max-width: 768px) 100vw, 80vw"
                 className="object-contain"
                 onClick={(e) => e.stopPropagation()}
               />

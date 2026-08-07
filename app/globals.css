@@ -2,6 +2,8 @@
 
 :root {
   --p5r-red: #E60012;
+  --p5r-red-hover: #ff0015;
+  --p5r-dark: #1a0000;
   --p5r-black: #000000;
   --p5r-white: #FFFFFF;
   --p5r-gray: #1a1a1a;
@@ -13,6 +15,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-p5r-red: var(--p5r-red);
+  --color-p5r-red-hover: var(--p5r-red-hover);
+  --color-p5r-dark: var(--p5r-dark);
   --color-p5r-black: var(--p5r-black);
   --color-p5r-white: var(--p5r-white);
   --color-p5r-gray: var(--p5r-gray);
@@ -52,7 +56,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff0015;
+  background: var(--p5r-red-hover);
 }
 
 /* P5R 官网风格样式 */
@@ -101,7 +105,7 @@ body {
 }
 
 .p5r-button:hover {
-  background: #ff0015;
+  background: var(--p5r-red-hover);
   transform: scale(1.05);
 }
 
@@ -126,7 +130,7 @@ body {
 /* P5R 卡片样式 */
 .p5r-card {
   position: relative;
-  background: linear-gradient(to bottom right, #1a0000, #000000);
+  background: linear-gradient(to bottom right, var(--p5r-dark), var(--p5r-black));
   border: 2px solid var(--p5r-red);
   padding: 1.5rem;
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
@@ -208,5 +212,5 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, #E60012, #ff0015);
+  background-image: linear-gradient(to right, var(--p5r-red), var(--p5r-red-hover));
 }

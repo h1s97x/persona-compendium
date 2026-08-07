@@ -15,10 +15,10 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-[#E60012]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-p5r-red">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-white hover:text-[#E60012] transition-colors">
+          <Link href="/" className="text-xl font-bold text-white hover:text-p5r-red transition-colors">
             Persona Compendium
           </Link>
 
@@ -28,7 +28,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white hover:text-[#E60012] transition-colors px-4 py-2 rounded"
+                className="text-white hover:text-p5r-red transition-colors px-4 py-2 rounded"
               >
                 {item.label}
               </Link>
@@ -37,7 +37,7 @@ export default function Header() {
               href="https://asia.sega.com/persona-remaster/p5r/cht/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#E60012] text-white px-4 py-2 rounded hover:bg-[#ff0015] transition-colors"
+              className="bg-p5r-red text-white px-4 py-2 rounded hover:bg-p5r-red-hover transition-colors"
             >
               官方网站
             </a>
@@ -71,7 +71,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block text-white hover:text-[#E60012] transition-colors py-2"
+                className="block text-white hover:text-p5r-red transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
@@ -81,7 +81,7 @@ export default function Header() {
               href="https://asia.sega.com/persona-remaster/p5r/cht/"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-[#E60012] text-white px-4 py-2 rounded hover:bg-[#ff0015] transition-colors mt-2 text-center"
+              className="block bg-p5r-red text-white px-4 py-2 rounded hover:bg-p5r-red-hover transition-colors mt-2 text-center"
             >
               官方网站
             </a>

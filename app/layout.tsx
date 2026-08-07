@@ -26,6 +26,29 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "Persona Compendium - 人格面具全书",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com"}`,
+      description: "Persona 全系列角色与内容介绍网站",
+      inLanguage: "zh-CN",
+    },
+    {
+      "@type": "VideoGame",
+      name: "女神异闻录5 皇家版",
+      alternateName: "Persona 5 Royal",
+      description: "《女神异闻录5 皇家版》角色介绍 Fan Site",
+      genre: "JRPG",
+      applicationCategory: "Game",
+      gamePlatform: ["PlayStation 5", "Xbox Series X|S", "Nintendo Switch", "Steam", "Windows"],
+      inLanguage: "zh-CN",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,6 +59,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

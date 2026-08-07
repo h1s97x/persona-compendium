@@ -27,13 +27,13 @@ export default function Home() {
       >
         {/* 背景图片/视频效果 */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-[#1a0000]/80 to-black z-10" />
-          <div className="absolute inset-0 bg-[url('/images/bg_header.png')] bg-cover bg-center opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-p5r-dark/80 to-black z-10" />
+          <div className="absolute inset-0 bg-[url('/images/bg_header.webp')] bg-cover bg-center opacity-30" />
         </div>
         
         {/* 斜线装饰 */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#E60012] opacity-10 transform skew-x-12 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-1/4 h-2/3 bg-[#E60012] opacity-10 transform -skew-x-12 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-p5r-red opacity-10 transform skew-x-12 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-1/4 h-2/3 bg-p5r-red opacity-10 transform -skew-x-12 -translate-x-1/2" />
         
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -52,6 +52,7 @@ export default function Home() {
               src="/images/p5r.png"
               alt="Persona Compendium"
               fill
+              sizes="(max-width: 768px) 70vw, 320px"
               className="object-contain drop-shadow-2xl"
               priority
             />
@@ -67,7 +68,7 @@ export default function Home() {
             <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wider">
               Persona Compendium
             </h1>
-            <p className="text-[#E60012] text-xl md:text-2xl font-bold">
+            <p className="text-p5r-red text-xl md:text-2xl font-bold">
               人格面具全书
             </p>
           </motion.div>
@@ -81,18 +82,18 @@ export default function Home() {
           >
             <Link
               href="/buy"
-              className="group relative px-12 py-4 bg-[#E60012] text-white text-xl font-bold overflow-hidden"
+              className="group relative px-12 py-4 bg-p5r-red text-white text-xl font-bold overflow-hidden"
             >
               <span className="relative z-10">立即购买</span>
               <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-              <span className="absolute inset-0 flex items-center justify-center text-[#E60012] opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
+              <span className="absolute inset-0 flex items-center justify-center text-p5r-red opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
                 立即购买
               </span>
             </Link>
 
             <button
               onClick={() => setShowVideo(true)}
-              className="group relative px-12 py-4 border-2 border-[#E60012] text-[#E60012] text-xl font-bold hover:bg-[#E60012] hover:text-white transition-all duration-300"
+              className="group relative px-12 py-4 border-2 border-p5r-red text-p5r-red text-xl font-bold hover:bg-p5r-red hover:text-white transition-all duration-300"
             >
               观看预告片
             </button>
@@ -123,8 +124,8 @@ export default function Home() {
       <section className="relative py-32 px-4 bg-black overflow-hidden">
         {/* 斜线背景 */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#1a0000] to-transparent transform -skew-y-2" />
-          <div className="absolute bottom-0 right-0 w-2/3 h-64 bg-[#E60012] opacity-5 transform skew-y-3" />
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-p5r-dark to-transparent transform -skew-y-2" />
+          <div className="absolute bottom-0 right-0 w-2/3 h-64 bg-p5r-red opacity-5 transform skew-y-3" />
         </div>
 
         <div className="container mx-auto max-w-5xl relative z-10">
@@ -135,7 +136,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-[#E60012] mb-12 tracking-wider">
+            <h2 className="text-5xl md:text-6xl font-bold text-p5r-red mb-12 tracking-wider">
               STORY
             </h2>
             
@@ -148,7 +149,7 @@ export default function Home() {
               >
                 少年主人公因为某个理由转学到「东京」的高中，<br />
                 同时他也开始做起奇异的梦。<br />
-                <span className="text-[#E60012] font-bold">──你正是命运的「囚徒」。</span><br />
+                <span className="text-p5r-red font-bold">──你正是命运的「囚徒」。</span><br />
                 不远的将来，你将面临毁灭。
               </motion.p>
 
@@ -170,9 +171,9 @@ export default function Home() {
       </section>
 
       {/* Characters Section - 横向滑动 */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-[#1a0000] to-black overflow-hidden">
+      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-p5r-dark to-black overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 right-0 w-1/2 h-1/2 bg-[#E60012] opacity-5 transform skew-x-12" />
+          <div className="absolute top-1/4 right-0 w-1/2 h-1/2 bg-p5r-red opacity-5 transform skew-x-12" />
         </div>
 
         <div className="container mx-auto relative z-10">
@@ -181,7 +182,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-bold text-[#E60012] text-center mb-20 tracking-wider"
+            className="text-5xl md:text-6xl font-bold text-p5r-red text-center mb-20 tracking-wider"
           >
             CHARACTERS
           </motion.h2>
@@ -201,6 +202,7 @@ export default function Home() {
                   src={CHARACTERS[currentCharacter].images.character}
                   alt={CHARACTERS[currentCharacter].name}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain drop-shadow-2xl"
                 />
               </motion.div>
@@ -215,7 +217,7 @@ export default function Home() {
               >
                 <div>
                   <h3 className="text-4xl font-bold mb-2">{CHARACTERS[currentCharacter].name}</h3>
-                  <p className="text-[#E60012] text-2xl font-bold mb-4">
+                  <p className="text-p5r-red text-2xl font-bold mb-4">
                     {CHARACTERS[currentCharacter].codename}
                   </p>
                   <p className="text-gray-300 text-lg leading-relaxed">
@@ -223,9 +225,9 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="border-t border-[#E60012] pt-6">
+                <div className="border-t border-p5r-red pt-6">
                   <p className="text-xl">
-                    <span className="text-[#E60012] font-bold">人格面具：</span>
+                    <span className="text-p5r-red font-bold">人格面具：</span>
                     {CHARACTERS[currentCharacter].persona}
                   </p>
                   <p className="text-gray-400 mt-2">
@@ -235,7 +237,7 @@ export default function Home() {
 
                 <Link
                   href={`/characters/${CHARACTERS[currentCharacter].id}`}
-                  className="inline-block px-8 py-3 bg-[#E60012] text-white font-bold hover:bg-[#ff0015] transition-colors"
+                  className="inline-block px-8 py-3 bg-p5r-red text-white font-bold hover:bg-p5r-red-hover transition-colors"
                 >
                   查看详情 →
                 </Link>
@@ -250,8 +252,8 @@ export default function Home() {
                   onClick={() => setCurrentCharacter(index)}
                   className={`w-12 h-12 rounded-full border-2 transition-all ${
                     index === currentCharacter
-                      ? 'border-[#E60012] bg-[#E60012]'
-                      : 'border-gray-600 hover:border-[#E60012]'
+                      ? 'border-p5r-red bg-p5r-red'
+                      : 'border-gray-600 hover:border-p5r-red'
                   }`}
                 >
                   <Image
@@ -268,7 +270,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Link
                 href="/characters"
-                className="inline-block px-12 py-4 border-2 border-[#E60012] text-[#E60012] text-xl font-bold hover:bg-[#E60012] hover:text-white transition-all"
+                className="inline-block px-12 py-4 border-2 border-p5r-red text-p5r-red text-xl font-bold hover:bg-p5r-red hover:text-white transition-all"
               >
                 查看所有角色
               </Link>
@@ -289,14 +291,14 @@ export default function Home() {
           <div className="relative w-full max-w-6xl aspect-video">
             <button
               onClick={() => setShowVideo(false)}
-              className="absolute -top-16 right-0 text-white text-5xl hover:text-[#E60012] transition-colors font-light"
+              className="absolute -top-16 right-0 text-white text-5xl hover:text-p5r-red transition-colors font-light"
             >
               ×
             </button>
             <video
               controls
               autoPlay
-              className="w-full h-full border-4 border-[#E60012]"
+              className="w-full h-full border-4 border-p5r-red"
               onClick={(e) => e.stopPropagation()}
             >
               <source src="/assets/p5r_pv.mp4" type="video/mp4" />

@@ -8,6 +8,10 @@ export default function AudioPlayer() {
   const [volume, setVolume] = useState(0.5);
   const [showControls, setShowControls] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  // 是否已发生过首次用户交互（页面加载时静默，首次交互后自动开始播放）
+  const startedRef = useRef(false);
+  // 用户是否主动暂停过（尊重用户意愿，之后不再自动恢复）
+  const userPausedRef = useRef(false);
 
   useEffect(() => {
     // 创建音频元素
@@ -27,11 +31,37 @@ export default function AudioPlayer() {
     }
   }, [volume]);
 
+  useEffect(() => {
+    // 首次用户交互（点击 / 按键 / 触摸）后自动开始播放 BGM，
+    // 规避浏览器自动播放限制，同时避免页面加载即出声的打扰。
+    const handleFirstInteraction = () => {
+      if (startedRef.current || userPausedRef.current || !audioRef.current) return;
+      startedRef.current = true;
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        console.log('BGM 自动播放被拦截，等待用户手动触发');
+      });
+    };
+
+    window.addEventListener('pointerdown', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
+    window.addEventListener('touchstart', handleFirstInteraction);
+
+    return () => {
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+    };
+  }, []);
+
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        userPausedRef.current = true;
       } else {
+        userPausedRef.current = false;
         audioRef.current.play().catch((error) => {
           console.log('音频播放失败:', error);
         });
@@ -50,7 +80,7 @@ export default function AudioPlayer() {
           onClick={togglePlay}
           onMouseEnter={() => setShowControls(true)}
           onMouseLeave={() => setShowControls(false)}
-          className="w-14 h-14 bg-[#E60012] rounded-full flex items-center justify-center shadow-lg hover:bg-[#ff0015] transition-colors"
+          className="w-14 h-14 bg-p5r-red rounded-full flex items-center justify-center shadow-lg hover:bg-p5r-red-hover transition-colors"
           aria-label={isPlaying ? '暂停音乐' : '播放音乐'}
         >
           {isPlaying ? (
@@ -71,7 +101,7 @@ export default function AudioPlayer() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="absolute bottom-0 right-16 bg-black/90 backdrop-blur-sm border border-[#E60012] rounded-lg p-4 w-48"
+              className="absolute bottom-0 right-16 bg-black/90 backdrop-blur-sm border border-p5r-red rounded-lg p-4 w-48"
               onMouseEnter={() => setShowControls(true)}
               onMouseLeave={() => setShowControls(false)}
             >
@@ -86,7 +116,7 @@ export default function AudioPlayer() {
                   step="0.01"
                   value={volume}
                   onChange={(e) => setVolume(parseFloat(e.target.value))}
-                  className="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#E60012]"
+                  className="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-p5r-red"
                 />
                 <span className="text-white text-sm w-8 text-right">
                   {Math.round(volume * 100)}

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function CharactersPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-[#1a0000] to-black py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-[#E60012] mb-4">心之怪盗团</h1>
+          <h1 className="text-5xl font-bold text-p5r-red mb-4">心之怪盗团</h1>
           <p className="text-white text-xl">点击角色卡片查看详细信息</p>
         </div>
 

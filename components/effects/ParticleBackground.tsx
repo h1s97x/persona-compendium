@@ -21,6 +21,13 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // 从 CSS 变量读取主题色（--p5r-red: #E60012），保持设计 token 单一来源
+    const red =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--p5r-red')
+        .trim() || '#E60012';
+    const rgb = hexToRgb(red);
+
     // 设置画布大小
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -61,7 +68,7 @@ export default function ParticleBackground() {
         // 绘制粒子
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(230, 0, 18, ${particle.opacity})`;
+        ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${particle.opacity})`;
         ctx.fill();
       });
 
@@ -76,7 +83,7 @@ export default function ParticleBackground() {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(230, 0, 18, ${0.1 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.1 * (1 - distance / 150)})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -101,4 +108,23 @@ export default function ParticleBackground() {
       style={{ opacity: 0.3 }}
     />
   );
+}
+
+/** 将 #RRGGBB 颜色转为 { r, g, b }，供 canvas 绘制 rgba 使用 */
+function hexToRgb(hex: string) {
+  const normalized = hex.replace('#', '');
+  const value = parseInt(
+    normalized.length === 3
+      ? normalized
+          .split('')
+          .map((c) => c + c)
+          .join('')
+      : normalized,
+    16,
+  );
+  return {
+    r: (value >> 16) & 0xff,
+    g: (value >> 8) & 0xff,
+    b: value & 0xff,
+  };
 }

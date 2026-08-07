@@ -13,7 +13,7 @@ export default function ScrollProgress() {
       animate={{ opacity: 1 }}
     >
       <motion.div
-        className="h-full bg-gradient-to-r from-[#E60012] to-[#ff0015]"
+        className="h-full bg-gradient-to-r from-p5r-red to-p5r-red-hover"
         style={{ width: `${progress}%` }}
         transition={{ duration: 0.1 }}
       />
