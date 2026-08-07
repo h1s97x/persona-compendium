@@ -1,5 +1,5 @@
 # =============================================================================
-# NextPersona  CNB 流水线配置
+# Persona Compendium  CNB 流水线配置
 #
 # 设计说明（参考 h1s97x 其他仓库的通用模板）：
 #   1. 质量检查：main push / PR 时执行 install + lint + build，
@@ -52,7 +52,7 @@ main:
         - name: sync to github
           image: tencentcom/git-sync
           settings:
-            target_url: https://github.com/h1s97x/Nextpersonas.git
+            target_url: https://github.com/h1s97x/persona-compendium.git
             auth_type: https
             username: ${GITHUB_USERNAME}
             password: ${GITHUB_TOKEN}

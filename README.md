@@ -31,10 +31,10 @@
 
 ```bash
 # 克隆项目
-git clone https://cnb.cool/h1s97x/NextPersona.git
+git clone https://cnb.cool/h1s97x/persona-compendium.git
 
 # 进入项目目录
-cd NextPersona
+cd persona-compendium
 
 # 安装依赖
 npm install
