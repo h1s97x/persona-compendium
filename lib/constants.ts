@@ -247,7 +247,7 @@ export const PLATFORMS: Platform[] = [
 ];
 
 export const SITE_CONFIG = {
-  title: '女神异闻录5 皇家版',
-  description: '心之怪盗团角色介绍',
+  title: 'Persona Compendium - 人格面具全书',
+  description: 'Persona 全系列角色与内容介绍',
   officialSite: 'https://asia.sega.com/persona-remaster/p5r/cht/',
 };

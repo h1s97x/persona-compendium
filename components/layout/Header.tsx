@@ -19,7 +19,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-bold text-white hover:text-[#E60012] transition-colors">
-            Persona 5 Royal
+            Persona Compendium
           </Link>
 
           {/* Desktop Navigation */}

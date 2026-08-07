@@ -18,12 +18,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "女神异闻录5 皇家版 - 角色介绍",
-  description: "心之怪盗团角色介绍网站",
-  keywords: ["Persona 5 Royal", "女神异闻录5", "P5R", "角色介绍"],
+  title: "Persona Compendium - 人格面具全书",
+  description: "Persona 全系列角色与内容介绍网站",
+  keywords: ["Persona", "女神异闻录", "Persona Compendium", "人格面具全书", "角色介绍"],
   openGraph: {
-    title: "女神异闻录5 皇家版",
-    description: "心之怪盗团角色介绍网站",
+    title: "Persona Compendium - 人格面具全书",
+    description: "Persona 全系列角色与内容介绍网站",
     type: "website",
   },
 };

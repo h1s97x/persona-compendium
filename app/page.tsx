@@ -50,7 +50,7 @@ export default function Home() {
           >
             <Image
               src="/images/p5r.png"
-              alt="Persona 5 Royal"
+              alt="Persona Compendium"
               fill
               className="object-contain drop-shadow-2xl"
               priority
@@ -65,10 +65,10 @@ export default function Home() {
             className="mb-12"
           >
             <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wider">
-              女神异闻录5 皇家版
+              Persona Compendium
             </h1>
             <p className="text-[#E60012] text-xl md:text-2xl font-bold">
-              好评发售中
+              人格面具全书
             </p>
           </motion.div>
 

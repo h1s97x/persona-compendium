@@ -1,8 +1,8 @@
-# Persona 5 Royal - 角色介绍网站
+# Persona Compendium - 人格面具全书
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-基于 Next.js 14 + React 18 + TypeScript 构建的《女神异闻录5 皇家版》角色介绍网站。
+基于 Next.js + React + TypeScript 构建的《女神异闻录》系列角色与内容介绍网站。
 
 ## ✨ 功能特性
 
@@ -62,7 +62,7 @@ npm run lint
 ## 📁 项目结构
 
 ```
-p5r-next/
+persona-compendium/
 ├── app/                    # Next.js App Router
 │   ├── characters/        # 角色页面
 │   │   ├── page.tsx      # 角色列表
@@ -121,7 +121,7 @@ p5r-next/
 
 ## 🎨 主题配色
 
-- **主色**: `#E60012` (P5R 红)
+- **主色**: `#E60012` (Persona 红)
 - **背景**: `#000000` (黑色)
 - **强调色**: `#1a0000` (深红)
 
