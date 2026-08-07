@@ -20,13 +20,12 @@
 
 ## 🛠️ 技术栈
 
-- **框架**: Next.js 14 (App Router)
-- **UI 库**: React 18
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
+- **框架**: Next.js 16 (App Router + SSG)
+- **UI 库**: React 19
+- **语言**: TypeScript (strict)
+- **样式**: Tailwind CSS v4
 - **动画**: Framer Motion
 - **状态管理**: Zustand
-- **音频**: Howler.js
 
 ## 📦 安装
 
@@ -63,47 +62,39 @@ npm run lint
 
 ```
 persona-compendium/
-├── app/                    # Next.js App Router
-│   ├── characters/        # 角色页面
-│   │   ├── page.tsx      # 角色列表
-│   │   └── [id]/         # 角色详情
-│   ├── gallery/          # 画廊页面
-│   ├── buy/              # 购买页面
-│   ├── layout.tsx        # 根布局
-│   ├── page.tsx          # 首页
-│   └── globals.css       # 全局样式
-├── components/           # React 组件
-│   ├── layout/          # 布局组件
-│   │   ├── Header.tsx
-│   │   └── Footer.tsx
-│   ├── character/       # 角色组件
-│   │   └── CharacterCard.tsx
-│   ├── ui/              # UI 组件
-│   │   ├── Button.tsx
-│   │   ├── Card.tsx
-│   │   ├── Modal.tsx
-│   │   └── ScrollProgress.tsx
-│   └── effects/         # 特效组件
-│       ├── AudioPlayer.tsx
-│       ├── LoadingScreen.tsx
-│       ├── PageTransition.tsx
-│       └── ParticleBackground.tsx
-├── lib/                 # 工具库
-│   ├── constants.ts    # 常量定义（角色数据）
-│   └── utils.ts        # 工具函数
-├── hooks/              # 自定义 Hooks
-│   ├── useScroll.ts
-│   └── useAnimation.ts
-├── store/              # 状态管理
-│   ├── useCharacterStore.ts
-│   └── useUIStore.ts
-├── types/              # TypeScript 类型
-│   ├── character.ts
-│   └── index.ts
-└── public/            # 静态资源
-    ├── images/       # 图片
-    ├── assets/       # 视频等资源
-    └── audio/        # 音频文件
+├── app/                     # Next.js App Router（不套 src/，扁平化）
+│   ├── (app)/               # 业务区路由组：带统一外壳（Header/Footer/背景/进度/BGM）
+│   │   ├── layout.tsx       # (app) 外壳布局
+│   │   ├── page.tsx         # 首页 /
+│   │   ├── characters/      # 角色列表（SSG）
+│   │   │   ├── page.tsx
+│   │   │   ├── loading.tsx
+│   │   │   ├── error.tsx
+│   │   │   └── [id]/        # 角色详情（generateStaticParams + generateMetadata）
+│   │   ├── gallery/         # 画廊（loading.tsx）
+│   │   └── buy/             # 购买（loading.tsx）
+│   ├── api/                 # API 路由（Route Handlers）
+│   │   └── health/          # 探活示例
+│   ├── layout.tsx           # 根布局：仅 html/body + 字体 + 全局样式
+│   ├── not-found.tsx        # 404 页面
+│   ├── robots.ts            # robots.txt
+│   ├── sitemap.ts           # sitemap.xml
+│   └── globals.css          # 全局样式（@theme 设计 token）
+├── components/             # React 组件（按功能分层）
+│   ├── layout/             # 布局组件（Header / Footer）
+│   ├── features/           # 业务功能组件
+│   │   └── character/      # 角色模块（CharacterCard）
+│   ├── ui/                 # 通用 UI 组件（ScrollProgress）
+│   └── effects/            # 特效组件（AudioPlayer / ParticleBackground）
+├── hooks/                  # 自定义 Hooks（useScroll）
+├── lib/                    # 工具库（constants.ts 角色/平台数据）
+├── store/                  # 状态管理（Zustand，预留）
+├── types/                  # TypeScript 类型
+├── public/                 # 静态资源
+│   ├── images/             # 图片（characters/ personas/ icons/ platforms/ logos/ gallery/）
+│   ├── assets/             # 视频等资源
+│   └── audio/              # 音频文件
+└── reference/              # 原始静态官网（参照物，不参与构建）
 ```
 
 ## 🎮 角色列表
