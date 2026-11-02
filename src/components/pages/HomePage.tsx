@@ -7,6 +7,8 @@ import CharacterShowcase from '@/components/features/home/CharacterShowcase';
 import LifeSection from '@/components/features/home/LifeSection';
 import { useI18n } from '@/components/providers/LocaleProvider';
 import { localAsset } from '@/lib/i18n/assets';
+import { useFitScale } from '@/hooks/useFitScale';
+import type { CSSProperties } from 'react';
 
 const DLC_ITEMS = [
   '女神异闻录４ 服装＆ＢＧＭ特别套组',
@@ -57,18 +59,22 @@ const DLC_ITEMS = [
 
 export default function HomePage() {
   const { t, locale } = useI18n();
+  /** 规格表画布：官网 section.spec 的 spec-box 尺寸 */
+  const { ref: specRef, scale: specScale } = useFitScale(1147);
 
+  /** size 对应官网 bg_spec_list_xs/s/m/l 四档标签贴图 */
   const specRows = [
-    { label: t('spec.name'), value: t('spec.valueName'), note: '' },
-    { label: t('spec.date'), value: t('spec.valueDate'), note: '' },
-    { label: t('spec.type'), value: t('spec.valueType'), note: '' },
-    { label: t('spec.players'), value: t('spec.valuePlayers'), note: '' },
+    { label: t('spec.name'), value: t('spec.valueName'), note: '', size: 'l' },
+    { label: t('spec.date'), value: t('spec.valueDate'), note: '', size: 'm' },
+    { label: t('spec.type'), value: t('spec.valueType'), note: '', size: 's' },
+    { label: t('spec.players'), value: t('spec.valuePlayers'), note: '', size: 'xs' },
     {
       label: t('spec.platforms'),
       value: t('spec.valuePlatforms'),
       note: t('spec.platformNote'),
+      size: 'l',
     },
-    { label: t('spec.language'), value: t('spec.valueLanguage'), note: '' },
+    { label: t('spec.language'), value: t('spec.valueLanguage'), note: '', size: 'l' },
   ];
 
   return (
@@ -141,27 +147,52 @@ export default function HomePage() {
         <p className="p5r-dlc__note">{t('dlc.note')}</p>
       </section>
 
+      {/* 规格表：官网 section.spec，1147×854 画布（阴影 + 底板 + 贴图标签） */}
       <section className="p5r-section p5r-spec" aria-label={t('spec.name')}>
-        <div className="p5r-spec__in">
-          {specRows.map((row) => (
-            <div key={row.label} className="p5r-spec__row">
-              <span className="p5r-spec__label">
-                <span>{row.label}</span>
-              </span>
-              <span className="p5r-spec__value">
-                {row.value}
-                {row.note && <small>{row.note}</small>}
-              </span>
+        <div
+          className="p5r-spec__fit"
+          ref={specRef}
+          style={{ '--spec-scale': specScale } as CSSProperties}
+        >
+          <div className="p5r-spec__canvas">
+            <div className="p5r-spec__shadow" aria-hidden />
+            <div className="p5r-spec__box">
+              <Image
+                src="/images/official/spec_title.webp"
+                alt=""
+                aria-hidden
+                width={271}
+                height={130}
+                className="p5r-spec__title"
+              />
+              <div className="p5r-spec__info">
+                <ul>
+                  {specRows.map((row) => (
+                    <li key={row.label}>
+                      <span
+                        className={`p5r-spec__label p5r-spec__label--${row.size}`}
+                        style={{ backgroundImage: `url('/images/official/bg_spec_list_${row.size}.webp')` }}
+                      >
+                        {row.label}
+                      </span>
+                      <span className="p5r-spec__value">
+                        {row.value}
+                        {row.note && <small>{row.note}</small>}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Image
+                  src="/images/official/spec_img.webp"
+                  alt={t('spec.valueName')}
+                  width={334}
+                  height={481}
+                  className="p5r-spec__img"
+                />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-        <Image
-          src="/images/cover.webp"
-          alt={t('spec.valueName')}
-          width={334}
-          height={481}
-          className="p5r-spec__cover"
-        />
       </section>
 
       <Image
@@ -172,38 +203,43 @@ export default function HomePage() {
         className="p5r-sysreq"
       />
 
-      <section className="p5r-section p5r-about" aria-label={t('about.title')}>
-        <div className="p5r-about__in">
-          <div>
-            <Image
-              src={localAsset(locale, 'bottom_info_title')}
-              alt={t('about.title')}
-              width={640}
-              height={148}
-              className="p5r-about__title"
-            />
-            <p>{t('about.p1')}</p>
-            {t('about.p2') && <p style={{ marginTop: 12 }}>{t('about.p2')}</p>}
-            <Image
-              src="/images/serise.webp"
-              alt={t('about.seriesAlt')}
-              width={607}
-              height={227}
-              className="p5r-about__series"
-            />
-          </div>
-          <div className="p5r-about__shots">
+      {/* 系列介绍：官网 section.bottom-info（bg_bottom 满宽 + 两张斜贴截图 + 系列横幅） */}
+      <section className="p5r-section p5r-bottom" aria-label={t('about.title')}>
+        <div className="p5r-bottom__in">
+          <Image
+            src={localAsset(locale, 'bottom_info_title')}
+            alt={t('about.title')}
+            width={640}
+            height={148}
+            className="p5r-bottom__title"
+          />
+          <div className="p5r-bottom__box">
+            <div className="p5r-bottom__text">
+              <p>{t('about.p1')}</p>
+              {t('about.p2') && <p>{t('about.p2')}</p>}
+            </div>
             <Image
               src="/images/bottom_info_ss1.webp"
               alt={t('about.shot1')}
               width={590}
               height={428}
+              className="p5r-bottom__ss p5r-bottom__ss--1"
             />
             <Image
               src="/images/bottom_info_ss2.webp"
               alt={t('about.shot2')}
               width={629}
               height={449}
+              className="p5r-bottom__ss p5r-bottom__ss--2"
+            />
+          </div>
+          <div className="p5r-bottom__platform">
+            <Image
+              src="/images/serise.webp"
+              alt={t('about.seriesAlt')}
+              width={607}
+              height={227}
+              className="p5r-bottom__series"
             />
           </div>
         </div>
