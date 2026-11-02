@@ -889,11 +889,28 @@ body {
   border: 0;
 }
 
+/* 官网把「校园生活」「怪盗生活」放在同一片红色点纹底上 */
+.p5r-life-zone {
+  position: relative;
+  margin-top: 72px;
+  padding: 64px 0 96px;
+  background:
+    radial-gradient(rgba(0, 0, 0, 0.22) 1px, transparent 1px) 0 0 / 13px 13px,
+    linear-gradient(118deg, #bb000f 0%, #7c000a 45%, #260004 100%);
+  box-shadow:
+    inset 0 60px 90px rgba(0, 0, 0, 0.55),
+    inset 0 -60px 90px rgba(0, 0, 0, 0.55);
+}
+
 .p5r-life {
   position: relative;
   max-width: 1180px;
-  margin: 96px auto 0;
+  margin: 0 auto;
   padding: 0 20px;
+}
+
+.p5r-life + .p5r-life {
+  margin-top: 84px;
 }
 
 .p5r-life__title {
@@ -922,151 +939,165 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-bottom: 6px;
 }
 
+/* 底图比例由 --panel-ratio 传入（官网 bg_slider_text1~8 各自原尺寸），
+   锁比例后斜切角度不会被内容高度拉歪；留白比例也对齐官网 padding */
 .p5r-life__panel {
   position: relative;
-  padding: 34px 32px 30px;
+  aspect-ratio: var(--panel-ratio, 742 / 401);
   background-position: center;
   background-repeat: no-repeat;
-  /* 面板底图为斜切黑底描边，纵向拉伸不破坏造型 */
   background-size: 100% 100%;
-  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.65));
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.7));
 }
 
 .p5r-life__panel--a {
-  width: 55%;
+  width: 62%;
+  padding: 21% 36% 6% 6%;
   z-index: 2;
-  transform: rotate(-1.2deg);
-}
-
-.p5r-life__panel--b {
-  width: 51%;
-  margin-top: 42px;
-  margin-left: -3%;
-  transform: rotate(1.4deg);
-}
-
-.p5r-life__panel:only-child {
-  width: 64%;
-  margin: 0 auto;
   transform: rotate(-0.8deg);
 }
 
-/* 图片字小标题 */
+.p5r-life__panel--b {
+  width: 58%;
+  padding: 24% 5% 6% 38%;
+  margin-top: 4%;
+  margin-left: -6%;
+  transform: rotate(0.8deg);
+}
+
+.p5r-life__panel:only-child {
+  width: 68%;
+  margin: 0 auto;
+  padding: 21% 36% 6% 6%;
+  transform: rotate(-0.6deg);
+}
+
+/* 图片字小标题：官网做法是绝对定位压在上沿外侧，正文另占下方留白区 */
 .p5r-life__copy {
-  display: block;
-  width: min(76%, 340px);
+  position: absolute;
+  top: -8%;
+  left: -1%;
+  z-index: 4;
+  width: 52%;
   height: auto;
-  margin: 0 0 12px -8px;
-  transform: rotate(-3deg);
+  transform: rotate(-2.5deg);
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.8));
 }
 
 .p5r-life__panel--b .p5r-life__copy {
-  margin: 0 -8px 12px auto;
-  transform: rotate(2.6deg);
+  top: -6%;
+  left: auto;
+  right: -2%;
+  transform: rotate(2deg);
 }
 
 .p5r-life__body {
   position: relative;
   z-index: 1;
-  color: #f2ecdd;
-  font-size: clamp(12px, 1.06vw, 13.5px);
+  color: #f4eee0;
+  font-size: clamp(12px, 1.06vw, 15px);
   line-height: 1.9;
   letter-spacing: 0.01em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 .p5r-life__body p + p {
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
-/* 游戏截图：贴住面板下缘，带金线细边与硬投影 */
+/* 游戏截图：斜贴并越出卡片边缘（官网 .school-life-ss / .phantom-life-ss 的做法） */
 .p5r-life__shots {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 3;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
+  flex-direction: column;
+  gap: 14px;
+  width: 52%;
+  pointer-events: none;
+}
+
+.p5r-life__panel--a .p5r-life__shots {
+  top: -9%;
+  right: -10%;
+  transform: rotate(-7deg);
+}
+
+.p5r-life__panel--b .p5r-life__shots {
+  top: 6%;
+  left: -12%;
+  transform: rotate(6deg);
 }
 
 .p5r-life__shots img {
   display: block;
-  width: auto;
-  max-width: 46%;
+  width: 100%;
   height: auto;
-  border: 1px solid rgba(216, 180, 95, 0.5);
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+  border: 3px solid #eed08a;
+  box-shadow:
+    0 0 0 2px #000,
+    10px 12px 0 rgba(0, 0, 0, 0.45);
 }
 
-/* 金色线画立绘装饰 */
+/* 徽章装饰：压在卡片上沿外侧 */
 .p5r-life__deco {
   position: absolute;
-  right: -6%;
-  bottom: -4%;
+  top: -24%;
+  right: -4%;
   z-index: 0;
-  width: 26%;
+  width: 28%;
   height: auto;
-  opacity: 0.92;
+  opacity: 0.96;
   pointer-events: none;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.65));
 }
 
 .p5r-life__panel--b .p5r-life__deco {
+  top: -20%;
   right: auto;
   left: -6%;
 }
 
-/* 翻页：斜切箭头 + 页码条 */
+/* 翻页：官网左右大箭头（carousel_arrow_left/right 贴图，62×99） */
 .p5r-life__nav {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin-top: 28px;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  margin: 0;
+  pointer-events: none;
 }
 
 .p5r-life__arrow {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  padding: 0;
-  border: 2px solid rgba(216, 180, 95, 0.8);
-  background: linear-gradient(150deg, #1a1a1a, #050505);
-  cursor: pointer;
-  transform: skewX(-12deg);
-  transition:
-    border-color 0.18s ease,
-    background 0.18s ease;
-}
-
-.p5r-life__arrow::before {
-  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 11px;
-  height: 11px;
-  border-top: 3px solid var(--p5r-gold-light);
-  border-right: 3px solid var(--p5r-gold-light);
+  top: 55%;
+  width: 62px;
+  height: 99px;
+  padding: 0;
+  border: 0;
+  background: transparent center / contain no-repeat;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
-.p5r-life__arrow--prev::before {
-  transform: translate(-50%, -50%) rotate(-135deg);
+.p5r-life__arrow--prev {
+  left: -6px;
+  background-image: url('/images/official/carousel_arrow_left.webp');
 }
 
-.p5r-life__arrow--next::before {
-  transform: translate(-50%, -50%) rotate(45deg);
+.p5r-life__arrow--next {
+  right: -6px;
+  background-image: url('/images/official/carousel_arrow_right.webp');
 }
 
 .p5r-life__arrow:hover {
-  border-color: var(--p5r-red);
-  background: linear-gradient(150deg, #2a0004, #4b000a);
+  transform: translateY(-50%) scale(1.06);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6)) brightness(1.12);
 }
 
 .p5r-life__arrow:focus-visible {
@@ -1075,9 +1106,13 @@ body {
 }
 
 .p5r-life__dots {
+  position: absolute;
+  left: 50%;
+  bottom: -44px;
   display: flex;
   align-items: center;
   gap: 10px;
+  transform: translateX(-50%);
 }
 
 .p5r-life__dots i {
@@ -1097,14 +1132,19 @@ body {
 }
 
 @media (max-width: 860px) {
-  .p5r-life {
-    margin-top: 72px;
+  .p5r-life-zone {
+    margin-top: 48px;
+    padding: 40px 0 68px;
+  }
+
+  .p5r-life + .p5r-life {
+    margin-top: 56px;
   }
 
   .p5r-life__title,
   .p5r-life--phantom .p5r-life__title {
     width: min(330px, 62%);
-    margin: -18px 0 2px;
+    margin: 0 0 2px;
     transform: rotate(-4deg);
   }
 
@@ -1113,35 +1153,59 @@ body {
     align-items: stretch;
   }
 
+  /* 小屏取消锁比例，交给内容撑高，避免文字溢出卡片 */
   .p5r-life__panel,
   .p5r-life__panel--a,
   .p5r-life__panel--b,
   .p5r-life__panel:only-child {
     width: 100%;
     margin: 0;
+    padding: 22% 8% 8%;
+    aspect-ratio: auto;
     transform: none;
   }
 
   .p5r-life__panel--b {
-    margin-top: 14px;
+    margin-top: 18px;
   }
 
   .p5r-life__copy,
   .p5r-life__panel--b .p5r-life__copy {
-    width: min(64%, 300px);
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: min(72%, 300px);
     margin: 0 0 10px;
   }
 
-  .p5r-life__shots img {
-    max-width: 47%;
+  /* 截图回到文档流，避免越界后被视口裁掉 */
+  .p5r-life__shots,
+  .p5r-life__panel--a .p5r-life__shots,
+  .p5r-life__panel--b .p5r-life__shots {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin-top: 14px;
+    transform: none;
   }
 
   .p5r-life__deco,
   .p5r-life__panel--b .p5r-life__deco {
+    top: -14%;
     right: -2%;
     left: auto;
-    bottom: -2%;
-    width: 22%;
+    width: 24%;
+  }
+
+  .p5r-life__arrow {
+    top: 50%;
+    width: 44px;
+    height: 72px;
+  }
+
+  .p5r-life__dots {
+    bottom: -28px;
   }
 }
 

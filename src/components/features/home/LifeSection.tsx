@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { useI18n } from '@/components/providers/LocaleProvider';
 import { LIFE_COPY, LIFE_TITLES } from '@/lib/i18n/life';
 import { lifeTitleAsset, localAsset } from '@/lib/i18n/assets';
@@ -21,6 +22,20 @@ type Panel = {
 
 /** 每屏 1~2 块黑金斜切面板，位置取自官网版式 */
 type Slide = { panels: Panel[] };
+
+/** 面板底图原始比例：锁死宽高比，斜切角度才不会被内容高度拉歪 */
+const BG_RATIO: Record<string, string> = {
+  'bg_slider_text1.webp': '742 / 401',
+  'bg_slider_text2.webp': '696 / 397',
+  'bg_slider_text3.webp': '742 / 438',
+  'bg_slider_text4.webp': '742 / 436',
+  'bg_slider_text5.webp': '696 / 418',
+  'bg_slider_text6.webp': '696 / 512',
+  'bg_slider_text7.webp': '742 / 472',
+  'bg_slider_text8.webp': '696 / 475',
+};
+
+const ratioOf = (bg: string) => BG_RATIO[bg.split('/').pop() ?? ''] ?? '16 / 9';
 
 const SCHOOL_SLIDES: Slide[] = [
   {
@@ -182,7 +197,12 @@ export default function LifeSection({ kind }: Props) {
             <article
               key={`${current}-${panelIndex}`}
               className={`p5r-life__panel p5r-life__panel--${panel.layout} p5r-slide`}
-              style={{ backgroundImage: `url('${panel.bg}')` }}
+              style={
+                {
+                  backgroundImage: `url('${panel.bg}')`,
+                  '--panel-ratio': ratioOf(panel.bg),
+                } as CSSProperties
+              }
             >
               <Image
                 src={localAsset(locale, panel.copy)}

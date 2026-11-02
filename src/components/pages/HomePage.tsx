@@ -105,8 +105,11 @@ export default function HomePage() {
 
       <CharacterShowcase />
 
-      <LifeSection kind="school" />
-      <LifeSection kind="phantom" />
+      {/* 官网「校园生活 / 怪盗生活」两段落在同一片红色点纹底上 */}
+      <div className="p5r-life-zone">
+        <LifeSection kind="school" />
+        <LifeSection kind="phantom" />
+      </div>
 
       <section className="p5r-section p5r-dlc" aria-labelledby="dlc-title">
         <h2 id="dlc-title" className="p5r-h3">
