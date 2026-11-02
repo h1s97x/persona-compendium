@@ -1,312 +1,248 @@
-'use client';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
-import { CHARACTERS } from '@/lib/constants';
+import HeroPoster from '@/components/features/home/HeroPoster';
+import CharacterShowcase from '@/components/features/home/CharacterShowcase';
+
+const NEWS = [
+  {
+    date: '2022.06.13',
+    text: '《女神异闻录５ 皇家版》重制版将于 2022 年 10 月 21 日发售！',
+  },
+  {
+    date: '2022.06.13',
+    text: '《女神异闻录》系列接连登上最新平台！',
+  },
+];
+
+const DLC_ITEMS = [
+  '女神异闻录４ 服装＆ＢＧＭ特别套组',
+  '女神异闻录３ 服装＆ＢＧＭ特别套组',
+  '女神异闻录２ 服装＆ＢＧＭ特别套组',
+  'Ｐｅｒｓｏｎａ 服装＆ＢＧＭ特别套组',
+  '真·女神转生ｉｆ… 服装＆ＢＧＭ特别套组',
+  '女神异闻录４ 通宵热舞 服装＆ＢＧＭ特别套组',
+  '女神异闻录４ 无敌究极后桥背摔 服装＆ＢＧＭ特别套组',
+  '真·女神转生Ⅳ 服装＆ＢＧＭ特别套组',
+  '凯瑟琳 服装＆ＢＧＭ特别套组',
+  '俄耳甫斯＆俄耳甫斯·贼神 套组',
+  '伊邪那岐＆伊邪那岐·贼神 套组',
+  '塔纳托斯＆塔纳托斯·贼神 套组',
+  '祸津伊邪那岐＆祸津伊邪那岐·贼神 套组',
+  '辉夜＆辉夜·贼神 套组',
+  '阿里亚德涅＆阿里亚德涅·贼神 套组',
+  '亚斯泰利欧斯＆亚斯泰利欧斯·贼神 套组',
+  '月读＆月读·贼神 套组',
+  '弥赛亚＆弥赛亚·贼神 套组',
+  '女神异闻录５ 皇家版 恢复道具套组',
+  '女神异闻录５ 皇家版 技能卡套组',
+  '女神异闻录５ 皇家版 挑战关卡',
+];
+
+const SPEC_ROWS = [
+  { label: '游戏名称', value: '女神异闻录５ 皇家版' },
+  { label: '发售日期', value: '好评发售中' },
+  { label: '游戏类别', value: 'RPG' },
+  { label: '游玩人数', value: '1 人' },
+  {
+    label: '支持平台',
+    value: 'Xbox Series X|S / Xbox One / Windows / PlayStation®5 / Nintendo Switch™ / Steam',
+    note: '※PlayStation®5 / Nintendo Switch™ 以外的平台仅发售下载版',
+  },
+  { label: '支持语言', value: '简体中文・繁体中文字幕／日语语音' },
+];
 
 export default function Home() {
-  const [showVideo, setShowVideo] = useState(false);
-  const [currentCharacter, setCurrentCharacter] = useState(0);
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
-
   return (
-    <div ref={containerRef} className="relative">
-      {/* Hero Section - 全屏视频背景风格 */}
-      <motion.section 
-        style={{ opacity, scale }}
-        className="relative h-screen flex items-center justify-center overflow-hidden"
-      >
-        {/* 背景图片/视频效果 */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-p5r-dark/80 to-black z-10" />
-          <div className="absolute inset-0 bg-[url('/images/bg_header.webp')] bg-cover bg-center opacity-30" />
-        </div>
-        
-        {/* 斜线装饰 */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-p5r-red opacity-10 transform skew-x-12 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-1/4 h-2/3 bg-p5r-red opacity-10 transform -skew-x-12 -translate-x-1/2" />
-        
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative z-20 text-center px-4"
-        >
-          {/* Logo */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="relative w-80 h-80 mx-auto mb-12"
-          >
-            <Image
-              src="/images/p5r.png"
-              alt="Persona Compendium"
-              fill
-              sizes="(max-width: 768px) 70vw, 320px"
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
-          </motion.div>
+    <>
+      <HeroPoster />
 
-          {/* 标题文字 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="mb-12"
-          >
-            <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-wider">
-              Persona Compendium
-            </h1>
-            <p className="text-p5r-red text-xl md:text-2xl font-bold">
-              人格面具全书
+      {/* 新闻 */}
+      <section className="p5r-section p5r-news" aria-label="最新情报">
+        <div className="p5r-news__title">INFORMATION</div>
+        <div className="p5r-news__list">
+          {NEWS.map((item) => (
+            <p key={item.text} className="p5r-news__item">
+              <span className="p5r-news__date">{item.date}</span>
+              <span>{item.text}</span>
             </p>
-          </motion.div>
+          ))}
+        </div>
+      </section>
 
-          {/* 按钮组 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-          >
-            <Link
-              href="/buy"
-              className="group relative px-12 py-4 bg-p5r-red text-white text-xl font-bold overflow-hidden"
-            >
-              <span className="relative z-10">立即购买</span>
-              <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-              <span className="absolute inset-0 flex items-center justify-center text-p5r-red opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
-                立即购买
+      {/* 故事 */}
+      <section className="p5r-section p5r-story" aria-label="故事">
+        <Image
+          src="/images/intro_title.webp"
+          alt="2022年10月21日，拿走你的心。"
+          width={840}
+          height={275}
+          className="p5r-story__title"
+        />
+        <div className="p5r-story__in">
+          <div>
+            <p>
+              少年主角因某个缘由转学到“东京”的高中后，开始做起了奇异的梦。
+              <br />
+              ——你确实是命运之『囚』啊。
+              <br />
+              少年被告知不久之后他就会迎来毁灭。
+            </p>
+            <p>
+              为了完成赋予他的“更生”任务，也为了将人们从邪恶欲望中拯救出来，
+              <br />
+              成为怪盗的主角与各种人邂逅，结下羁绊。
+              <br />
+              在度过了宝贵的一年后，等待你的将是……？
+            </p>
+          </div>
+          <Image
+            src="/images/ren.webp"
+            alt="主角"
+            width={465}
+            height={545}
+            className="p5r-story__art"
+          />
+        </div>
+      </section>
+
+      {/* 角色 */}
+      <CharacterShowcase />
+
+      {/* 双面生活 */}
+      <section className="p5r-section p5r-dual" aria-label="双面生活">
+        <article className="p5r-dual__card">
+          <span className="p5r-dual__badge">DAYTIME</span>
+          <h3>白天是普普通通的高中生</h3>
+          <p>
+            在学校上课、放学后和朋友外出、体验丰富的校园活动，一年中都充满让人心动的事件！
+            早上坐电车去学校，认真上课，满足特定条件还能加深与同伴的羁绊。
+          </p>
+        </article>
+        <article className="p5r-dual__card p5r-dual__card--night">
+          <Image
+            src="/images/phantom.webp"
+            alt=""
+            aria-hidden
+            width={6410}
+            height={6300}
+            className="p5r-dual__mask"
+          />
+          <span className="p5r-dual__badge">NIGHT</span>
+          <h3>晚上化身怪盗，盗走堕落大人们的心</h3>
+          <p>
+            主角一行自称“心灵怪盗”，席卷大城市。目标是目中无人虐待学生的教师、明目张胆进行剽窃的创作者等，
+            怀有扭曲欲望的“堕落大人”们。让这些大人悔改，为弱者夺回被偷走的世界吧！
+          </p>
+        </article>
+      </section>
+
+      {/* DLC */}
+      <section className="p5r-section p5r-dlc" aria-labelledby="dlc-title">
+        <h2 id="dlc-title" className="p5r-h3">
+          DLC 追加内容
+        </h2>
+        <ul>
+          {DLC_ITEMS.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="p5r-dlc__note">※各追加内容的发售情况与价格请以各平台商店页面为准。</p>
+      </section>
+
+      {/* 规格 */}
+      <section className="p5r-section p5r-spec" aria-label="游戏规格">
+        <div className="p5r-spec__in">
+          {SPEC_ROWS.map((row) => (
+            <div key={row.label} className="p5r-spec__row">
+              <span className="p5r-spec__label">
+                <span>{row.label}</span>
               </span>
-            </Link>
-
-            <button
-              onClick={() => setShowVideo(true)}
-              className="group relative px-12 py-4 border-2 border-p5r-red text-p5r-red text-xl font-bold hover:bg-p5r-red hover:text-white transition-all duration-300"
-            >
-              观看预告片
-            </button>
-          </motion.div>
-
-          {/* 滚动提示 */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-white text-sm flex flex-col items-center gap-2"
-            >
-              <span>SCROLL</span>
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </motion.section>
-
-      {/* Story Section - 斜线分割 */}
-      <section className="relative py-32 px-4 bg-black overflow-hidden">
-        {/* 斜线背景 */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-p5r-dark to-transparent transform -skew-y-2" />
-          <div className="absolute bottom-0 right-0 w-2/3 h-64 bg-p5r-red opacity-5 transform skew-y-3" />
-        </div>
-
-        <div className="container mx-auto max-w-5xl relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center space-y-8"
-          >
-            <h2 className="text-5xl md:text-6xl font-bold text-p5r-red mb-12 tracking-wider">
-              STORY
-            </h2>
-            
-            <div className="space-y-8 text-white text-lg md:text-xl leading-relaxed">
-              <motion.p
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                少年主人公因为某个理由转学到「东京」的高中，<br />
-                同时他也开始做起奇异的梦。<br />
-                <span className="text-p5r-red font-bold">──你正是命运的「囚徒」。</span><br />
-                不远的将来，你将面临毁灭。
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                为了达成自己被赋予的『更生』任务，<br />
-                也为了将人们从邪恶的欲望中拯救出来，<br />
-                成为怪盗的主人公与各式各样的人邂逅，<br />
-                缔结了特别的羁绊关系。<br />
-                度过这宝贵的一年后，等待着你的会是……？
-              </motion.p>
+              <span className="p5r-spec__value">
+                {row.value}
+                {row.note && <small>{row.note}</small>}
+              </span>
             </div>
-          </motion.div>
+          ))}
         </div>
+        <Image
+          src="/images/cover.webp"
+          alt="《女神异闻录５ 皇家版》封面"
+          width={334}
+          height={481}
+          className="p5r-spec__cover"
+        />
       </section>
 
-      {/* Characters Section - 横向滑动 */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-p5r-dark to-black overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 right-0 w-1/2 h-1/2 bg-p5r-red opacity-5 transform skew-x-12" />
-        </div>
+      <Image
+        src="/images/system_requirements.webp"
+        alt="系统需求"
+        width={839}
+        height={437}
+        className="p5r-sysreq"
+      />
 
-        <div className="container mx-auto relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-bold text-p5r-red text-center mb-20 tracking-wider"
-          >
-            CHARACTERS
-          </motion.h2>
-
-          {/* 角色轮播 */}
-          <div className="relative max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* 角色图片 */}
-              <motion.div
-                key={currentCharacter}
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="relative h-[600px]"
-              >
-                <Image
-                  src={CHARACTERS[currentCharacter].images.character}
-                  alt={CHARACTERS[currentCharacter].name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain drop-shadow-2xl"
-                />
-              </motion.div>
-
-              {/* 角色信息 */}
-              <motion.div
-                key={`info-${currentCharacter}`}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-white space-y-6"
-              >
-                <div>
-                  <h3 className="text-4xl font-bold mb-2">{CHARACTERS[currentCharacter].name}</h3>
-                  <p className="text-p5r-red text-2xl font-bold mb-4">
-                    {CHARACTERS[currentCharacter].codename}
-                  </p>
-                  <p className="text-gray-300 text-lg leading-relaxed">
-                    {CHARACTERS[currentCharacter].description}
-                  </p>
-                </div>
-
-                <div className="border-t border-p5r-red pt-6">
-                  <p className="text-xl">
-                    <span className="text-p5r-red font-bold">人格面具：</span>
-                    {CHARACTERS[currentCharacter].persona}
-                  </p>
-                  <p className="text-gray-400 mt-2">
-                    阿尔卡那：{CHARACTERS[currentCharacter].arcana}
-                  </p>
-                </div>
-
-                <Link
-                  href={`/characters/${CHARACTERS[currentCharacter].id}`}
-                  className="inline-block px-8 py-3 bg-p5r-red text-white font-bold hover:bg-p5r-red-hover transition-colors"
-                >
-                  查看详情 →
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* 角色切换按钮 */}
-            <div className="flex justify-center gap-3 mt-12">
-              {CHARACTERS.map((char, index) => (
-                <button
-                  key={char.id}
-                  onClick={() => setCurrentCharacter(index)}
-                  className={`w-12 h-12 rounded-full border-2 transition-all ${
-                    index === currentCharacter
-                      ? 'border-p5r-red bg-p5r-red'
-                      : 'border-gray-600 hover:border-p5r-red'
-                  }`}
-                >
-                  <Image
-                    src={char.images.icon}
-                    alt={char.name}
-                    width={48}
-                    height={48}
-                    className="rounded-full"
-                  />
-                </button>
-              ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <Link
-                href="/characters"
-                className="inline-block px-12 py-4 border-2 border-p5r-red text-p5r-red text-xl font-bold hover:bg-p5r-red hover:text-white transition-all"
-              >
-                查看所有角色
-              </Link>
-            </div>
+      {/* 系列介绍 */}
+      <section className="p5r-section p5r-about" aria-label="系列介绍">
+        <div className="p5r-about__in">
+          <div>
+            <Image
+              src="/images/bottom_info_title.webp"
+              alt="《女神异闻录》是什么？"
+              width={640}
+              height={148}
+              className="p5r-about__title"
+            />
+            <p>
+              『女神异闻录』为青少年侠盗 RPG 系列游戏，以现代日本都市为舞台，玩家在体验校园生活、友情、恋爱等生活小事的同时，
+              必须挺身面对不可思议的谣言、都市传说等超自然事件。描写主角与觉醒「人格面具能力」的少年少女相遇，
+              并对抗重重困难、逐渐成长的故事。近年亦将触角伸至电视动画、剧场版动画、武道馆 Live 音乐会、舞台剧、漫画等媒体，
+              不断扩展其魅力。
+            </p>
+            <p style={{ marginTop: 12 }}>
+              作品中的「人格面具」指的是沉睡于自身体内的「另一个人格」，
+              化作「自古以来的神或恶魔」的样貌现身，是一种拥有强大力量的「另一个自己」。
+            </p>
+            <Image
+              src="/images/serise.webp"
+              alt="Persona 系列"
+              width={607}
+              height={227}
+              className="p5r-about__series"
+            />
+          </div>
+          <div className="p5r-about__shots">
+            <Image
+              src="/images/bottom_info_ss1.webp"
+              alt="游戏画面 1"
+              width={590}
+              height={428}
+            />
+            <Image
+              src="/images/bottom_info_ss2.webp"
+              alt="游戏画面 2"
+              width={629}
+              height={449}
+            />
           </div>
         </div>
       </section>
 
-      {/* Video Modal */}
-      {showVideo && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowVideo(false)}
-        >
-          <div className="relative w-full max-w-6xl aspect-video">
-            <button
-              onClick={() => setShowVideo(false)}
-              className="absolute -top-16 right-0 text-white text-5xl hover:text-p5r-red transition-colors font-light"
-            >
-              ×
-            </button>
-            <video
-              controls
-              autoPlay
-              className="w-full h-full border-4 border-p5r-red"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <source src="/assets/p5r_pv.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </motion.div>
-      )}
-    </div>
+      {/* 购买引导 */}
+      <section className="p5r-section p5r-cta" aria-label="购买">
+        <div className="p5r-cta__badges">
+          <Image src="/images/st.webp" alt="实体版" width={213} height={90} />
+          <Image src="/images/dl.webp" alt="下载版" width={213} height={90} />
+        </div>
+        <p className="p5r-cta__title">现在就开始你的「更生」吧</p>
+        <div className="p5r-cta__actions">
+          <Link href="/buy" className="p5r-btn">
+            <span>前往购买</span>
+          </Link>
+          <Link href="/gallery" className="p5r-btn p5r-btn--dark">
+            <span>游戏画廊</span>
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }

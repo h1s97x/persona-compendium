@@ -3,7 +3,7 @@ import { Character, GalleryImage, Platform } from '@/types';
 export const CHARACTERS: Character[] = [
   {
     id: 'joker',
-    name: 'Joker',
+    name: '雨宫莲',
     codename: 'Joker',
     persona: 'Arsene',
     arcana: 'Fool',
