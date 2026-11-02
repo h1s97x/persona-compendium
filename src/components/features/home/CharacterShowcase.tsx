@@ -154,6 +154,20 @@ const STRIP = [
   { id: 'crow', img: 'btn_chara_akechi' },
 ];
 
+/** 每个 txt_bg 斜切面板内可安全排字的列宽：量自贴图不透明黑底的右边界 - 左内边距 */
+const TXT_WIDTH: Record<number, number> = {
+  1: 192,
+  2: 212,
+  3: 240,
+  4: 164,
+  5: 182,
+  6: 169,
+  7: 181,
+  8: 205,
+  9: 192,
+  10: 240,
+};
+
 const namePlateOf = (n: number, locale: Locale) => localAsset(locale, `chara${n}_name`);
 
 type Costume = 'thief' | 'school';
@@ -197,15 +211,16 @@ export default function CharacterShowcase() {
     '--txt-left': `${layout.txt.left}px`,
     '--txt-pt': `${layout.txt.pt}px`,
     '--txt-pl': `${layout.txt.pl}px`,
+    '--txt-w': `${TXT_WIDTH[layout.n] ?? 200}px`,
   } as CSSProperties;
 
   return (
-    <section id="characters" className="p5r-section p5r-chara">
+    <section id="characters" className="p5r-section p5r-chara" style={vars}>
       <h2 className="p5r-chara__title">
         <Image src={localAsset(locale, 'chara_title')} alt="CHARACTER" width={515} height={157} />
       </h2>
 
-      <div className="p5r-chara__fit" ref={fitRef} style={vars}>
+      <div className="p5r-chara__fit" ref={fitRef}>
         <div className="p5r-chara__canvas">
           <Image
             src="/images/chara_star.webp"
@@ -300,19 +315,19 @@ export default function CharacterShowcase() {
               className="p5r-chara__txt-bg"
             />
             <p className="p5r-chara__profile">{text.description}</p>
-          </div>
 
-          <div className="p5r-chara__meta">
-            <span>
-              {t('chara.arcana')} · {character.arcana}
-            </span>
-            <LocaleLink
-              href={`/characters/${character.id}`}
-              className="p5r-stage__link"
-              aria-label={t('chara.aria', { name: character.codename })}
-            >
-              {t('chara.detail')}
-            </LocaleLink>
+            <div className="p5r-chara__meta">
+              <span>
+                {t('chara.arcana')} · {character.arcana}
+              </span>
+              <LocaleLink
+                href={`/characters/${character.id}`}
+                className="p5r-stage__link"
+                aria-label={t('chara.aria', { name: character.codename })}
+              >
+                {t('chara.detail')}
+              </LocaleLink>
+            </div>
           </div>
 
           <div className="p5r-chara__strip" role="tablist" aria-label="角色切换">

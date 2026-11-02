@@ -14,6 +14,9 @@
   top: 104px;
   left: 22px;
   z-index: 15;
+  /* 标题在画布外，必须跟着 --chara-scale 一起缩，否则中屏会压住立绘 */
+  transform: scale(var(--chara-scale, 1));
+  transform-origin: top left;
 }
 
 .p5r-chara__title img {
@@ -26,13 +29,14 @@
 .p5r-chara__fit {
   position: relative;
   width: 100%;
-  height: calc(1000px * var(--chara-scale, 1));
+  /* 画布高 1160：底部两排缩略图（783 → 1135）必须留在画布内，不能压到下一区 */
+  height: calc(1160px * var(--chara-scale, 1));
 }
 
 .p5r-chara__canvas {
   position: relative;
   width: 1305px;
-  height: 1000px;
+  height: 1160px;
   transform: scale(var(--chara-scale, 1));
   transform-origin: top left;
 }
@@ -108,8 +112,9 @@
 /* 服装切换按钮：官网做法是整块按钮翻转 180° 换另一张贴图 */
 .p5r-chara__change {
   position: absolute;
-  top: 611px;
-  left: 800px;
+  /* 贴右侧空白区，避免压住立绘的腿 */
+  top: 606px;
+  left: 916px;
   width: 221px;
   height: 167px;
   padding: 0;
@@ -196,31 +201,37 @@
   left: 0;
   width: auto;
   height: auto;
+  /* preflight 的 img{max-width:100%} 会按文字列宽把面板压扁，这里恢复官网原尺寸 */
+  max-width: none;
 }
 
 .p5r-chara__profile {
   position: relative;
-  width: 330px;
+  /* 列宽由各角色 txt_bg 的可视黑底宽度决定（见 TXT_WIDTH），避免压到斜切描边 */
+  width: var(--txt-w, 200px);
   margin: 0;
   color: #fff;
-  font-size: 16px;
-  line-height: 1.9;
+  font-size: 13px;
+  line-height: 1.8;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
   display: -webkit-box;
-  -webkit-line-clamp: 9;
+  -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .p5r-chara__meta {
-  position: absolute;
-  top: 800px;
-  left: 69px;
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-top: 12px;
+  max-width: calc(var(--txt-w, 200px) + 46px);
   z-index: 18;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 8px;
+  font-size: 11px;
   color: var(--p5r-gold-light);
 }
 
@@ -235,8 +246,9 @@
 .p5r-chara__strip {
   position: absolute;
   top: 783px;
-  left: 123px;
+  left: 50%;
   width: 960px;
+  transform: translateX(-50%);
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -265,7 +277,7 @@
 .p5r-chara__strip > button:nth-of-type(2) {
   width: 111px;
   height: 165px;
-  top: 144px;
+  top: 176px;
   left: 60px;
 }
 
@@ -278,7 +290,7 @@
 .p5r-chara__strip > button:nth-of-type(4) {
   width: 112px;
   height: 176px;
-  top: 134px;
+  top: 176px;
   left: 211px;
 }
 
@@ -291,7 +303,7 @@
 .p5r-chara__strip > button:nth-of-type(6) {
   width: 109px;
   height: 146px;
-  top: 144px;
+  top: 176px;
   left: 360px;
 }
 
@@ -304,7 +316,7 @@
 .p5r-chara__strip > button:nth-of-type(8) {
   width: 119px;
   height: 147px;
-  top: 149px;
+  top: 176px;
   left: 513px;
 }
 
@@ -317,7 +329,7 @@
 .p5r-chara__strip > button:nth-of-type(10) {
   width: 117px;
   height: 145px;
-  top: 153px;
+  top: 176px;
   left: 691px;
 }
 
@@ -386,6 +398,7 @@
     top: auto;
     left: auto;
     margin-bottom: 12px;
+    transform: none;
   }
 
   .p5r-chara__title img {
@@ -431,6 +444,8 @@
   }
 
   .p5r-chara__box {
+    /* 立绘仍是绝对定位，容器必须保留定位上下文，否则会跑到画布顶上被裁掉 */
+    position: relative;
     width: 100%;
     height: 360px;
   }
@@ -485,6 +500,10 @@
     width: 100%;
   }
 
+  .p5r-chara__meta {
+    max-width: none;
+  }
+
   .p5r-chara__txt-bg {
     position: static;
     width: 100%;
@@ -501,6 +520,7 @@
     width: 100%;
     justify-content: center;
     gap: 6px;
+    transform: none;
   }
 
   .p5r-chara__strip > button:nth-of-type(n + 1) {
