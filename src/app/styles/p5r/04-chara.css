@@ -1,0 +1,515 @@
+/* ==== p5r · 角色舞台（1305×1000 画布 1:1） ==== */
+
+/* ---------- 角色舞台（官网 1305×1000 画布 1:1 复刻） ---------- */
+
+.p5r-chara {
+  position: relative;
+  max-width: 1345px;
+  margin: 76px auto 0;
+  padding: 107px 20px 0;
+}
+
+.p5r-chara__title {
+  position: absolute;
+  top: 104px;
+  left: 22px;
+  z-index: 15;
+}
+
+.p5r-chara__title img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+/* 画布按容器宽度等比缩放，坐标全部保留官网像素值 */
+.p5r-chara__fit {
+  position: relative;
+  width: 100%;
+  height: calc(1000px * var(--chara-scale, 1));
+}
+
+.p5r-chara__canvas {
+  position: relative;
+  width: 1305px;
+  height: 1000px;
+  transform: scale(var(--chara-scale, 1));
+  transform-origin: top left;
+}
+
+.p5r-chara__star {
+  position: absolute;
+  top: 101px;
+  left: 334px;
+  z-index: 0;
+  width: 739px;
+  height: 719px;
+}
+
+/* 名牌 */
+.p5r-chara__name {
+  position: absolute;
+  top: var(--name-top);
+  left: var(--name-left);
+  width: var(--name-w);
+  height: var(--name-h);
+  z-index: 20;
+}
+
+.p5r-chara__name img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* 立绘：怪盗服 / 校服 两层，切换时旧图左移淡出、新图从右滑入（官网 .costume1/.costume2） */
+.p5r-chara__box {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+}
+
+.p5r-chara__costume {
+  position: absolute;
+  transition: 0.3s;
+}
+
+.p5r-chara__costume--1 {
+  top: var(--c1-top);
+  left: var(--c1-left);
+}
+
+.p5r-chara__costume--2 {
+  top: var(--c2-top);
+  left: var(--c2-left);
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.p5r-chara__costume img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.p5r-chara__box[data-costume='school'] .p5r-chara__costume--1 {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.p5r-chara__box[data-costume='school'] .p5r-chara__costume--2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 服装切换按钮：官网做法是整块按钮翻转 180° 换另一张贴图 */
+.p5r-chara__change {
+  position: absolute;
+  top: 611px;
+  left: 800px;
+  width: 221px;
+  height: 167px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 10;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.p5r-chara__change img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.p5r-chara__change img:nth-child(2) {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.p5r-chara__change[data-on='true'] {
+  transform: rotate(-180deg);
+}
+
+.p5r-chara__change[data-on='true'] img:nth-child(1) {
+  opacity: 0;
+}
+
+.p5r-chara__change[data-on='true'] img:nth-child(2) {
+  opacity: 1;
+}
+
+.p5r-chara__change:hover {
+  transform: scale(1.1);
+}
+
+.p5r-chara__change:hover[data-on='true'] {
+  transform: scale(1.1) rotate(-180deg);
+}
+
+/* 人格面具 */
+.p5r-chara__persona {
+  position: absolute;
+  top: var(--persona-top);
+  left: var(--persona-left);
+  z-index: 1;
+}
+
+.p5r-chara__persona img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.p5r-chara__pname {
+  position: absolute;
+  top: var(--pname-top);
+  left: var(--pname-left);
+  z-index: 10;
+}
+
+.p5r-chara__pname img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+/* Profile 档案牌 */
+.p5r-chara__txt {
+  position: absolute;
+  top: var(--txt-top);
+  left: var(--txt-left);
+  padding: var(--txt-pt) 0 0 var(--txt-pl);
+  z-index: 15;
+}
+
+.p5r-chara__txt-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+
+.p5r-chara__profile {
+  position: relative;
+  width: 330px;
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.9;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.p5r-chara__meta {
+  position: absolute;
+  top: 800px;
+  left: 69px;
+  z-index: 18;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--p5r-gold-light);
+}
+
+.p5r-chara__meta > span {
+  padding: 3px 10px;
+  border: 1px solid rgba(216, 180, 95, 0.55);
+  background: rgba(0, 0, 0, 0.45);
+  transform: skewX(-6deg);
+}
+
+/* 底部两排角色切换图标（官网 .character-btn：1/3/5/7/9 在流内、2/4/6/8/10 绝对定位） */
+.p5r-chara__strip {
+  position: absolute;
+  top: 783px;
+  left: 123px;
+  width: 960px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  z-index: 25;
+}
+
+.p5r-chara__strip > button {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.p5r-chara__strip > button:nth-of-type(2n) {
+  position: absolute;
+}
+
+.p5r-chara__strip > button:nth-of-type(1) {
+  width: 109px;
+  height: 158px;
+}
+
+.p5r-chara__strip > button:nth-of-type(2) {
+  width: 111px;
+  height: 165px;
+  top: 144px;
+  left: 60px;
+}
+
+.p5r-chara__strip > button:nth-of-type(3) {
+  width: 124px;
+  height: 154px;
+  margin: 0 0 0 42px;
+}
+
+.p5r-chara__strip > button:nth-of-type(4) {
+  width: 112px;
+  height: 176px;
+  top: 134px;
+  left: 211px;
+}
+
+.p5r-chara__strip > button:nth-of-type(5) {
+  width: 102px;
+  height: 149px;
+  margin: 4px 0 0 39px;
+}
+
+.p5r-chara__strip > button:nth-of-type(6) {
+  width: 109px;
+  height: 146px;
+  top: 144px;
+  left: 360px;
+}
+
+.p5r-chara__strip > button:nth-of-type(7) {
+  width: 105px;
+  height: 155px;
+  margin: 4px 0 0 45px;
+}
+
+.p5r-chara__strip > button:nth-of-type(8) {
+  width: 119px;
+  height: 147px;
+  top: 149px;
+  left: 513px;
+}
+
+.p5r-chara__strip > button:nth-of-type(9) {
+  width: 104px;
+  height: 154px;
+  margin: 17px 0 0 42px;
+}
+
+.p5r-chara__strip > button:nth-of-type(10) {
+  width: 117px;
+  height: 145px;
+  top: 153px;
+  left: 691px;
+}
+
+.p5r-chara__strip-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.9;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.p5r-chara__strip > button:hover .p5r-chara__strip-img {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.p5r-chara__strip > button[data-current='true'] .p5r-chara__strip-img {
+  opacity: 0.65;
+}
+
+/* 左右翻页箭头（官网 slick-prev/next 坐标） */
+.p5r-chara__arrow {
+  position: absolute;
+  top: 540px;
+  width: 62px;
+  height: 99px;
+  padding: 0;
+  border: 0;
+  background: transparent center / contain no-repeat;
+  cursor: pointer;
+  z-index: 50;
+  transition: filter 0.2s ease;
+}
+
+.p5r-chara__arrow--prev {
+  left: 0;
+  background-image: url('/images/official/carousel_arrow_left.webp');
+}
+
+.p5r-chara__arrow--next {
+  right: 277px;
+  background-image: url('/images/official/carousel_arrow_right.webp');
+}
+
+.p5r-chara__arrow:hover {
+  filter: brightness(1.15);
+}
+
+.p5r-chara__more {
+  text-align: center;
+  margin-top: 26px;
+}
+
+/* 小屏：放弃 1:1 画布，改为纵向流式排版 */
+@media (max-width: 900px) {
+  .p5r-chara {
+    padding: 0 16px;
+    margin-top: 56px;
+  }
+
+  .p5r-chara__title {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 12px;
+  }
+
+  .p5r-chara__title img {
+    width: min(300px, 60%);
+    height: auto;
+  }
+
+  .p5r-chara__fit {
+    height: auto;
+  }
+
+  .p5r-chara__canvas {
+    width: 100%;
+    height: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .p5r-chara__star,
+  .p5r-chara__arrow {
+    display: none;
+  }
+
+  .p5r-chara__name,
+  .p5r-chara__box,
+  .p5r-chara__persona,
+  .p5r-chara__pname,
+  .p5r-chara__txt,
+  .p5r-chara__meta,
+  .p5r-chara__strip {
+    position: static;
+    width: auto;
+    height: auto;
+    inset: auto;
+    padding: 0;
+  }
+
+  .p5r-chara__name {
+    width: 58%;
+  }
+
+  .p5r-chara__box {
+    width: 100%;
+    height: 360px;
+  }
+
+  .p5r-chara__costume,
+  .p5r-chara__costume--1,
+  .p5r-chara__costume--2 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .p5r-chara__costume img {
+    height: 340px;
+    width: auto;
+  }
+
+  .p5r-chara__box[data-costume='school'] .p5r-chara__costume--1 {
+    opacity: 0;
+    transform: translateX(-50%) translateX(-60px);
+  }
+
+  .p5r-chara__box[data-costume='school'] .p5r-chara__costume--2 {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+
+  .p5r-chara__change {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    width: 130px;
+    height: 98px;
+  }
+
+  .p5r-chara__persona img {
+    height: 190px;
+    width: auto;
+  }
+
+  .p5r-chara__pname {
+    width: 46%;
+  }
+
+  .p5r-chara__pname img {
+    width: 100%;
+    height: auto;
+  }
+
+  .p5r-chara__txt {
+    width: 100%;
+  }
+
+  .p5r-chara__txt-bg {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .p5r-chara__profile {
+    width: 100%;
+    font-size: 13px;
+    -webkit-line-clamp: unset;
+  }
+
+  .p5r-chara__strip {
+    width: 100%;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .p5r-chara__strip > button:nth-of-type(n + 1) {
+    position: static;
+    width: 17%;
+    height: auto;
+    margin: 0;
+    top: auto;
+    left: auto;
+  }
+}
+

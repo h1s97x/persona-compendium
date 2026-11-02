@@ -1,0 +1,229 @@
+/* ==== p5r · 首屏海报 + 预告片弹窗 ==== */
+
+/* ---------- 首屏海报 ---------- */
+
+.p5r-hero {
+  position: relative;
+  /* 官方主视觉原图 918×670：限制显示宽度，整幅完整显示，不再全屏拉伸放大 */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 918 / 670;
+  background: url('/images/poster.webp') center / cover no-repeat;
+  /* 原图四周是白色高光渐隐，黑底上补一层内阴影，让边缘自然过渡 */
+  box-shadow: inset 0 0 70px 18px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+/* 官网提供的主视觉原图仅 918×670，宽屏铺满会被放大发虚，
+   这里在宽屏改用 2 倍重采样版本，避免浏览器二次插值 */
+@media (min-width: 1000px) {
+  .p5r-hero {
+    background-image: url('/images/poster-2x.webp');
+  }
+}
+
+.p5r-hero__logo {
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  width: 27%;
+  height: auto;
+  transform: translateX(-50%) rotate(-3deg);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.85));
+  z-index: 4;
+}
+
+.p5r-hero__buynow {
+  position: absolute;
+  right: 3.5%;
+  bottom: 12%;
+  width: 23%;
+  z-index: 5;
+  transform: rotate(-4deg);
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.p5r-hero__buynow img {
+  width: 100%;
+  height: auto;
+}
+
+.p5r-hero__buynow:hover {
+  transform: rotate(-4deg) scale(1.07);
+  filter: brightness(1.1);
+}
+
+/* 无本地化购买图时改用的文字按钮（拉丁/日韩语言） */
+.p5r-hero__buynow--text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border: 2px solid var(--p5r-gold-light);
+  background: linear-gradient(150deg, #e60012 0%, #8a0009 100%);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+  transform: skewX(-8deg) rotate(-4deg);
+  text-decoration: none;
+}
+
+.p5r-hero__buynow--text > span {
+  display: block;
+  transform: skewX(8deg);
+  color: #fff;
+  font-size: clamp(13px, 1.15vw, 18px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.p5r-hero__buynow--text:hover {
+  transform: skewX(-8deg) rotate(-2deg) scale(1.05);
+  filter: brightness(1.12);
+}
+
+.p5r-pv {
+  position: absolute;
+  left: 2.5%;
+  bottom: 3.5%;
+  width: 21%;
+  aspect-ratio: 303 / 202;
+  background: url('/images/pv.webp') center / contain no-repeat;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+.p5r-pv:hover {
+  transform: scale(1.04);
+}
+
+.p5r-pv video {
+  position: absolute;
+  top: 26.2%;
+  left: 14.5%;
+  width: 82.8%;
+  height: 69.8%;
+  object-fit: cover;
+  pointer-events: none;
+  background: #000;
+}
+
+.p5r-float {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  animation: p5r-floaty 6s ease-in-out infinite;
+}
+
+.p5r-float--l {
+  left: 0;
+  top: 11%;
+  width: 28%;
+  height: auto;
+}
+
+.p5r-float--r {
+  right: 0;
+  top: 26%;
+  width: 19%;
+  height: auto;
+  animation-delay: 1.4s;
+}
+
+/* 非中文语言用官网 AVAILABLE NOW 角标替代「新价格/最新平台」大图 */
+.p5r-float--badge {
+  top: 15%;
+  width: 15%;
+}
+
+@keyframes p5r-floaty {
+  0%,
+  100% {
+    transform: translateY(-6px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-1deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .p5r-float {
+    display: none;
+  }
+
+  .p5r-hero {
+    /* 竖屏按高度铺满，左右少量裁切，避免整图缩得太小 */
+    aspect-ratio: auto;
+    height: min(68vh, 520px);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .p5r-hero__logo {
+    width: 42%;
+    bottom: 19%;
+  }
+
+  .p5r-hero__buynow {
+    width: 30%;
+    right: 2%;
+    bottom: 3%;
+  }
+
+  .p5r-pv {
+    left: 2%;
+    bottom: 2%;
+    width: 29%;
+  }
+}
+
+/* ---------- 预告片弹窗 ---------- */
+
+.p5r-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.94);
+  animation: p5r-fade 0.25s ease;
+}
+
+.p5r-modal__box {
+  position: relative;
+  width: min(1000px, 94vw);
+  border: 3px solid var(--p5r-gold);
+  box-shadow:
+    0 0 0 6px #000,
+    0 24px 60px rgba(0, 0, 0, 0.8);
+  background: #000;
+}
+
+.p5r-modal__box video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p5r-modal__close {
+  position: absolute;
+  top: -46px;
+  right: -6px;
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--p5r-gold);
+  background: #000;
+  color: var(--p5r-gold-light);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+

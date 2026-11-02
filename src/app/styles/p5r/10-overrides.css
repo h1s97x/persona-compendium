@@ -1,0 +1,145 @@
+/* ==== p5r · 细节修正 + 语言切换 ==== */
+
+/* ---------- 细节修正 ---------- */
+
+/* 键盘可达性：统一金色焦点环 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--p5r-gold);
+  outline-offset: 3px;
+}
+
+/* 内页标题在平板竖屏即折行 */
+@media (max-width: 860px) {
+  .p5r-page__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* 头部在窄屏收紧间距 */
+@media (max-width: 520px) {
+  .p5r-header__in {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+
+  .p5r-header__actions {
+    gap: 8px;
+  }
+
+  .p5r-header__logo img {
+    height: 30px;
+  }
+}
+
+/* ---------- 语言切换 ---------- */
+
+.p5r-lang {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.p5r-lang__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px 10px;
+  border: 2px solid rgba(216, 180, 95, 0.75);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--p5r-gold-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transform: skewX(-9deg);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.p5r-lang__btn > span {
+  display: block;
+  transform: skewX(9deg);
+}
+
+.p5r-lang__btn:hover,
+.p5r-lang__btn[aria-expanded='true'] {
+  border-color: var(--p5r-gold);
+  background: rgba(230, 0, 18, 0.5);
+  color: #fff;
+}
+
+.p5r-lang__globe {
+  width: 14px;
+  height: 14px;
+  color: var(--p5r-gold);
+  transform: skewX(9deg);
+  flex: 0 0 auto;
+}
+
+.p5r-lang__caret {
+  font-size: 9px;
+  opacity: 0.85;
+}
+
+.p5r-lang__menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 75;
+  width: 168px;
+  max-height: min(70vh, 430px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.75));
+}
+
+.p5r-lang__menu li + li {
+  margin-top: 5px;
+}
+
+.p5r-lang__menu button {
+  display: block;
+  width: 100%;
+  padding: 9px 10px 10px;
+  border: 0;
+  background: url('/images/buttonbg.webp') center / 100% 100% no-repeat;
+  color: #1a1204;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+.p5r-lang__menu button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.p5r-lang__menu button[data-active='true'] {
+  background: linear-gradient(135deg, #e60012, #9c000c);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 0 0 0 2px var(--p5r-gold);
+}
+
+@media (max-width: 520px) {
+  .p5r-lang__btn {
+    padding: 7px 9px 8px;
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .p5r-lang__globe {
+    display: none;
+  }
+}

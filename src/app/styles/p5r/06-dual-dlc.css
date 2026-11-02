@@ -1,0 +1,131 @@
+/* ==== p5r · 双面生活 + DLC ==== */
+
+/* ---------- 双面生活 ---------- */
+
+.p5r-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  max-width: 1180px;
+  margin: 88px auto 0;
+  padding: 0 20px;
+}
+
+.p5r-dual__card {
+  position: relative;
+  padding: 34px 30px 38px;
+  border: 2px solid rgba(216, 180, 95, 0.55);
+  background: linear-gradient(155deg, #101010 0%, #070707 100%);
+  overflow: hidden;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
+}
+
+.p5r-dual__card--night {
+  background: linear-gradient(155deg, #260004 0%, #4b000a 100%);
+  border-color: rgba(230, 0, 18, 0.65);
+}
+
+.p5r-dual__card h3 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 900;
+  color: var(--p5r-gold-light);
+  transform: skewX(-6deg);
+  margin-bottom: 6px;
+}
+
+.p5r-dual__card p {
+  position: relative;
+  z-index: 2;
+  color: #ded5c4;
+  font-size: 15px;
+  line-height: 1.95;
+}
+
+.p5r-dual__card--night p {
+  color: #ffe9ea;
+}
+
+.p5r-dual__mask {
+  position: absolute;
+  right: -12%;
+  bottom: -16%;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  background: url('/images/phantom.webp') center / contain no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.p5r-dual__badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 10px;
+  background: var(--p5r-red);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  transform: skewX(-10deg);
+}
+
+@media (max-width: 820px) {
+  .p5r-dual {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- DLC ---------- */
+
+.p5r-dlc {
+  position: relative;
+  max-width: 1180px;
+  margin: 88px auto 0;
+  padding: 34px 32px 38px;
+  border: 2px solid rgba(216, 180, 95, 0.5);
+  background: rgba(8, 8, 8, 0.92) url('/images/bg_slider_text2.webp') center / 100% 100% no-repeat;
+}
+
+.p5r-dlc ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 26px;
+  margin-top: 20px;
+}
+
+.p5r-dlc li {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #d8cfbe;
+  padding-left: 16px;
+  position: relative;
+}
+
+.p5r-dlc li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--p5r-red);
+  font-size: 9px;
+  line-height: 2.6;
+}
+
+.p5r-dlc__note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #9b9385;
+}
+
+@media (max-width: 900px) {
+  .p5r-dlc ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .p5r-dlc ul {
+    grid-template-columns: 1fr;
+  }
+}
+

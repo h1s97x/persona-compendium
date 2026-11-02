@@ -1,0 +1,201 @@
+/* ==== p5r · 站点基础 / 头部 / 通用排版 ==== */
+
+/* ============================================================
+   P5R 视觉系统
+   版式依据 reference/index.html + 官方站 resources/css/top.css
+   关键词：黑色舞台 / 金色描边 / 血红斜切面板 / 图片字标题
+   ============================================================ */
+
+:root {
+  --p5r-gold: #d8b45f;
+  --p5r-gold-light: #f5e3b0;
+  --p5r-gold-deep: #8a6b21;
+  --p5r-ink: #0b0b0b;
+  --p5r-paper: #efe7d7;
+}
+
+/* ---------- 站点基础 ---------- */
+
+body {
+  background-color: #000;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(230, 0, 18, 0.28), transparent 55%),
+    radial-gradient(rgba(216, 180, 95, 0.07) 1px, transparent 1px);
+  background-size:
+    auto,
+    16px 16px;
+  background-attachment: fixed, fixed;
+  font-family:
+    'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', 'PingFang SC', 'Hiragino Sans', 'Malgun Gothic',
+    'Microsoft YaHei', Arial, sans-serif;
+  color: var(--p5r-paper);
+}
+
+.p5r-site {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------- 头部 ---------- */
+
+.p5r-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background-color: #080808;
+  background-image: url('/images/bg_header.webp');
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: auto 100%;
+  border-bottom: 1px solid rgba(216, 180, 95, 0.35);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.65);
+}
+
+.p5r-header__in {
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 68px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.p5r-header__logo {
+  display: block;
+  flex: 0 0 auto;
+  transform: rotate(-3deg);
+  transition: transform 0.25s ease;
+}
+
+.p5r-header__logo:hover {
+  transform: rotate(-3deg) scale(1.06);
+}
+
+.p5r-header__logo img {
+  height: clamp(34px, 4vw, 44px);
+  width: auto;
+}
+
+.p5r-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.p5r-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p5r-nav--mobile {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 4px 20px 18px;
+}
+
+.p5r-nav--mobile .p5r-btn {
+  justify-content: center;
+}
+
+.p5r-nav-toggle {
+  display: none;
+  width: 44px;
+  height: 38px;
+  border: 2px solid rgba(216, 180, 95, 0.7);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--p5r-gold-light);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .p5r-nav--desktop {
+    display: none;
+  }
+
+  .p5r-nav-toggle {
+    display: block;
+  }
+}
+
+/* 金色铭牌按钮（官方 buttonbg.png 同源） */
+.p5r-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 116px;
+  padding: 10px 22px 12px;
+  background: url('/images/buttonbg.webp') center / 100% 100% no-repeat;
+  color: #1a1204;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  transform: skewX(-10deg);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.75);
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+  white-space: nowrap;
+  border: 0;
+  cursor: pointer;
+}
+
+.p5r-btn > span {
+  display: block;
+  transform: skewX(10deg);
+}
+
+.p5r-btn:hover {
+  transform: skewX(-10deg) translateY(-2px) scale(1.04);
+  filter: brightness(1.12);
+}
+
+.p5r-btn--dark {
+  background: #111;
+  color: var(--p5r-gold-light);
+  border: 2px solid var(--p5r-gold);
+}
+
+.p5r-btn--red {
+  background: linear-gradient(135deg, #e60012, #9c000c);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- 通用排版 ---------- */
+
+.p5r-section {
+  position: relative;
+}
+
+.p5r-h2 {
+  display: inline-block;
+  font-size: clamp(26px, 3.6vw, 44px);
+  font-weight: 900;
+  color: var(--p5r-gold-light);
+  letter-spacing: 0.04em;
+  transform: skewX(-8deg) rotate(-2deg);
+  text-shadow:
+    3px 3px 0 #101010,
+    6px 6px 0 rgba(216, 180, 95, 0.22);
+}
+
+.p5r-h3 {
+  font-size: clamp(17px, 1.7vw, 22px);
+  font-weight: 800;
+  color: var(--p5r-gold-light);
+  letter-spacing: 0.06em;
+}
+
+.p5r-lead {
+  color: #cfc6b4;
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.9;
+}
+

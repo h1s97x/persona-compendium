@@ -1,0 +1,336 @@
+/* ==== p5r · 校园生活 / 怪盗生活 ==== */
+
+/* ---------- 校园 / 怪盗生活 ---------- */
+
+.p5r-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 官网把「校园生活」「怪盗生活」放在同一片红色点纹底上 */
+.p5r-life-zone {
+  position: relative;
+  margin-top: 72px;
+  padding: 64px 0 96px;
+  background:
+    radial-gradient(rgba(0, 0, 0, 0.22) 1px, transparent 1px) 0 0 / 13px 13px,
+    linear-gradient(118deg, #bb000f 0%, #7c000a 45%, #260004 100%);
+  box-shadow:
+    inset 0 60px 90px rgba(0, 0, 0, 0.55),
+    inset 0 -60px 90px rgba(0, 0, 0, 0.55);
+}
+
+.p5r-life {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.p5r-life + .p5r-life {
+  margin-top: 84px;
+}
+
+.p5r-life__title {
+  position: relative;
+  z-index: 3;
+  width: min(400px, 44%);
+  margin: -26px 0 4px -2%;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.7));
+}
+
+.p5r-life__title > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p5r-life--phantom .p5r-life__title {
+  margin: -26px -2% 4px auto;
+  transform: rotate(5deg);
+}
+
+/* 舞台：两块黑金斜切面板，B 面板下沉并压住 A 面板一角 */
+.p5r-life__stage {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 底图比例由 --panel-ratio 传入（官网 bg_slider_text1~8 各自原尺寸），
+   锁比例后斜切角度不会被内容高度拉歪；留白比例也对齐官网 padding */
+.p5r-life__panel {
+  position: relative;
+  aspect-ratio: var(--panel-ratio, 742 / 401);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.7));
+}
+
+.p5r-life__panel--a {
+  width: 62%;
+  padding: 21% 36% 6% 6%;
+  z-index: 2;
+  transform: rotate(-0.8deg);
+}
+
+.p5r-life__panel--b {
+  width: 58%;
+  padding: 24% 5% 6% 38%;
+  margin-top: 4%;
+  margin-left: -6%;
+  transform: rotate(0.8deg);
+}
+
+.p5r-life__panel:only-child {
+  width: 68%;
+  margin: 0 auto;
+  padding: 21% 36% 6% 6%;
+  transform: rotate(-0.6deg);
+}
+
+/* 图片字小标题：官网做法是绝对定位压在上沿外侧，正文另占下方留白区 */
+.p5r-life__copy {
+  position: absolute;
+  top: -8%;
+  left: -1%;
+  z-index: 4;
+  width: 52%;
+  height: auto;
+  transform: rotate(-2.5deg);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.8));
+}
+
+.p5r-life__panel--b .p5r-life__copy {
+  top: -6%;
+  left: auto;
+  right: -2%;
+  transform: rotate(2deg);
+}
+
+.p5r-life__body {
+  position: relative;
+  z-index: 1;
+  color: #f4eee0;
+  font-size: clamp(12px, 1.06vw, 15px);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
+.p5r-life__body p + p {
+  margin-top: 4px;
+}
+
+/* 游戏截图：斜贴并越出卡片边缘（官网 .school-life-ss / .phantom-life-ss 的做法） */
+.p5r-life__shots {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 52%;
+  pointer-events: none;
+}
+
+.p5r-life__panel--a .p5r-life__shots {
+  top: -9%;
+  right: -10%;
+  transform: rotate(-7deg);
+}
+
+.p5r-life__panel--b .p5r-life__shots {
+  top: 6%;
+  left: -12%;
+  transform: rotate(6deg);
+}
+
+.p5r-life__shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid #eed08a;
+  box-shadow:
+    0 0 0 2px #000,
+    10px 12px 0 rgba(0, 0, 0, 0.45);
+}
+
+/* 徽章装饰：压在卡片上沿外侧 */
+.p5r-life__deco {
+  position: absolute;
+  top: -24%;
+  right: -4%;
+  z-index: 0;
+  width: 28%;
+  height: auto;
+  opacity: 0.96;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.65));
+}
+
+.p5r-life__panel--b .p5r-life__deco {
+  top: -20%;
+  right: auto;
+  left: -6%;
+}
+
+/* 翻页：官网左右大箭头（carousel_arrow_left/right 贴图，62×99） */
+.p5r-life__nav {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  margin: 0;
+  pointer-events: none;
+}
+
+.p5r-life__arrow {
+  position: absolute;
+  top: 55%;
+  width: 62px;
+  height: 99px;
+  padding: 0;
+  border: 0;
+  background: transparent center / contain no-repeat;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.p5r-life__arrow--prev {
+  left: -6px;
+  background-image: url('/images/official/carousel_arrow_left.webp');
+}
+
+.p5r-life__arrow--next {
+  right: -6px;
+  background-image: url('/images/official/carousel_arrow_right.webp');
+}
+
+.p5r-life__arrow:hover {
+  transform: translateY(-50%) scale(1.06);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6)) brightness(1.12);
+}
+
+.p5r-life__arrow:focus-visible {
+  outline: 2px solid var(--p5r-gold-light);
+  outline-offset: 3px;
+}
+
+.p5r-life__dots {
+  position: absolute;
+  left: 50%;
+  bottom: -44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.p5r-life__dots i {
+  width: 26px;
+  height: 6px;
+  background: rgba(216, 180, 95, 0.3);
+  transform: skewX(-20deg);
+  transition:
+    background 0.18s ease,
+    width 0.18s ease;
+}
+
+.p5r-life__dots i[data-active='true'] {
+  width: 38px;
+  background: var(--p5r-red);
+  box-shadow: 0 0 10px rgba(230, 0, 18, 0.6);
+}
+
+@media (max-width: 860px) {
+  .p5r-life-zone {
+    margin-top: 48px;
+    padding: 40px 0 68px;
+  }
+
+  .p5r-life + .p5r-life {
+    margin-top: 56px;
+  }
+
+  .p5r-life__title,
+  .p5r-life--phantom .p5r-life__title {
+    width: min(330px, 62%);
+    margin: 0 0 2px;
+    transform: rotate(-4deg);
+  }
+
+  .p5r-life__stage {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* 小屏取消锁比例，交给内容撑高，避免文字溢出卡片 */
+  .p5r-life__panel,
+  .p5r-life__panel--a,
+  .p5r-life__panel--b,
+  .p5r-life__panel:only-child {
+    width: 100%;
+    margin: 0;
+    padding: 22% 8% 8%;
+    aspect-ratio: auto;
+    transform: none;
+  }
+
+  .p5r-life__panel--b {
+    margin-top: 18px;
+  }
+
+  .p5r-life__copy,
+  .p5r-life__panel--b .p5r-life__copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: min(72%, 300px);
+    margin: 0 0 10px;
+  }
+
+  /* 截图回到文档流，避免越界后被视口裁掉 */
+  .p5r-life__shots,
+  .p5r-life__panel--a .p5r-life__shots,
+  .p5r-life__panel--b .p5r-life__shots {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin-top: 14px;
+    transform: none;
+  }
+
+  .p5r-life__deco,
+  .p5r-life__panel--b .p5r-life__deco {
+    top: -14%;
+    right: -2%;
+    left: auto;
+    width: 24%;
+  }
+
+  .p5r-life__arrow {
+    top: 50%;
+    width: 44px;
+    height: 72px;
+  }
+
+  .p5r-life__dots {
+    bottom: -28px;
+  }
+}
+

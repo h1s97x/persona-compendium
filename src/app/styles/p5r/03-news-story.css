@@ -1,0 +1,105 @@
+/* ==== p5r · 新闻条 + 故事区 ==== */
+
+/* ---------- 新闻 ---------- */
+
+.p5r-news {
+  max-width: 1180px;
+  margin: 26px auto 0;
+  padding: 0 20px;
+}
+
+.p5r-news__title {
+  height: 52px;
+  background: url('/images/news_bg.webp') center / 100% 100% no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--p5r-gold-light);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+}
+
+.p5r-news__list {
+  margin-top: 6px;
+  border-left: 2px solid rgba(216, 180, 95, 0.35);
+}
+
+.p5r-news__item {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px 16px;
+  border-bottom: 1px dashed rgba(216, 180, 95, 0.22);
+  font-size: 14px;
+  color: #ded5c4;
+}
+
+.p5r-news__date {
+  flex: 0 0 auto;
+  color: var(--p5r-gold);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 故事 ---------- */
+
+/* 故事：红色斜切底板。参考站做法是 1024×500 容器 + background-size: contain，
+   这里直接锁定 red.webp 的原始比例（1227×728），斜切角度不会被拉歪 */
+.p5r-story {
+  position: relative;
+  width: min(1024px, 94%);
+  margin: 26px auto 0;
+  aspect-ratio: 1227 / 728;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 22px);
+  padding: 2% 5% 3%;
+  text-align: center;
+  background: url('/images/red.webp') center / 100% 100% no-repeat;
+}
+
+.p5r-story__title {
+  display: block;
+  /* 参考站 .text1 img 固定 180px 高：按高度缩放，各语言图都保持同一视觉大小 */
+  height: clamp(110px, 16vw, 180px);
+  width: auto;
+  max-width: 78%;
+  margin-left: -3%;
+  transform: rotate(-3deg);
+}
+
+.p5r-story__in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(720px, 92%);
+}
+
+.p5r-story p {
+  color: #fff;
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.9;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+.p5r-story p + p {
+  margin-top: 22px;
+}
+
+@media (max-width: 820px) {
+  /* 小屏不再锁比例（文字放不下），退化为整块铺满 */
+  .p5r-story {
+    width: 100%;
+    aspect-ratio: auto;
+    padding: 38px 6% 46px;
+  }
+
+  .p5r-story p + p {
+    margin-top: 16px;
+  }
+}
+
