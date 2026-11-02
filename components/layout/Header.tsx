@@ -5,17 +5,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import AudioPlayer from '@/components/effects/AudioPlayer';
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
+import { useI18n } from '@/components/providers/LocaleProvider';
 
 const NAV_ITEMS = [
-  { href: '/', label: '首页' },
-  { href: '/characters', label: '角色' },
-  { href: '/gallery', label: '画廊' },
-  { href: '/buy', label: '购买' },
+  { href: '/', labelKey: 'nav.home' },
+  { href: '/characters', labelKey: 'nav.characters' },
+  { href: '/gallery', labelKey: 'nav.gallery' },
+  { href: '/buy', labelKey: 'nav.buy' },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useI18n();
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -23,7 +26,7 @@ export default function Header() {
   return (
     <header className="p5r-header">
       <div className="p5r-header__in">
-        <Link href="/" className="p5r-header__logo" aria-label="Persona 5 Royal 首页">
+        <Link href="/" className="p5r-header__logo" aria-label={t('header.logoAria')}>
           <Image src="/images/p5r.png" alt="Persona 5 Royal" width={824} height={567} priority />
         </Link>
 
@@ -35,19 +38,20 @@ export default function Header() {
                 href={item.href}
                 className={`p5r-btn${isActive(item.href) ? ' p5r-btn--red' : ''}`}
               >
-                <span>{item.label}</span>
+                <span>{t(item.labelKey)}</span>
               </Link>
             ))}
             <a
-              href="https://asia.sega.com/persona-remaster/p5r/cn/"
+              href="https://asia.sega.com/persona-remaster/p5r/"
               target="_blank"
               rel="noopener noreferrer"
               className="p5r-btn p5r-btn--dark"
             >
-              <span>官方网站</span>
+              <span>{t('nav.official')}</span>
             </a>
           </nav>
 
+          <LanguageSwitcher />
           <AudioPlayer />
 
           <button
@@ -55,7 +59,7 @@ export default function Header() {
             className="p5r-nav-toggle"
             onClick={() => setIsMenuOpen((open) => !open)}
             aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? '收起菜单' : '展开菜单'}
+            aria-label={isMenuOpen ? t('header.menuClose') : t('header.menuOpen')}
           >
             {isMenuOpen ? '✕' : '☰'}
           </button>
@@ -71,16 +75,16 @@ export default function Header() {
               className={`p5r-btn${isActive(item.href) ? ' p5r-btn--red' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              <span>{item.label}</span>
+              <span>{t(item.labelKey)}</span>
             </Link>
           ))}
           <a
-            href="https://asia.sega.com/persona-remaster/p5r/cn/"
+            href="https://asia.sega.com/persona-remaster/p5r/"
             target="_blank"
             rel="noopener noreferrer"
             className="p5r-btn p5r-btn--dark"
           >
-            <span>官方网站</span>
+            <span>{t('nav.official')}</span>
           </a>
         </nav>
       )}

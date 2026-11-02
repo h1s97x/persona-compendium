@@ -8,20 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  return (
-    <div className="p5r-page">
-      <div className="p5r-page__head">
-        <h1 className="p5r-h2" style={{ fontSize: 'clamp(34px, 5vw, 62px)' }}>
-          GALLERY
-        </h1>
-        <p className="p5r-page__sub">
-          截取自游戏内的名场面与战斗演出。
-          <br />
-          点击图片查看大图，支持左右切换。
-        </p>
-      </div>
-
-      <GalleryBrowser />
-    </div>
-  );
+  return <GalleryBrowser />;
 }

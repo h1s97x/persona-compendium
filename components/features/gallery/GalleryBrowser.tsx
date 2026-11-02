@@ -5,17 +5,17 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { GALLERY_CATEGORIES, GALLERY_IMAGES } from '@/lib/constants';
 import type { GalleryCategory } from '@/types';
+import { useI18n } from '@/components/providers/LocaleProvider';
 
 type CategoryValue = GalleryCategory | 'all';
-
-const CATEGORY_LABELS: Record<Exclude<CategoryValue, 'all'>, string> = {
-  scene: '游戏中的各种纪念照',
-  battle: '战斗处决动画',
-};
 
 export default function GalleryBrowser() {
   const [category, setCategory] = useState<CategoryValue>('all');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const { t } = useI18n();
+  const [subtitle1, subtitle2] = t('gallery.subtitle').split('|');
+  const altOf = (cat: string) =>
+    cat === 'battle' ? t('gallery.altBattle') : t('gallery.altScene');
 
   const filteredImages = useMemo(
     () =>
@@ -28,7 +28,22 @@ export default function GalleryBrowser() {
   const closeLightbox = () => setSelectedImage(null);
 
   return (
-    <>
+    <div className="p5r-page">
+      <div className="p5r-page__head">
+        <h1 className="p5r-h2" style={{ fontSize: 'clamp(34px, 5vw, 62px)' }}>
+          GALLERY
+        </h1>
+        <p className="p5r-page__sub">
+          {subtitle1}
+          {subtitle2 && (
+            <>
+              <br />
+              {subtitle2}
+            </>
+          )}
+        </p>
+      </div>
+
       {/* 分类筛选 */}
       <div
         style={{
@@ -50,7 +65,7 @@ export default function GalleryBrowser() {
               setSelectedImage(null);
             }}
           >
-            <span>{cat.label}</span>
+            <span>{t(`gallery.cat.${cat.value}`)}</span>
           </button>
         ))}
       </div>
@@ -62,7 +77,7 @@ export default function GalleryBrowser() {
               className="p5r-h3"
               style={{ transform: 'skewX(-6deg)', marginBottom: 16, paddingLeft: 4 }}
             >
-              {CATEGORY_LABELS[cat as Exclude<CategoryValue, 'all'>]}
+              {t(`gallery.cat.${cat}`)}
             </h2>
             <div className="grid grid-cols-1 min-[520px]:grid-cols-2 lg:grid-cols-3 gap-5">
               {GALLERY_IMAGES.filter((img) => img.category === cat).map((image) => {
@@ -71,6 +86,7 @@ export default function GalleryBrowser() {
                   <GalleryItem
                     key={image.id}
                     image={image}
+                    alt={altOf(image.category)}
                     onClick={() => setSelectedImage(index < 0 ? 0 : index)}
                   />
                 );
@@ -81,14 +97,19 @@ export default function GalleryBrowser() {
       ) : (
         <div className="grid grid-cols-1 min-[520px]:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredImages.map((image, index) => (
-            <GalleryItem key={image.id} image={image} onClick={() => setSelectedImage(index)} />
+            <GalleryItem
+              key={image.id}
+              image={image}
+              alt={altOf(image.category)}
+              onClick={() => setSelectedImage(index)}
+            />
           ))}
         </div>
       )}
 
       <div style={{ textAlign: 'center', marginTop: 40 }}>
         <Link href="/buy" className="p5r-btn">
-          <span>前往购买</span>
+          <span>{t('gallery.cta')}</span>
         </Link>
       </div>
 
@@ -97,7 +118,7 @@ export default function GalleryBrowser() {
           <button
             type="button"
             onClick={closeLightbox}
-            aria-label="关闭"
+            aria-label={t('gallery.close')}
             className="p5r-modal__close"
             style={{ top: 16, right: 16 }}
           >
@@ -106,7 +127,7 @@ export default function GalleryBrowser() {
 
           <button
             type="button"
-            aria-label="上一张"
+            aria-label={t('gallery.prev')}
             onClick={(event) => {
               event.stopPropagation();
               setSelectedImage((prev) => (prev! > 0 ? prev! - 1 : filteredImages.length - 1));
@@ -119,7 +140,7 @@ export default function GalleryBrowser() {
 
           <button
             type="button"
-            aria-label="下一张"
+            aria-label={t('gallery.next')}
             onClick={(event) => {
               event.stopPropagation();
               setSelectedImage((prev) => (prev! < filteredImages.length - 1 ? prev! + 1 : 0));
@@ -132,7 +153,7 @@ export default function GalleryBrowser() {
 
           <Image
             src={filteredImages[selectedImage].src}
-            alt={filteredImages[selectedImage].alt}
+            alt={altOf(filteredImages[selectedImage].category)}
             width={1280}
             height={720}
             style={{
@@ -147,16 +168,17 @@ export default function GalleryBrowser() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
 
 interface GalleryItemProps {
   image: (typeof GALLERY_IMAGES)[number];
+  alt: string;
   onClick: () => void;
 }
 
-function GalleryItem({ image, onClick }: GalleryItemProps) {
+function GalleryItem({ image, alt, onClick }: GalleryItemProps) {
   return (
     <button
       type="button"
@@ -167,7 +189,7 @@ function GalleryItem({ image, onClick }: GalleryItemProps) {
       <div style={{ position: 'relative', aspectRatio: '16 / 9' }}>
         <Image
           src={image.src}
-          alt={image.alt}
+          alt={alt}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           style={{ objectFit: 'cover', zIndex: 2 }}
@@ -183,7 +205,7 @@ function GalleryItem({ image, onClick }: GalleryItemProps) {
           zIndex: 3,
         }}
       >
-        {image.alt}
+        {alt}
       </p>
     </button>
   );

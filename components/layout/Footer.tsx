@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useI18n } from '@/components/providers/LocaleProvider';
 
 const BRAND_LOGOS = [
   { src: '/images/logos/sega_logo_s.webp', alt: 'SEGA', width: 160, height: 40 },
@@ -15,6 +18,8 @@ const PLATFORM_LOGOS = [
 ];
 
 export default function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="p5r-footer">
       <div className="p5r-footer__inner">
@@ -43,7 +48,7 @@ export default function Footer() {
         </div>
 
         <div className="p5r-footer__legal">
-          <strong>本页面为个人网页设计作业，与 ATLUS 无关，与 SEGA 无关</strong>
+          <strong>{t('footer.disclaimer')}</strong>
           <p>
             Microsoft Xbox Series X, Xbox Series S, Xbox One and related Xbox logos are trademarks
             and/or registered trademarks of Microsoft Corporation and the Microsoft group of companies.
@@ -58,7 +63,7 @@ export default function Footer() {
             Corporation in the U.S. and/or other countries.
           </p>
           <p>©ATLUS ©SEGA All rights reserved.</p>
-          <p>ElectroME 2026</p>
+          <p>{t('footer.author')}</p>
         </div>
       </div>
     </footer>

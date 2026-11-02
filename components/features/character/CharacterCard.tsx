@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Character } from '@/types';
+import { useCharacterText, useI18n } from '@/components/providers/LocaleProvider';
 
 interface CharacterCardProps {
   character: Character;
@@ -8,6 +9,13 @@ interface CharacterCardProps {
 }
 
 export default function CharacterCard({ character }: CharacterCardProps) {
+  const { t } = useI18n();
+  const text = useCharacterText(character.id, {
+    name: character.name,
+    description: character.description,
+    story: character.story,
+  });
+
   return (
     <Link href={`/characters/${character.id}`} className="p5r-card" style={{ display: 'block' }}>
       <div
@@ -21,7 +29,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
       >
         <Image
           src={character.images.character}
-          alt={`${character.codename} / ${character.name}`}
+          alt={`${character.codename} / ${text.name}`}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           style={{
@@ -82,7 +90,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         >
           {character.codename}
         </h3>
-        <p style={{ fontSize: 13, color: '#a89f8e', marginBottom: 8 }}>{character.name}</p>
+        <p style={{ fontSize: 13, color: '#a89f8e', marginBottom: 8 }}>{text.name}</p>
         <p
           style={{
             fontSize: 12,
@@ -94,10 +102,10 @@ export default function CharacterCard({ character }: CharacterCardProps) {
             overflow: 'hidden',
           }}
         >
-          {character.description}
+          {text.description}
         </p>
         <p style={{ marginTop: 10, fontSize: 12, color: 'var(--p5r-gold)' }}>
-          人格面具 · {character.persona}
+          {t('characters.cardPersona')} · {character.persona}
         </p>
       </div>
     </Link>

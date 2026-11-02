@@ -2,6 +2,7 @@
 
 import { useDeferredValue, useMemo } from 'react';
 import { useCharacterStore } from '@/store/useCharacterStore';
+import { useI18n } from '@/components/providers/LocaleProvider';
 
 const ARCANAS = ['Fool', 'Magician', 'Priestess', 'Empress', 'Emperor', 'Lovers', 'Chariot', 'Justice', 'Hermit'] as const;
 
@@ -10,6 +11,7 @@ export default function CharacterSearch() {
   const setSearchKeyword = useCharacterStore((s) => s.setSearchKeyword);
   const filterArcana = useCharacterStore((s) => s.filterArcana);
   const setFilterArcana = useCharacterStore((s) => s.setFilterArcana);
+  const { t } = useI18n();
 
   // 延迟值避免输入时筛选渲染阻塞
   const deferredKeyword = useDeferredValue(keyword);
@@ -53,7 +55,7 @@ export default function CharacterSearch() {
           type="search"
           value={keyword}
           onChange={handleKeywordChange}
-          placeholder="搜索角色名 / 代号 / 人格面具 / 阿尔卡那…"
+          placeholder={t('characters.searchPlaceholder')}
           aria-label="搜索角色"
           className="p5r-input"
           style={{ paddingLeft: 44, paddingRight: 40, paddingTop: 14, paddingBottom: 14 }}
@@ -110,7 +112,7 @@ export default function CharacterSearch() {
           data-active={filterArcana === null}
           onClick={() => setFilterArcana(null)}
         >
-          <span>全部</span>
+          <span>{t('characters.filterAll')}</span>
         </button>
         {ARCANAS.map((arcana) => (
           <button
@@ -139,7 +141,9 @@ export default function CharacterSearch() {
           }}
         >
           <span>
-            共 <b style={{ color: 'var(--p5r-gold-light)' }}>{resultCount}</b> 位角色
+            {t('characters.resultPrefix')}{' '}
+            <b style={{ color: 'var(--p5r-gold-light)' }}>{resultCount}</b>{' '}
+            {t('characters.resultSuffix')}
             {activeFilters.map((filter) => (
               <span key={filter} style={{ marginLeft: 6, color: 'var(--p5r-gold)' }}>
                 {filter}
@@ -159,7 +163,7 @@ export default function CharacterSearch() {
               fontSize: 13,
             }}
           >
-            清除筛选
+            {t('characters.clear')}
           </button>
         </div>
       )}

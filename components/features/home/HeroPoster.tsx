@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useI18n } from '@/components/providers/LocaleProvider';
 
 export default function HeroPoster() {
   const [isPvOpen, setIsPvOpen] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -47,7 +49,7 @@ export default function HeroPoster() {
         type="button"
         className="p5r-pv"
         onClick={() => setIsPvOpen(true)}
-        aria-label="播放《女神异闻录５ 皇家版》预告片"
+        aria-label={t('hero.pvAria')}
       >
         <video
           src="/assets/p5r_pv.mp4"
@@ -60,8 +62,8 @@ export default function HeroPoster() {
         />
       </button>
 
-      <Link href="/buy" className="p5r-hero__buynow" aria-label="立刻购买">
-        <Image src="/images/buynow.webp" alt="立刻购买" width={338} height={132} />
+      <Link href="/buy" className="p5r-hero__buynow" aria-label={t('hero.buy')}>
+        <Image src="/images/buynow.webp" alt={t('hero.buy')} width={338} height={132} />
       </Link>
 
       {isPvOpen && (
@@ -71,7 +73,7 @@ export default function HeroPoster() {
               type="button"
               className="p5r-modal__close"
               onClick={() => setIsPvOpen(false)}
-              aria-label="关闭预告片"
+              aria-label={t('hero.pvClose')}
             >
               ✕
             </button>

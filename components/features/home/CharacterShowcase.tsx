@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { CHARACTERS } from '@/lib/constants';
+import { useCharacterText, useI18n } from '@/components/providers/LocaleProvider';
 
 const namePlateOf = (icon: string) => {
   const matched = icon.match(/changebtn(\d+)\./);
@@ -12,7 +13,13 @@ const namePlateOf = (icon: string) => {
 
 export default function CharacterShowcase() {
   const [current, setCurrent] = useState(0);
+  const { t } = useI18n();
   const character = CHARACTERS[current];
+  const text = useCharacterText(character.id, {
+    name: character.name,
+    description: character.description,
+    story: character.story,
+  });
 
   return (
     <section id="characters" className="p5r-section p5r-chara">
@@ -60,23 +67,25 @@ export default function CharacterShowcase() {
               height={190}
               className="p5r-stage__name"
             />
-            <p className="p5r-stage__desc">{character.description}</p>
+            <p className="p5r-stage__desc">{text.description}</p>
             <div className="p5r-stage__meta">
-              <span>阿尔卡那 · {character.arcana}</span>
-              <span>{character.name}</span>
+              <span>
+                {t('chara.arcana')} · {character.arcana}
+              </span>
+              <span>{text.name}</span>
               <Link
                 href={`/characters/${character.id}`}
                 className="p5r-stage__link"
-                aria-label={`查看 ${character.codename} 的详细档案`}
+                aria-label={t('chara.aria', { name: character.codename })}
               >
-                详细档案 →
+                {t('chara.detail')}
               </Link>
             </div>
           </div>
         </div>
 
         <div className="p5r-stage__persona-label">
-          <em>初期人格面具</em>
+          <em>{t('chara.personaLabel')}</em>
           <b>{character.persona}</b>
         </div>
       </div>
@@ -99,7 +108,7 @@ export default function CharacterShowcase() {
 
       <div style={{ textAlign: 'center', marginTop: 26 }}>
         <Link href="/characters" className="p5r-btn p5r-btn--dark">
-          <span>查看全部角色</span>
+          <span>{t('chara.seeAll')}</span>
         </Link>
       </div>
     </section>
