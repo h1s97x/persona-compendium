@@ -3,6 +3,8 @@
 :root {
   --p5r-red: #E60012;
   --p5r-red-hover: #ff0015;
+  --p5r-gold: #d8b45f;
+  --p5r-gold-light: #f5e3b0;
   --p5r-dark: #1a0000;
   --p5r-black: #000000;
   --p5r-white: #FFFFFF;
@@ -16,6 +18,8 @@
   --color-foreground: var(--foreground);
   --color-p5r-red: var(--p5r-red);
   --color-p5r-red-hover: var(--p5r-red-hover);
+  --color-p5r-gold: var(--p5r-gold);
+  --color-p5r-gold-light: var(--p5r-gold-light);
   --color-p5r-dark: var(--p5r-dark);
   --color-p5r-black: var(--p5r-black);
   --color-p5r-white: var(--p5r-white);
@@ -37,7 +41,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
