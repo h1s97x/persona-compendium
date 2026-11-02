@@ -97,6 +97,7 @@ const zhCN: Dictionary = {
   'chara.arcana': '阿尔卡那',
   'chara.personaLabel': '初期人格面具',
   'chara.costume': '切换服装',
+  'chara.school': '校服',
   'chara.aria': '查看 {name} 的详细档案',
 
   'characters.subtitle': '心之怪盗团全体成员。|点击卡片查看角色档案与初期人格面具。',
@@ -209,6 +210,7 @@ const zhTW: Dictionary = {
   'chara.arcana': '阿爾卡那',
   'chara.personaLabel': '初期人格面具',
   'chara.costume': '切換服裝',
+  'chara.school': '校服',
   'chara.aria': '查看 {name} 的詳細檔案',
 
   'characters.subtitle': '心之怪盜團全體成員。|點擊卡片查看角色檔案與初期人格面具。',
@@ -323,6 +325,7 @@ const en: Dictionary = {
   'chara.arcana': 'Arcana',
   'chara.personaLabel': 'Initial Persona',
   'chara.costume': 'Switch costume',
+  'chara.school': 'School uniform',
   'chara.aria': 'Open the full profile of {name}',
 
   'characters.subtitle':
@@ -444,6 +447,7 @@ const ja: Dictionary = {
   'chara.arcana': 'アルカナ',
   'chara.personaLabel': '初期ペルソナ',
   'chara.costume': 'コスチューム切替',
+  'chara.school': '制服',
   'chara.aria': '{name} の詳細プロフィールを見る',
 
   'characters.subtitle': '心の怪盗団の全メンバー。|カードをクリックするとプロフィールを表示。',

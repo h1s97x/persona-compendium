@@ -13,7 +13,6 @@ const NAV_ITEMS = [
   { href: '/', labelKey: 'nav.home' },
   { href: '/characters', labelKey: 'nav.characters' },
   { href: '/gallery', labelKey: 'nav.gallery' },
-  { href: '/buy', labelKey: 'nav.buy' },
 ];
 
 export default function Header() {
@@ -43,14 +42,6 @@ export default function Header() {
                 <span>{t(item.labelKey)}</span>
               </LocaleLink>
             ))}
-            <a
-              href="https://asia.sega.com/persona-remaster/p5r/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p5r-btn p5r-btn--dark"
-            >
-              <span>{t('nav.official')}</span>
-            </a>
           </nav>
 
           <LanguageSwitcher />
@@ -80,14 +71,6 @@ export default function Header() {
               <span>{t(item.labelKey)}</span>
             </LocaleLink>
           ))}
-          <a
-            href="https://asia.sega.com/persona-remaster/p5r/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p5r-btn p5r-btn--dark"
-          >
-            <span>{t('nav.official')}</span>
-          </a>
         </nav>
       )}
     </header>
