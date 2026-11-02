@@ -57,6 +57,7 @@ export const ko: Dictionary = {
   'chara.detail': '상세 프로필 →',
   'chara.arcana': '아르카나',
   'chara.personaLabel': '초기 페르소나',
+  'chara.costume': '코스튬 전환',
   'chara.aria': '{name}의 상세 프로필 보기',
 
   'characters.subtitle':
@@ -162,6 +163,7 @@ export const fr: Dictionary = {
   'chara.detail': 'Fiche complète →',
   'chara.arcana': 'Arcane',
   'chara.personaLabel': 'Persona initial',
+  'chara.costume': 'Changer de tenue',
   'chara.aria': 'Ouvrir la fiche de {name}',
 
   'characters.subtitle':
@@ -268,6 +270,7 @@ export const it: Dictionary = {
   'chara.detail': 'Scheda completa →',
   'chara.arcana': 'Arcano',
   'chara.personaLabel': 'Persona iniziale',
+  'chara.costume': 'Cambia costume',
   'chara.aria': 'Apri la scheda di {name}',
 
   'characters.subtitle':
@@ -373,6 +376,7 @@ export const de: Dictionary = {
   'chara.detail': 'Vollständiges Profil →',
   'chara.arcana': 'Arkana',
   'chara.personaLabel': 'Anfangs-Persona',
+  'chara.costume': 'Kostüm wechseln',
   'chara.aria': 'Profil von {name} öffnen',
 
   'characters.subtitle': 'Die Phantomdiebe.|Klicke auf eine Karte für Profil und Anfangs-Persona.',
@@ -478,6 +482,7 @@ export const es: Dictionary = {
   'chara.detail': 'Ficha completa →',
   'chara.arcana': 'Arcano',
   'chara.personaLabel': 'Persona inicial',
+  'chara.costume': 'Cambiar de traje',
   'chara.aria': 'Abrir la ficha de {name}',
 
   'characters.subtitle':

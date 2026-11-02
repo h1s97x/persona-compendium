@@ -6,7 +6,10 @@ export interface Character {
   arcana: string;
   description: string;
   images: {
+    /** 怪盗服立绘（官网 costume2） */
     character: string;
+    /** 校服立绘（官网 costume1），部分角色没有校服版本 */
+    school?: string;
     persona: string;
     icon: string;
   };
