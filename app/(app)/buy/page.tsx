@@ -1,141 +1,149 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
 import Image from 'next/image';
-import { PLATFORMS } from '@/lib/constants';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '购买指南',
+  description:
+    '《女神异闻录５ 皇家版》购买指南：对应平台、实体版与下载版、游戏规格与 PC 系统需求。',
+};
+
+const STORES = [
+  { name: 'PlayStation 5', image: '/images/ps5_btn.webp', link: 'https://store.playstation.com' },
+  { name: 'Nintendo Switch', image: '/images/switch_btn.webp', link: 'https://store.nintendo.com' },
+  { name: 'Steam', image: '/images/steam_btn.webp', link: 'https://store.steampowered.com' },
+  { name: 'Xbox Series X|S', image: '/images/xbox_xs_btn.webp', link: 'https://www.xbox.com' },
+  { name: 'Xbox One', image: '/images/xbox_one_btn.webp', link: 'https://www.xbox.com' },
+  { name: 'Windows', image: '/images/windows_btn.webp', link: 'https://www.microsoft.com/store' },
+];
+
+const SPEC_ROWS = [
+  { label: '游戏名称', value: '女神异闻录５ 皇家版' },
+  { label: '发售日期', value: '好评发售中' },
+  { label: '游戏类别', value: 'RPG' },
+  { label: '游玩人数', value: '1 人' },
+  {
+    label: '支持平台',
+    value: 'Xbox Series X|S / Xbox One / Windows / PlayStation®5 / Nintendo Switch™ / Steam',
+    note: '※PlayStation®5 / Nintendo Switch™ 以外的平台仅发售下载版',
+  },
+  { label: '支持语言', value: '简体中文・繁体中文字幕／日语语音' },
+];
 
 export default function BuyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl font-bold text-p5r-red mb-4">购买游戏</h1>
-          <p className="text-white text-xl">选择您的平台</p>
-        </motion.div>
-
-        {/* Game Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-8 mb-12"
-        >
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative h-96">
-              <Image
-                src="/images/cover.webp"
-                alt="游戏封面"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain"
-              />
-            </div>
-
-            <div className="text-white space-y-6">
-              <h2 className="text-3xl font-bold text-p5r-red">游戏信息</h2>
-              
-              <div>
-                <h3 className="text-xl font-bold mb-2">游戏名称</h3>
-                <p className="text-gray-300">女神异闻录 5 皇家版</p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold mb-2">游戏类型</h3>
-                <p className="text-gray-300">JRPG</p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold mb-2">支持平台</h3>
-                <p className="text-gray-300">
-                  Xbox Game Pass<br />
-                  Xbox Series X|S<br />
-                  PlayStation®5<br />
-                  Nintendo Switch™<br />
-                  Steam<br />
-                  Windows
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold mb-2">支持语言</h3>
-                <p className="text-gray-300">多语言字幕/日语语音</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Platforms */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <h2 className="text-3xl font-bold text-p5r-red text-center mb-8">选择购买平台</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PLATFORMS.map((platform, index) => (
-              <motion.a
-                key={platform.name}
-                href={platform.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-6 hover:border-p5r-red-hover transition-colors"
-              >
-                <div className="relative h-24 mb-4">
-                  <Image
-                    src={platform.logo}
-                    alt={platform.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-contain"
-                  />
-                </div>
-                <p className="text-white text-center font-bold">{platform.name}</p>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* System Requirements */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg p-8"
-        >
-          <h2 className="text-3xl font-bold text-p5r-red mb-6">系统需求 (PC)</h2>
-          <div className="grid md:grid-cols-2 gap-8 text-white">
-            <div>
-              <h3 className="text-xl font-bold text-p5r-red mb-4">最低配置</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li><span className="text-white font-bold">操作系统:</span> Windows 10 (64-bit)</li>
-                <li><span className="text-white font-bold">处理器:</span> Intel Core i7-4790 / AMD Ryzen 5 1500X</li>
-                <li><span className="text-white font-bold">内存:</span> 8 GB RAM</li>
-                <li><span className="text-white font-bold">显卡:</span> Nvidia GeForce GTX 650 Ti / AMD Radeon R7 360</li>
-                <li><span className="text-white font-bold">存储空间:</span> 需要 41 GB 可用空间</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-p5r-red mb-4">推荐配置</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li><span className="text-white font-bold">操作系统:</span> Windows 10 (64-bit)</li>
-                <li><span className="text-white font-bold">处理器:</span> Intel Core i7-4790 / AMD Ryzen 5 1500X</li>
-                <li><span className="text-white font-bold">内存:</span> 8 GB RAM</li>
-                <li><span className="text-white font-bold">显卡:</span> Nvidia GeForce GTX 760 / AMD Radeon HD 7870</li>
-                <li><span className="text-white font-bold">存储空间:</span> 需要 41 GB 可用空间</li>
-              </ul>
-            </div>
-          </div>
-        </motion.div>
+    <div className="p5r-page">
+      <div className="p5r-shop-head">
+        <Image
+          src="/images/shopguide_title.webp"
+          alt="购买指南 SHOP GUIDE"
+          width={318}
+          height={249}
+          priority
+        />
+        <Image src="/images/st.webp" alt="实体版" width={213} height={90} />
+        <Image src="/images/dl.webp" alt="下载版" width={213} height={90} />
       </div>
+
+      <p
+        style={{
+          textAlign: 'center',
+          color: '#cfc6b4',
+          fontSize: 14,
+          lineHeight: 1.9,
+          marginBottom: 26,
+        }}
+      >
+        选择你的平台，开始这段「更生」之旅。
+        <br />
+        实体版仅对应部分平台，其余平台仅发售下载版。
+      </p>
+
+      {/* 商店按钮 */}
+      <div className="p5r-stores">
+        {STORES.map((store) => (
+          <a
+            key={store.name}
+            href={store.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p5r-store"
+            aria-label={`前往 ${store.name} 商店`}
+          >
+            <Image src={store.image} alt={store.name} width={292} height={70} />
+          </a>
+        ))}
+      </div>
+
+      {/* 规格 */}
+      <section style={{ marginTop: 66 }}>
+        <h2 className="p5r-h2" style={{ display: 'block', textAlign: 'center', marginBottom: 22 }}>
+          SPEC
+        </h2>
+        <div className="p5r-panel" style={{ maxWidth: 860, margin: '0 auto' }}>
+          {SPEC_ROWS.map((row) => (
+            <div
+              key={row.label}
+              style={{
+                display: 'flex',
+                gap: 16,
+                alignItems: 'flex-start',
+                padding: '11px 0',
+                borderBottom: '1px dashed rgba(216,180,95,0.2)',
+              }}
+            >
+              <span
+                style={{
+                  flex: '0 0 104px',
+                  fontSize: 13,
+                  fontWeight: 800,
+                  color: 'var(--p5r-gold-light)',
+                  transform: 'skewX(-6deg)',
+                }}
+              >
+                {row.label}
+              </span>
+              <span style={{ fontSize: 13, lineHeight: 1.85, color: '#ded5c4' }}>
+                {row.value}
+                {row.note && (
+                  <small style={{ display: 'block', color: '#9b9385', fontSize: 11, marginTop: 2 }}>
+                    {row.note}
+                  </small>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 系统需求 */}
+      <section style={{ marginTop: 60, textAlign: 'center' }}>
+        <h2 className="p5r-h3" style={{ marginBottom: 18, transform: 'skewX(-6deg)' }}>
+          系统需求（PC）
+        </h2>
+        <Image
+          src="/images/system_requirements.webp"
+          alt="PC 系统需求"
+          width={839}
+          height={437}
+          style={{ width: 'min(760px, 92%)', height: 'auto', margin: '0 auto', display: 'block' }}
+        />
+      </section>
+
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 14, marginTop: 50, flexWrap: 'wrap' }}>
+        <Link href="/gallery" className="p5r-btn p5r-btn--dark">
+          <span>先看看游戏画面</span>
+        </Link>
+        <Link href="/characters" className="p5r-btn">
+          <span>查看角色</span>
+        </Link>
+      </div>
+
+      <p style={{ textAlign: 'center', fontSize: 11, color: '#7d766a', marginTop: 30, lineHeight: 1.9 }}>
+        各平台售价与特典内容请以商店页面为准。
+        <br />
+        ©ATLUS ©SEGA All rights reserved.
+      </p>
     </div>
   );
 }
