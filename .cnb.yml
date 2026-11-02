@@ -37,7 +37,7 @@ main:
         - name: typecheck
           script: |
             set -e
-            npx tsc --noEmit
+            npm run type-check
         - name: build
           script: |
             set -e
@@ -76,7 +76,7 @@ main:
         - name: typecheck
           script: |
             set -e
-            npx tsc --noEmit
+            npm run type-check
         - name: build
           script: |
             set -e
@@ -167,7 +167,7 @@ $:
         - name: typecheck
           script: |
             set -e
-            npx tsc --noEmit
+            npm run type-check
         - name: build
           script: |
             set -e
