@@ -98,17 +98,8 @@ export default function HomePage() {
           className="p5r-story__title"
         />
         <div className="p5r-story__in">
-          <div>
-            <p>{t('story.p1')}</p>
-            <p>{t('story.p2')}</p>
-          </div>
-          <Image
-            src="/images/ren.webp"
-            alt={t('chara.aria', { name: 'Joker' })}
-            width={465}
-            height={545}
-            className="p5r-story__art"
-          />
+          <p>{t('story.p1')}</p>
+          <p>{t('story.p2')}</p>
         </div>
       </section>
 
