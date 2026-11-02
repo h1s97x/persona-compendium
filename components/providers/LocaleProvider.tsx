@@ -16,6 +16,7 @@ import {
   type Locale,
 } from '@/lib/i18n/dictionary';
 import { CHARACTER_TEXT, type CharacterText } from '@/lib/i18n/characters';
+import { OFFICIAL_CONTENT } from '@/lib/i18n/official-content';
 
 interface LocaleContextValue {
   locale: Locale;
@@ -101,5 +102,19 @@ export function useCharacterText(
   fallback: CharacterText,
 ): CharacterText {
   const { locale } = useI18n();
-  return CHARACTER_TEXT[locale]?.[id] ?? fallback;
+
+  const handWritten = CHARACTER_TEXT[locale]?.[id];
+  if (handWritten) return handWritten;
+
+  const officialBio = OFFICIAL_CONTENT[locale]?.characters[id];
+  if (officialBio) {
+    const englishName = CHARACTER_TEXT.en?.[id]?.name;
+    return {
+      name: englishName ?? fallback.name,
+      description: officialBio,
+      story: '',
+    };
+  }
+
+  return fallback;
 }

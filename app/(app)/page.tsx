@@ -157,7 +157,7 @@ export default function Home() {
               className="p5r-about__title"
             />
             <p>{t('about.p1')}</p>
-            <p style={{ marginTop: 12 }}>{t('about.p2')}</p>
+            {t('about.p2') && <p style={{ marginTop: 12 }}>{t('about.p2')}</p>}
             <Image
               src="/images/serise.webp"
               alt={t('about.seriesAlt')}

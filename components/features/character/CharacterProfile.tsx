@@ -250,20 +250,22 @@ export default function CharacterProfile({ character }: { character: Character }
         </div>
       </article>
 
-      <section className="p5r-panel" style={{ marginTop: 26, padding: '24px 26px' }}>
-        <h2
-          style={{
-            fontSize: 16,
-            fontWeight: 900,
-            color: 'var(--p5r-gold-light)',
-            marginBottom: 10,
-            transform: 'skewX(-6deg)',
-          }}
-        >
-          {t('detail.story')}
-        </h2>
-        <p style={{ fontSize: 14, lineHeight: 2, color: '#d5ccba' }}>{text.story}</p>
-      </section>
+      {text.story && (
+        <section className="p5r-panel" style={{ marginTop: 26, padding: '24px 26px' }}>
+          <h2
+            style={{
+              fontSize: 16,
+              fontWeight: 900,
+              color: 'var(--p5r-gold-light)',
+              marginBottom: 10,
+              transform: 'skewX(-6deg)',
+            }}
+          >
+            {t('detail.story')}
+          </h2>
+          <p style={{ fontSize: 14, lineHeight: 2, color: '#d5ccba' }}>{text.story}</p>
+        </section>
+      )}
 
       <nav style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 26 }}>
         <Link href={`/characters/${prev.id}`} className="p5r-btn p5r-btn--dark">

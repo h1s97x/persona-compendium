@@ -1,8 +1,17 @@
+import { OFFICIAL_CONTENT } from './official-content';
+import { ko, fr, it, de, es } from './dictionaries-extra';
+
+/** 顺序与官网语言菜单一致 */
 export const LOCALES = [
   { code: 'zh-CN', label: '簡体中文', short: '简中' },
-  { code: 'zh-TW', label: '繁體中文', short: '繁中' },
-  { code: 'en', label: 'English', short: 'EN' },
   { code: 'ja', label: '日本語', short: '日本語' },
+  { code: 'zh-TW', label: '繁體中文', short: '繁中' },
+  { code: 'ko', label: '한국어', short: '한국어' },
+  { code: 'en', label: 'English', short: 'EN' },
+  { code: 'fr', label: 'Français', short: 'FR' },
+  { code: 'it', label: 'Italiano', short: 'IT' },
+  { code: 'de', label: 'Deutsch', short: 'DE' },
+  { code: 'es', label: 'Español', short: 'ES' },
 ] as const;
 
 export type Locale = (typeof LOCALES)[number]['code'];
@@ -466,9 +475,35 @@ const ja: Dictionary = {
   'footer.author': 'ElectroME 2026',
 };
 
+/** 长文案与规格表取值优先使用官网原文，缺失时回退到手写文案 */
+const withOfficial = (code: string, ui: Dictionary): Dictionary => {
+  const official = OFFICIAL_CONTENT[code];
+  if (!official) return ui;
+
+  const merged: Dictionary = {
+    ...ui,
+    'story.p1': official.storyP1 || ui['story.p1'],
+    'story.p2': official.storyP2 || ui['story.p2'],
+    'about.p1': official.aboutP1 || ui['about.p1'],
+    'about.p2': official.aboutP2,
+    'spec.valueName': official.spec.title || ui['spec.valueName'],
+    'spec.valueDate': official.spec.date || ui['spec.valueDate'],
+    'spec.valueType': official.spec.genre || ui['spec.valueType'],
+    'spec.valuePlayers': official.spec.players || ui['spec.valuePlayers'],
+    'spec.valuePlatforms': official.spec.platforms || ui['spec.valuePlatforms'],
+  };
+
+  return merged;
+};
+
 export const DICTIONARIES: Record<Locale, Dictionary> = {
   'zh-CN': zhCN,
-  'zh-TW': zhTW,
-  en,
-  ja,
+  ja: withOfficial('ja', ja),
+  'zh-TW': withOfficial('zh-TW', zhTW),
+  ko: withOfficial('ko', ko),
+  en: withOfficial('en', en),
+  fr: withOfficial('fr', fr),
+  it: withOfficial('it', it),
+  de: withOfficial('de', de),
+  es: withOfficial('es', es),
 };
