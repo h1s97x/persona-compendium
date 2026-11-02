@@ -199,3 +199,38 @@ body {
   line-height: 1.9;
 }
 
+/* 页面级红色斜带底（官网 .bg-red-line + .bg-red-shadow） */
+.p5r-redzone {
+  position: relative;
+  isolation: isolate;
+  padding-top: 48px;
+  background: linear-gradient(158deg, #a9000c 0%, #7c000a 38%, #450006 72%, #170002 100%);
+}
+
+/* 官网的红色点纹覆盖层：从原图截取 360×360 可平铺纹理，避免引入 11MB 整图 */
+.p5r-redzone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('/images/official/red_dot_tile.webp') repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.p5r-redzone__line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1602px;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: 0;
+  background: url('/images/official/bg_red_line.webp') top center / 100% auto no-repeat;
+  pointer-events: none;
+}
+
+.p5r-redzone > *:not(.p5r-redzone__line) {
+  position: relative;
+  z-index: 1;
+}

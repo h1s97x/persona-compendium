@@ -75,19 +75,39 @@ export default function HomePage() {
     <>
       <HeroPoster />
 
-      <section className="p5r-section p5r-news" aria-label={t('news.label')}>
-        <div className="p5r-news__title">{t('news.label')}</div>
-        <div className="p5r-news__list">
-          <p className="p5r-news__item">
-            <span className="p5r-news__date">2022.06.13</span>
-            <span>{t('news.1')}</span>
-          </p>
-          <p className="p5r-news__item">
-            <span className="p5r-news__date">2022.06.13</span>
-            <span>{t('news.2')}</span>
-          </p>
-        </div>
-      </section>
+      {/* 官网整页从新闻区起就是一片红色斜带底（bg-red-line + bg-red-shadow） */}
+      <div className="p5r-redzone">
+        <div className="p5r-redzone__line" aria-hidden />
+
+        <section className="p5r-section p5r-news" aria-label={t('news.label')}>
+          <Image
+            src="/images/official/news_title.webp"
+            alt={t('news.label')}
+            width={65}
+            height={30}
+            className="p5r-news__title"
+          />
+          <div className="p5r-news__container">
+            <Image
+              src="/images/official/news_bg.webp"
+              alt=""
+              aria-hidden
+              width={1024}
+              height={94}
+              className="p5r-news__bg"
+            />
+            <ul className="p5r-news__list">
+              <li>
+                <span className="p5r-news__date">2022.06.13</span>
+                <span className="p5r-news__text">{t('news.1')}</span>
+              </li>
+              <li>
+                <span className="p5r-news__date">2022.06.13</span>
+                <span className="p5r-news__text">{t('news.2')}</span>
+              </li>
+            </ul>
+          </div>
+        </section>
 
       <section className="p5r-section p5r-story">
         <Image
@@ -105,11 +125,9 @@ export default function HomePage() {
 
       <CharacterShowcase />
 
-      {/* 官网「校园生活 / 怪盗生活」两段落在同一片红色点纹底上 */}
-      <div className="p5r-life-zone">
-        <LifeSection kind="school" />
-        <LifeSection kind="phantom" />
-      </div>
+      {/* 两段生活区直接落在页面红色底上（官网同样是整页红底） */}
+      <LifeSection kind="school" />
+      <LifeSection kind="phantom" />
 
       <section className="p5r-section p5r-dlc" aria-labelledby="dlc-title">
         <h2 id="dlc-title" className="p5r-h3">
@@ -206,6 +224,7 @@ export default function HomePage() {
           </LocaleLink>
         </div>
       </section>
+      </div>
     </>
   );
 }

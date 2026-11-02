@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import LocaleLink from '@/components/ui/LocaleLink';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { CHARACTERS } from '@/lib/constants';
 import { useCharacterText, useI18n } from '@/components/providers/LocaleProvider';
 import { localAsset } from '@/lib/i18n/assets';
+import { useFitScale } from '@/hooks/useFitScale';
 import type { Locale } from '@/lib/i18n/dictionary';
 
 /** 官网 1305×1000 画布；所有坐标直接取自官方 top.css，不做百分比换算 */
@@ -160,8 +161,7 @@ type Costume = 'thief' | 'school';
 export default function CharacterShowcase() {
   const [current, setCurrent] = useState(0);
   const [costume, setCostume] = useState<Costume>('thief');
-  const [scale, setScale] = useState(1);
-  const fitRef = useRef<HTMLDivElement>(null);
+  const { ref: fitRef, scale } = useFitScale(CANVAS_W);
   const { t, locale } = useI18n();
 
   const character = CHARACTERS[current];
@@ -172,16 +172,6 @@ export default function CharacterShowcase() {
     story: character.story,
   });
   const hasSchool = Boolean(character.images.school);
-
-  useEffect(() => {
-    const el = fitRef.current;
-    if (!el) return;
-    const update = () => setScale(Math.min(1, el.clientWidth / CANVAS_W));
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const selectCharacter = (id: string) => {
     const index = CHARACTERS.findIndex((item) => item.id === id);

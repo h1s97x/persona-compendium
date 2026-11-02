@@ -3,14 +3,17 @@
 import Image from 'next/image';
 import LocaleLink from '@/components/ui/LocaleLink';
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { useI18n } from '@/components/providers/LocaleProvider';
-import { heroBuyImage, heroPrBadge } from '@/lib/i18n/assets';
+import { useFitScale } from '@/hooks/useFitScale';
+
+/** 官网 main section.first-view + .kv-wrapper 的画布宽度 */
+const CANVAS_W = 1024;
 
 export default function HeroPoster() {
   const [isPvOpen, setIsPvOpen] = useState(false);
-  const { t, locale } = useI18n();
-  const badge = heroPrBadge(locale);
-  const buyImage = heroBuyImage(locale);
+  const { t } = useI18n();
+  const { ref, scale } = useFitScale(CANVAS_W);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -21,71 +24,86 @@ export default function HeroPoster() {
   }, []);
 
   return (
-    <section className="p5r-section p5r-hero">
-      {badge.kind === 'copy' ? (
-        <Image
-          src={badge.src}
-          alt=""
-          aria-hidden
-          width={347}
-          height={313}
-          className="p5r-float p5r-float--l"
-        />
-      ) : (
-        <Image
-          src={badge.src}
-          alt={t('hero.availableNow')}
-          width={168}
-          height={126}
-          className="p5r-float p5r-float--l p5r-float--badge"
-        />
-      )}
-      <Image
-        src="/images/text2.webp"
-        alt=""
-        aria-hidden
-        width={310}
-        height={218}
-        className="p5r-float p5r-float--r"
-      />
-
-      <Image
-        src="/images/p5r.png"
-        alt="Persona 5 Royal"
-        width={824}
-        height={567}
-        priority
-        className="p5r-hero__logo"
-      />
-
-      <button
-        type="button"
-        className="p5r-pv"
-        onClick={() => setIsPvOpen(true)}
-        aria-label={t('hero.pvAria')}
+    <section className="p5r-hero">
+      <div
+        className="p5r-hero__fit"
+        ref={ref}
+        style={{ '--hero-scale': scale } as CSSProperties}
       >
-        <video
-          src="/assets/p5r_pv.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden
-        />
-      </button>
+        <div className="p5r-hero__canvas">
+          {/* 主视觉：官网 .kv（918×670，居中） */}
+          <div className="p5r-hero__kv" aria-hidden />
 
-      <LocaleLink
-        href="/buy"
-        className={`p5r-hero__buynow${buyImage ? '' : ' p5r-hero__buynow--text'}`}
-        aria-label={t('hero.buy')}
-      >
-        {buyImage ? (
-          <Image src={buyImage} alt={t('hero.buy')} width={338} height={132} />
-        ) : (
-          <span>{t('hero.buy')}</span>
-        )}
-      </LocaleLink>
+          {/* 左列：文案条 + 主标语 + PV（官网 .first-view .column:first-child） */}
+          <div className="p5r-hero__col p5r-hero__col--l">
+            <Image
+              src="/images/official/fv_copy1.webp"
+              alt=""
+              aria-hidden
+              width={326}
+              height={33}
+              priority
+              className="p5r-hero__copy1"
+            />
+            <Image
+              src="/images/official/fv_copy2.webp"
+              alt=""
+              aria-hidden
+              width={347}
+              height={313}
+              priority
+              className="p5r-hero__copy2"
+            />
+            <button
+              type="button"
+              className="p5r-hero__pv"
+              onClick={() => setIsPvOpen(true)}
+              aria-label={t('hero.pvAria')}
+            >
+              <video
+                src="/assets/p5r_pv.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden
+              />
+            </button>
+          </div>
+
+          {/* 右列：发售日 + 预购按钮（官网 .column:nth-child(2)，右对齐） */}
+          <div className="p5r-hero__col p5r-hero__col--r">
+            <Image
+              src="/images/official/fv_release_date.webp"
+              alt=""
+              aria-hidden
+              width={310}
+              height={218}
+              priority
+              className="p5r-hero__release"
+            />
+            <LocaleLink href="/buy" className="p5r-hero__preorder" aria-label={t('hero.buy')}>
+              <Image
+                src="/images/official/pre_order_btn.webp"
+                alt={t('hero.buy')}
+                width={338}
+                height={132}
+              />
+            </LocaleLink>
+          </div>
+
+          {/* 标题 logo：官网 h1.logo（339×237，压在画面左下） */}
+          <Image
+            src="/images/official/fv_logo.webp"
+            alt="Persona 5 Royal"
+            width={339}
+            height={237}
+            priority
+            className="p5r-hero__logo"
+          />
+        </div>
+      </div>
 
       {isPvOpen && (
         <div
