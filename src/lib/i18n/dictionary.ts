@@ -131,7 +131,6 @@ const zhCN: Dictionary = {
   'buy.physical': '实体版',
   'buy.digital': '下载版',
   'buy.intro': '选择你的平台，开始这段「更生」之旅。|实体版仅对应部分平台，其余平台仅发售下载版。',
-  'buy.storeAria': '前往 {name} 商店',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': '系统需求（PC）',
   'buy.sysreqAlt': 'PC 系统需求',
@@ -241,7 +240,6 @@ const zhTW: Dictionary = {
   'buy.physical': '實體版',
   'buy.digital': '下載版',
   'buy.intro': '選擇你的平台，開始這段「更生」之旅。|實體版僅對應部分平台，其餘平台僅發售下載版。',
-  'buy.storeAria': '前往 {name} 商店',
   'buy.sysreq': '系統需求（PC）',
   'buy.sysreqAlt': 'PC 系統需求',
   'buy.note': '各平台售價與特典內容請以商店頁面為準。',
@@ -362,7 +360,6 @@ const en: Dictionary = {
   'buy.digital': 'Digital',
   'buy.intro':
     'Pick your platform and start the rehabilitation.|Physical editions are available on selected platforms only.',
-  'buy.storeAria': 'Open the {name} store',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': 'System requirements (PC)',
   'buy.sysreqAlt': 'PC system requirements',
@@ -483,7 +480,6 @@ const ja: Dictionary = {
   'buy.digital': 'ダウンロード版',
   'buy.intro':
     'プラットフォームを選んで、「更生」の旅を始めよう。|パッケージ版は一部機種のみ、その他はダウンロード版のみ。',
-  'buy.storeAria': '{name} ストアを開く',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': '動作環境（PC）',
   'buy.sysreqAlt': 'PC 動作環境',

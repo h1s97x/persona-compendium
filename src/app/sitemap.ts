@@ -7,6 +7,7 @@ const ROUTES: { path: string; priority: number; changeFrequency: 'weekly' | 'mon
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/characters', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/gallery', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/buy', priority: 0.6, changeFrequency: 'monthly' },
   ...CHARACTERS.map((character) => ({
     path: `/characters/${character.id}`,
     priority: 0.8,

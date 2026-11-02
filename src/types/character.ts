@@ -39,5 +39,6 @@ export interface GalleryImage {
 export interface Platform {
   name: string;
   logo: string;
-  link: string;
+  /** 已去除商店跳转，保留字段以便后续接入自有页面 */
+  link?: string;
 }

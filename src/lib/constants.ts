@@ -300,31 +300,15 @@ export const GALLERY_IMAGES: GalleryImage[] = [
   },
 ];
 
+/** 平台仅作信息展示，不带商店跳转 */
 export const PLATFORMS: Platform[] = [
-  {
-    name: 'PlayStation 5',
-    logo: '/images/platforms/ps5_logo.webp',
-    link: 'https://store.playstation.com',
-  },
-  {
-    name: 'Xbox Series X|S',
-    logo: '/images/platforms/xbox_xs_logo.webp',
-    link: 'https://www.xbox.com',
-  },
-  {
-    name: 'Nintendo Switch',
-    logo: '/images/platforms/switch_logo.webp',
-    link: 'https://www.nintendo.com',
-  },
-  {
-    name: 'Steam',
-    logo: '/images/platforms/steam_logo.webp',
-    link: 'https://store.steampowered.com',
-  },
+  { name: 'PlayStation 5', logo: '/images/platforms/ps5_logo.webp' },
+  { name: 'Xbox Series X|S', logo: '/images/platforms/xbox_xs_logo.webp' },
+  { name: 'Nintendo Switch', logo: '/images/platforms/switch_logo.webp' },
+  { name: 'Steam', logo: '/images/platforms/steam_logo.webp' },
 ];
 
 export const SITE_CONFIG = {
   title: 'Persona Compendium - 人格面具全书',
   description: 'Persona 全系列角色与内容介绍',
-  officialSite: 'https://asia.sega.com/persona-remaster/p5r/cht/',
 };

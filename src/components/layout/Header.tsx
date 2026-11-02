@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: '/', labelKey: 'nav.home' },
   { href: '/characters', labelKey: 'nav.characters' },
   { href: '/gallery', labelKey: 'nav.gallery' },
+  { href: '/buy', labelKey: 'nav.buy' },
 ];
 
 export default function Header() {

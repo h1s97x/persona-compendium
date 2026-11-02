@@ -5,13 +5,14 @@ import LocaleLink from '@/components/ui/LocaleLink';
 import { useI18n } from '@/components/providers/LocaleProvider';
 import { localAsset } from '@/lib/i18n/assets';
 
+/** 商店按钮只作展示：保留官方贴图与悬浮效果，不再跳转外部商店 */
 const STORES = [
-  { name: 'PlayStation 5', image: '/images/ps5_btn.webp', link: 'https://store.playstation.com' },
-  { name: 'Nintendo Switch', image: '/images/switch_btn.webp', link: 'https://store.nintendo.com' },
-  { name: 'Steam', image: '/images/steam_btn.webp', link: 'https://store.steampowered.com' },
-  { name: 'Xbox Series X|S', image: '/images/xbox_xs_btn.webp', link: 'https://www.xbox.com' },
-  { name: 'Xbox One', image: '/images/xbox_one_btn.webp', link: 'https://www.xbox.com' },
-  { name: 'Windows', image: '/images/windows_btn.webp', link: 'https://www.microsoft.com/store' },
+  { name: 'PlayStation 5', image: '/images/ps5_btn.webp' },
+  { name: 'Nintendo Switch', image: '/images/switch_btn.webp' },
+  { name: 'Steam', image: '/images/steam_btn.webp' },
+  { name: 'Xbox Series X|S', image: '/images/xbox_xs_btn.webp' },
+  { name: 'Xbox One', image: '/images/xbox_one_btn.webp' },
+  { name: 'Windows', image: '/images/windows_btn.webp' },
 ];
 
 export default function BuyScreen() {
@@ -72,16 +73,9 @@ export default function BuyScreen() {
 
       <div className="p5r-stores">
         {STORES.map((store) => (
-          <a
-            key={store.name}
-            href={store.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p5r-store"
-            aria-label={t('buy.storeAria', { name: store.name })}
-          >
+          <div key={store.name} className="p5r-store" title={store.name}>
             <Image src={store.image} alt={store.name} width={292} height={70} />
-          </a>
+          </div>
         ))}
       </div>
 

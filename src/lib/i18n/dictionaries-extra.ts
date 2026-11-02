@@ -95,7 +95,6 @@ export const ko: Dictionary = {
   'buy.digital': '다운로드판',
   'buy.intro':
     '플랫폼을 선택해 「갱생」의 여정을 시작하세요.|패키지판은 일부 기종만, 그 외는 다운로드판만 발매됩니다.',
-  'buy.storeAria': '{name} 스토어 열기',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': '시스템 요구 사항(PC)',
   'buy.sysreqAlt': 'PC 시스템 요구 사항',
@@ -202,7 +201,6 @@ export const fr: Dictionary = {
   'buy.digital': 'Numérique',
   'buy.intro':
     'Choisissez votre plateforme et commencez la réhabilitation.|Édition physique sur certaines plateformes uniquement.',
-  'buy.storeAria': 'Ouvrir la boutique {name}',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': 'Configuration requise (PC)',
   'buy.sysreqAlt': 'Configuration requise PC',
@@ -310,7 +308,6 @@ export const it: Dictionary = {
   'buy.digital': 'Digitale',
   'buy.intro':
     'Scegli la piattaforma e inizia la riabilitazione.|Edizione fisica solo su alcune piattaforme.',
-  'buy.storeAria': 'Apri lo store {name}',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': 'Requisiti di sistema (PC)',
   'buy.sysreqAlt': 'Requisiti di sistema PC',
@@ -416,7 +413,6 @@ export const de: Dictionary = {
   'buy.digital': 'Digital',
   'buy.intro':
     'Wähle deine Plattform und beginne die Rehabilitation.|Physische Version nur für ausgewählte Plattformen.',
-  'buy.storeAria': '{name}-Shop öffnen',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': 'Systemanforderungen (PC)',
   'buy.sysreqAlt': 'PC-Systemanforderungen',
@@ -524,7 +520,6 @@ export const es: Dictionary = {
   'buy.digital': 'Digital',
   'buy.intro':
     'Elige tu plataforma y empieza la rehabilitación.|Edición física solo en algunas plataformas.',
-  'buy.storeAria': 'Abrir la tienda de {name}',
   'buy.specTitle': 'SPEC',
   'buy.sysreq': 'Requisitos del sistema (PC)',
   'buy.sysreqAlt': 'Requisitos del sistema PC',
