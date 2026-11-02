@@ -61,17 +61,17 @@ export default function CharacterShowcase() {
               className="p5r-stage__name"
             />
             <p className="p5r-stage__desc">{character.description}</p>
-            <p className="p5r-stage__meta">
+            <div className="p5r-stage__meta">
               <span>阿尔卡那 · {character.arcana}</span>
               <span>{character.name}</span>
-            </p>
-            <Link
-              href={`/characters/${character.id}`}
-              className="p5r-stage__link"
-              aria-label={`查看 ${character.codename} 的详细档案`}
-            >
-              详细档案 →
-            </Link>
+              <Link
+                href={`/characters/${character.id}`}
+                className="p5r-stage__link"
+                aria-label={`查看 ${character.codename} 的详细档案`}
+              >
+                详细档案 →
+              </Link>
+            </div>
           </div>
         </div>
 

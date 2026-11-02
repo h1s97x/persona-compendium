@@ -49,8 +49,15 @@ export default function HeroPoster() {
         onClick={() => setIsPvOpen(true)}
         aria-label="播放《女神异闻录５ 皇家版》预告片"
       >
-        <video src="/assets/p5r_pv.mp4" autoPlay muted loop playsInline preload="metadata" />
-        <span className="p5r-pv__hint">▶ PV</span>
+        <video
+          src="/assets/p5r_pv.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden
+        />
       </button>
 
       <Link href="/buy" className="p5r-hero__buynow" aria-label="立刻购买">

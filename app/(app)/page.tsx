@@ -119,14 +119,7 @@ export default function Home() {
           </p>
         </article>
         <article className="p5r-dual__card p5r-dual__card--night">
-          <Image
-            src="/images/phantom.webp"
-            alt=""
-            aria-hidden
-            width={6410}
-            height={6300}
-            className="p5r-dual__mask"
-          />
+          <span aria-hidden className="p5r-dual__mask" />
           <span className="p5r-dual__badge">NIGHT</span>
           <h3>晚上化身怪盗，盗走堕落大人们的心</h3>
           <p>

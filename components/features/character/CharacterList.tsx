@@ -36,7 +36,7 @@ export default function CharacterList() {
           <p style={{ color: '#8b8477', fontSize: 13 }}>换个关键词或清除筛选试试吧</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 min-[520px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
           {filtered.map((character, index) => (
             <CharacterCard key={character.id} character={character} index={index} />
           ))}

@@ -10,13 +10,26 @@ interface CharacterCardProps {
 export default function CharacterCard({ character }: CharacterCardProps) {
   return (
     <Link href={`/characters/${character.id}`} className="p5r-card" style={{ display: 'block' }}>
-      <div style={{ position: 'relative', aspectRatio: '4 / 5', overflow: 'hidden' }}>
+      <div
+        style={{
+          position: 'relative',
+          aspectRatio: '4 / 5',
+          overflow: 'hidden',
+          background:
+            'radial-gradient(circle at 50% 78%, rgba(230,0,18,0.3), rgba(0,0,0,0) 62%)',
+        }}
+      >
         <Image
           src={character.images.character}
           alt={`${character.codename} / ${character.name}`}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-          style={{ objectFit: 'contain', objectPosition: 'bottom center', zIndex: 2 }}
+          style={{
+            objectFit: 'contain',
+            objectPosition: 'bottom center',
+            zIndex: 2,
+            transform: 'scale(1.03)',
+          }}
         />
         <Image
           src={character.images.persona}
@@ -26,12 +39,12 @@ export default function CharacterCard({ character }: CharacterCardProps) {
           height={260}
           style={{
             position: 'absolute',
-            right: '-6%',
-            bottom: '2%',
-            width: '46%',
+            right: '2%',
+            bottom: '1%',
+            width: '52%',
             height: 'auto',
-            opacity: 0.45,
-            filter: 'grayscale(0.2)',
+            opacity: 0.28,
+            filter: 'saturate(1.15)',
             zIndex: 1,
           }}
         />
