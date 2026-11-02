@@ -52,8 +52,14 @@ npm run build
 # 启动生产服务器
 npm start
 
-# 代码检查
+# 代码检查（ESLint）
 npm run lint
+
+# 类型检查（等价于 tsc --noEmit，CI 与本地一致）
+npm run type-check
+
+# 代码格式化（Prettier，规则见 .prettierrc）
+npm run format
 ```
 
 访问 [http://localhost:3000](http://localhost:3000) 查看网站。
@@ -62,39 +68,35 @@ npm run lint
 
 ```
 persona-compendium/
-├── app/                     # Next.js App Router（不套 src/，扁平化）
-│   ├── (app)/               # 业务区路由组：带统一外壳（Header/Footer/背景/进度/BGM）
-│   │   ├── layout.tsx       # (app) 外壳布局
-│   │   ├── page.tsx         # 首页 /
-│   │   ├── characters/      # 角色列表（SSG）
-│   │   │   ├── page.tsx
-│   │   │   ├── loading.tsx
-│   │   │   ├── error.tsx
-│   │   │   └── [id]/        # 角色详情（generateStaticParams + generateMetadata）
-│   │   ├── gallery/         # 画廊（loading.tsx）
-│   │   └── buy/             # 购买（loading.tsx）
-│   ├── api/                 # API 路由（Route Handlers）
-│   │   └── health/          # 探活示例
-│   ├── layout.tsx           # 根布局：仅 html/body + 字体 + 全局样式
-│   ├── not-found.tsx        # 404 页面
-│   ├── robots.ts            # robots.txt
-│   ├── sitemap.ts           # sitemap.xml
-│   └── globals.css          # 全局样式（@theme 设计 token）
-├── components/             # React 组件（按功能分层）
-│   ├── layout/             # 布局组件（Header / Footer）
-│   ├── features/           # 业务功能组件
-│   │   └── character/      # 角色模块（CharacterCard）
-│   ├── ui/                 # 通用 UI 组件（ScrollProgress）
-│   └── effects/            # 特效组件（AudioPlayer / ParticleBackground）
-├── hooks/                  # 自定义 Hooks（useScroll）
-├── lib/                    # 工具库（constants.ts 角色/平台数据）
-├── store/                  # 状态管理（Zustand，预留）
-├── types/                  # TypeScript 类型
-├── public/                 # 静态资源
-│   ├── images/             # 图片（characters/ personas/ icons/ platforms/ logos/ gallery/）
-│   ├── assets/             # 视频等资源
-│   └── audio/              # 音频文件
-└── reference/              # 原始静态官网（参照物，不参与构建）
+├── src/                        # 全部源码
+│   ├── app/                    # Next.js App Router
+│   │   ├── layout.tsx          # 唯一根布局：html/body + 字体 + 全局样式（语言切换不丢样式）
+│   │   ├── (site)/             # 默认语言（简中，无前缀）路由组
+│   │   ├── [locale]/           # 其余 8 种语言（/ja、/en、/zh-TW …）
+│   │   ├── api/health/         # 探活 Route Handler
+│   │   ├── not-found.tsx       # 404
+│   │   ├── robots.ts / sitemap.ts
+│   │   ├── globals.css         # Tailwind + @theme 设计 token
+│   │   └── p5r.css             # 站点视觉系统（首屏/生活区块/角色舞台等）
+│   ├── components/             # React 组件
+│   │   ├── layout/             # Header / Footer / RootShell / LanguageSwitcher
+│   │   ├── features/           # home / character / gallery / buy
+│   │   ├── ui/                 # 通用 UI（LocaleLink / ScrollProgress / BackToTop）
+│   │   └── effects/            # AudioPlayer / ParticleBackground
+│   ├── lib/                    # i18n 词典、素材解析、常量、SEO 元信息
+│   ├── hooks/                  # 自定义 Hooks
+│   ├── store/                  # 状态管理（Zustand，预留）
+│   └── types/                  # TypeScript 类型
+├── public/                     # 线上静态资源（Next 要求放在根目录）
+│   ├── images/
+│   │   ├── i18n/<locale>/      # 图片字素材：标题/标语/角色名/截图，按语言分目录
+│   │   ├── official/           # 官网原始素材库（装饰图、面板底图等）
+│   │   ├── characters/ personas/ icons/ platforms/ logos/ gallery/
+│   ├── assets/                 # PV 视频
+│   └── audio/                  # BGM
+├── assets/reference/           # 参考站与原始素材（不参与构建、不部署）
+├── docs/                       # 设计与更新文档
+└── next.config.ts / tsconfig.json / eslint.config.mjs / postcss.config.mjs / .cnb.yml
 ```
 
 ## 🎮 角色列表
@@ -163,7 +165,7 @@ npm run build
 
 ### 环境变量
 
-创建 `.env.local` 文件：
+复制 `.env.example` 为 `.env.local`，按需填写：
 
 ```env
 # 可选配置
@@ -172,20 +174,9 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 
 ### Tailwind 配置
 
-主题配置在 `tailwind.config.ts`：
-
-```typescript
-theme: {
-  extend: {
-    colors: {
-      p5r: {
-        red: '#E60012',
-        black: '#000000',
-      }
-    }
-  }
-}
-```
+本项目使用 Tailwind CSS v4，没有 `tailwind.config.ts`：设计 token 写在
+`src/app/globals.css` 的 `@theme inline` 区块（对应 `--color-p5r-*` 等变量），
+站点视觉样式集中在 `src/app/p5r.css`。
 
 ## 🐛 已知问题
 
