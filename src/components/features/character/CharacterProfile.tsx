@@ -118,8 +118,10 @@ export default function CharacterProfile({ character }: { character: Character }
               width={340}
               height={190}
               style={{
-                width: '54%',
-                height: 'auto',
+                // 名牌素材比例各不相同，按高度缩放才能保持各角色一致
+                height: 'clamp(42px, 4.4vw, 64px)',
+                width: 'auto',
+                maxWidth: '60%',
                 transform: 'rotate(-3deg)',
                 marginBottom: 6,
               }}

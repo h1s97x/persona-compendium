@@ -154,8 +154,8 @@ export default function GalleryBrowser() {
           <Image
             src={filteredImages[selectedImage].src}
             alt={altOf(filteredImages[selectedImage].category)}
-            width={1280}
-            height={720}
+            width={filteredImages[selectedImage].w}
+            height={filteredImages[selectedImage].h}
             style={{
               maxWidth: '90vw',
               maxHeight: '80vh',
@@ -186,15 +186,15 @@ function GalleryItem({ image, alt, onClick }: GalleryItemProps) {
       className="p5r-card"
       style={{ display: 'block', width: '100%', padding: 0, cursor: 'pointer', textAlign: 'left' }}
     >
-      <div style={{ position: 'relative', aspectRatio: '16 / 9' }}>
-        <Image
-          src={image.src}
-          alt={alt}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          style={{ objectFit: 'cover', zIndex: 2 }}
-        />
-      </div>
+      {/* 官网截图素材本身有两种比例（3:2 与 16:9），按原比例展示，不做 16:9 裁切 */}
+      <Image
+        src={image.src}
+        alt={alt}
+        width={image.w}
+        height={image.h}
+        sizes="(max-width: 768px) 100vw, 33vw"
+        style={{ display: 'block', width: '100%', height: 'auto', zIndex: 2 }}
+      />
       <p
         style={{
           padding: '10px 12px',

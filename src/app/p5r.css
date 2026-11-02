@@ -568,11 +568,13 @@ body {
   position: absolute;
   right: 0;
   bottom: 6%;
-  width: 28%;
-  max-height: 66%;
-  height: auto;
+  /* 人格面具原图比例差异极大（Johanna 1.41 / Arsene 1.04 / Necronomicon 2.0），
+     官网是按各自自然尺寸摆放的；这里统一按舞台高度缩放，保证不同角色视觉大小一致 */
+  height: 44%;
+  width: auto;
+  max-width: 38%;
   object-fit: contain;
-  object-position: bottom center;
+  object-position: bottom right;
   z-index: 2;
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
 }
@@ -581,9 +583,11 @@ body {
   position: absolute;
   left: 44%;
   bottom: 0;
+  /* 立绘原图高度一致（560~723px 视角色而定），官网按原尺寸摆放、不做宽度约束；
+     这里统一按舞台高度缩放，max-width 只作越界保护，避免宽幅角色被压矮 */
   height: 74%;
   width: auto;
-  max-width: 34%;
+  max-width: 52%;
   object-fit: contain;
   object-position: bottom center;
   z-index: 3;
@@ -595,7 +599,9 @@ body {
   left: 0;
   top: 9%;
   width: 72%;
-  height: 62%;
+  /* 面板底图 bg_slider_text1 原始尺寸 742×401，锁定同一比例，斜切角度才不会被拉歪 */
+  aspect-ratio: 742 / 401;
+  height: auto;
   background: url('/images/bg_slider_text1.webp') center / 100% 100% no-repeat;
   z-index: 1;
 }
@@ -611,9 +617,12 @@ body {
 }
 
 .p5r-stage__name {
-  width: 46%;
-  max-height: 24%;
-  height: auto;
+  /* 名牌图片字比例各不相同（chara2 2.07 / chara6 2.29 / de/chara5 2.02 …），
+     按宽度缩放会让不同角色的名牌高矮不一，改为统一按高度缩放 */
+  align-self: flex-start;
+  height: clamp(40px, 4.6vw, 66px);
+  width: auto;
+  max-width: 54%;
   object-fit: contain;
   object-position: left center;
 }
@@ -820,7 +829,9 @@ body {
   }
 
   .p5r-stage__name {
-    width: 44%;
+    width: auto;
+    height: clamp(38px, 9vw, 62px);
+    max-width: 52%;
     max-height: none;
   }
 

@@ -28,6 +28,9 @@ export interface GalleryImage {
   src: string;
   alt: string;
   category: GalleryCategory;
+  /** 原图像素尺寸：截图并非统一 16:9（1060×707 / 1256×707），需按原比例展示 */
+  w: number;
+  h: number;
 }
 
 export interface Platform {
