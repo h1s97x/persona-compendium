@@ -29,12 +29,14 @@ export default function CharacterList() {
   return (
     <>
       {filtered.length === 0 ? (
-        <div className="text-center py-24">
-          <p className="text-2xl text-gray-400 mb-4">没有找到符合条件的角色</p>
-          <p className="text-gray-500">换个关键词或清除筛选试试吧</p>
+        <div style={{ textAlign: 'center', padding: '80px 0' }}>
+          <p style={{ fontSize: 20, color: 'var(--p5r-gold-light)', fontWeight: 700, marginBottom: 8 }}>
+            没有找到符合条件的角色
+          </p>
+          <p style={{ color: '#8b8477', fontSize: 13 }}>换个关键词或清除筛选试试吧</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
           {filtered.map((character, index) => (
             <CharacterCard key={character.id} character={character} index={index} />
           ))}

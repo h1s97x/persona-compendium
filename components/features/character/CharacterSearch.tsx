@@ -34,8 +34,8 @@ export default function CharacterSearch() {
     ).length,
   );
 
-  const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
+  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(event.target.value);
     // 输入搜索词时清空阿尔卡那筛选，避免条件叠加造成困惑
     if (filterArcana) setFilterArcana(null);
   };
@@ -46,22 +46,32 @@ export default function CharacterSearch() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mb-16 space-y-6">
+    <div style={{ maxWidth: 900, margin: '0 auto 46px' }}>
       {/* 搜索框 */}
-      <div className="relative">
+      <div style={{ position: 'relative', marginBottom: 18 }}>
         <input
           type="search"
           value={keyword}
           onChange={handleKeywordChange}
           placeholder="搜索角色名 / 代号 / 人格面具 / 阿尔卡那…"
           aria-label="搜索角色"
-          className="w-full bg-black/60 border-2 border-p5r-red rounded-lg pl-12 pr-12 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-p5r-red-hover focus:ring-2 focus:ring-p5r-red/40 transition-all"
+          className="p5r-input"
+          style={{ paddingLeft: 44, paddingRight: 40, paddingTop: 14, paddingBottom: 14 }}
         />
         <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-p5r-red"
+          style={{
+            position: 'absolute',
+            left: 14,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 18,
+            height: 18,
+            color: 'var(--p5r-gold)',
+          }}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden
         >
           <path
             strokeLinecap="round"
@@ -72,58 +82,82 @@ export default function CharacterSearch() {
         </svg>
         {keyword && (
           <button
+            type="button"
             onClick={() => setSearchKeyword('')}
             aria-label="清空搜索"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-p5r-red transition-colors"
+            style={{
+              position: 'absolute',
+              right: 12,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'var(--p5r-gold-light)',
+              background: 'none',
+              border: 0,
+              cursor: 'pointer',
+              fontSize: 16,
+            }}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            ✕
           </button>
         )}
       </div>
 
       {/* 阿尔卡那快捷筛选 */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8 }}>
         <button
+          type="button"
+          className="p5r-chip"
+          data-active={filterArcana === null}
           onClick={() => setFilterArcana(null)}
-          className={`px-4 py-1.5 rounded-full border-2 text-sm transition-all ${
-            filterArcana === null
-              ? 'bg-p5r-red border-p5r-red text-white'
-              : 'border-gray-600 text-gray-300 hover:border-p5r-red hover:text-p5r-red'
-          }`}
         >
-          全部
+          <span>全部</span>
         </button>
         {ARCANAS.map((arcana) => (
           <button
             key={arcana}
+            type="button"
+            className="p5r-chip"
+            data-active={filterArcana === arcana}
             onClick={() => setFilterArcana(filterArcana === arcana ? null : arcana)}
-            className={`px-4 py-1.5 rounded-full border-2 text-sm transition-all ${
-              filterArcana === arcana
-                ? 'bg-p5r-red border-p5r-red text-white'
-                : 'border-gray-600 text-gray-300 hover:border-p5r-red hover:text-p5r-red'
-            }`}
           >
-            {arcana}
+            <span>{arcana}</span>
           </button>
         ))}
       </div>
 
       {/* 当前筛选状态 */}
       {activeFilters.length > 0 && (
-        <div className="flex items-center justify-center gap-3 text-sm text-gray-300">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 12,
+            marginTop: 16,
+            fontSize: 13,
+            color: '#b8ae9b',
+          }}
+        >
           <span>
-            共 <span className="text-p5r-red font-bold">{resultCount}</span> 位角色
-            {activeFilters.map((f) => (
-              <span key={f} className="ml-1 text-p5r-red">
-                {f}
+            共 <b style={{ color: 'var(--p5r-gold-light)' }}>{resultCount}</b> 位角色
+            {activeFilters.map((filter) => (
+              <span key={filter} style={{ marginLeft: 6, color: 'var(--p5r-gold)' }}>
+                {filter}
               </span>
             ))}
           </span>
           <button
+            type="button"
             onClick={clearAll}
-            className="text-gray-400 underline underline-offset-4 hover:text-p5r-red transition-colors"
+            style={{
+              background: 'none',
+              border: 0,
+              color: 'var(--p5r-gold)',
+              textDecoration: 'underline',
+              textUnderlineOffset: 4,
+              cursor: 'pointer',
+              fontSize: 13,
+            }}
           >
             清除筛选
           </button>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import CharacterSearch from "@/components/features/character/CharacterSearch";
 import CharacterList from "@/components/features/character/CharacterList";
 
@@ -9,16 +10,25 @@ export const metadata: Metadata = {
 
 export default function CharactersPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-p5r-red mb-4">心之怪盗团</h1>
-          <p className="text-white text-xl">搜索或筛选角色，点击卡片查看详细信息</p>
-        </div>
-
-        <CharacterSearch />
-        <CharacterList />
+    <div className="p5r-page">
+      <div className="p5r-page__head">
+        <Image
+          src="/images/chara_title.webp"
+          alt="CHARACTER"
+          width={515}
+          height={157}
+          priority
+          className="p5r-page__title"
+        />
+        <p className="p5r-page__sub">
+          心之怪盗团全体成员。
+          <br />
+          点击卡片查看角色档案与初期人格面具。
+        </p>
       </div>
+
+      <CharacterSearch />
+      <CharacterList />
     </div>
   );
 }

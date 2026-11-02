@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Character } from '@/types';
@@ -10,45 +7,86 @@ interface CharacterCardProps {
   index: number;
 }
 
-export default function CharacterCard({ character, index }: CharacterCardProps) {
+export default function CharacterCard({ character }: CharacterCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.05 }}
-      className="group"
-    >
-      <Link href={`/characters/${character.id}`}>
-        <div className="relative bg-gradient-to-br from-p5r-dark to-black border-2 border-p5r-red rounded-lg overflow-hidden h-96 cursor-pointer">
-          {/* Character Image */}
-          <div className="absolute inset-0 flex items-end justify-center">
-            <div className="relative w-full h-full">
-              <Image
-                src={character.images.character}
-                alt={character.name}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-contain object-bottom group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-          </div>
+    <Link href={`/characters/${character.id}`} className="p5r-card" style={{ display: 'block' }}>
+      <div style={{ position: 'relative', aspectRatio: '4 / 5', overflow: 'hidden' }}>
+        <Image
+          src={character.images.character}
+          alt={`${character.codename} / ${character.name}`}
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          style={{ objectFit: 'contain', objectPosition: 'bottom center', zIndex: 2 }}
+        />
+        <Image
+          src={character.images.persona}
+          alt=""
+          aria-hidden
+          width={200}
+          height={260}
+          style={{
+            position: 'absolute',
+            right: '-6%',
+            bottom: '2%',
+            width: '46%',
+            height: 'auto',
+            opacity: 0.45,
+            filter: 'grayscale(0.2)',
+            zIndex: 1,
+          }}
+        />
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to top, #050505 4%, transparent 52%)',
+            zIndex: 3,
+          }}
+        />
+      </div>
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-
-          {/* Character Info */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-            <h3 className="text-2xl font-bold text-white mb-2">{character.name}</h3>
-            <p className="text-p5r-red font-bold text-lg mb-2">{character.codename}</p>
-            <p className="text-gray-300 text-sm line-clamp-2">{character.description}</p>
-          </div>
-
-          {/* Hover Effect */}
-          <div className="absolute inset-0 bg-p5r-red/0 group-hover:bg-p5r-red/10 transition-colors duration-300" />
-        </div>
-      </Link>
-    </motion.div>
+      <div style={{ padding: '0 16px 18px', position: 'relative', zIndex: 4, marginTop: '-18px' }}>
+        <p
+          style={{
+            fontSize: 11,
+            letterSpacing: '0.24em',
+            color: 'var(--p5r-red)',
+            fontWeight: 700,
+          }}
+        >
+          {character.arcana}
+        </p>
+        <h3
+          style={{
+            fontSize: 21,
+            fontWeight: 900,
+            color: 'var(--p5r-gold-light)',
+            letterSpacing: '0.02em',
+            lineHeight: 1.3,
+            transform: 'skewX(-4deg)',
+          }}
+        >
+          {character.codename}
+        </h3>
+        <p style={{ fontSize: 13, color: '#a89f8e', marginBottom: 8 }}>{character.name}</p>
+        <p
+          style={{
+            fontSize: 12,
+            lineHeight: 1.8,
+            color: '#cfc6b4',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
+          {character.description}
+        </p>
+        <p style={{ marginTop: 10, fontSize: 12, color: 'var(--p5r-gold)' }}>
+          人格面具 · {character.persona}
+        </p>
+      </div>
+    </Link>
   );
 }
