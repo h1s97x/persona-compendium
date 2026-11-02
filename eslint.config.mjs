@@ -12,8 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // 原始静态官网参照物，无需 lint
-    "reference/**",
+    // 原始静态官网素材与参照物，无需 lint
+    "assets/**",
   ]),
 ]);
 
