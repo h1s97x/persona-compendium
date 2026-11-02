@@ -1,144 +1,186 @@
 /* ==== p5r · 首屏海报 + 预告片弹窗 ==== */
 
-/* ---------- 首屏（官网 .kv-wrapper + section.first-view） ---------- */
+/* ---------- 首屏海报 ---------- */
 
 .p5r-hero {
   position: relative;
-  margin-top: -30px;
-  z-index: 5;
-}
-
-/* 官网首屏是 1024×675 的固定画布，等比缩放到容器宽度 */
-.p5r-hero__fit {
-  position: relative;
+  /* 官方主视觉原图 918×670：限制显示宽度，整幅完整显示，不再全屏拉伸放大 */
   width: 100%;
-  height: calc(675px * var(--hero-scale, 1));
-}
-
-.p5r-hero__canvas {
-  position: relative;
-  width: 1024px;
-  height: 675px;
+  max-width: 1200px;
   margin: 0 auto;
-  transform: scale(var(--hero-scale, 1));
-  transform-origin: top center;
+  aspect-ratio: 918 / 670;
+  background: url('/images/poster.webp') center / cover no-repeat;
+  /* 原图四周是白色高光渐隐，黑底上补一层内阴影，让边缘自然过渡 */
+  box-shadow: inset 0 0 70px 18px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
 }
 
-/* 主视觉 fv.png：918×670，居中偏左 53px */
-.p5r-hero__kv {
+/* 官网提供的主视觉原图仅 918×670，宽屏铺满会被放大发虚，
+   这里在宽屏改用 2 倍重采样版本，避免浏览器二次插值 */
+@media (min-width: 1000px) {
+  .p5r-hero {
+    background-image: url('/images/poster-2x.webp');
+  }
+}
+
+.p5r-hero__logo {
   position: absolute;
-  top: 0;
-  left: 53px;
-  width: 918px;
-  height: 670px;
-  background: url('/images/official/fv.webp') center / contain no-repeat;
-}
-
-.p5r-hero__col {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  z-index: 6;
-}
-
-.p5r-hero__col--l {
-  left: 14px;
-  top: 37px;
-  align-items: flex-start;
-}
-
-.p5r-hero__col--r {
-  right: 0;
-  top: 154px;
-  align-items: flex-end;
-}
-
-.p5r-hero__copy1 {
-  display: block;
-  width: 326px;
+  left: 50%;
+  bottom: 3%;
+  width: 27%;
   height: auto;
+  transform: translateX(-50%) rotate(-3deg);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.85));
+  z-index: 4;
 }
 
-.p5r-hero__copy2 {
-  display: block;
-  width: 347px;
-  height: auto;
-  margin: -44px 0 0 -8px;
-}
-
-.p5r-hero__release {
-  display: block;
-  width: 310px;
-  height: auto;
-}
-
-/* PV：官网 .pv 303×202，播放器窗口 254×143 @ (43,52) */
-.p5r-hero__pv {
-  position: relative;
-  width: 303px;
-  height: 202px;
-  margin: 5px 0 0 -54px;
-  padding: 0;
-  border: 0;
-  background: url('/images/official/pv.webp') center / contain no-repeat;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.p5r-hero__pv video {
+.p5r-hero__buynow {
   position: absolute;
-  top: 52px;
-  left: 43px;
-  width: 254px;
-  height: 143px;
-  object-fit: cover;
-  pointer-events: none;
-  background: #000;
-}
-
-.p5r-hero__pv::after {
-  content: '';
-  position: absolute;
-  top: 52px;
-  left: 43px;
-  width: 254px;
-  height: 143px;
-  background: url('/images/official/play.webp') center / 63px 62px no-repeat;
-  pointer-events: none;
-}
-
-.p5r-hero__pv:hover {
-  transform: scale(1.02);
-}
-
-.p5r-hero__preorder {
-  display: block;
-  width: 338px;
-  margin: 109px -42px 0 0;
+  right: 3.5%;
+  bottom: 12%;
+  width: 23%;
+  z-index: 5;
+  transform: rotate(-4deg);
   transition:
     transform 0.25s ease,
     filter 0.25s ease;
 }
 
-.p5r-hero__preorder img {
-  display: block;
+.p5r-hero__buynow img {
   width: 100%;
   height: auto;
 }
 
-.p5r-hero__preorder:hover {
-  transform: translateY(-3px) scale(1.03);
-  filter: brightness(1.08);
+.p5r-hero__buynow:hover {
+  transform: rotate(-4deg) scale(1.07);
+  filter: brightness(1.1);
 }
 
-.p5r-hero__logo {
+/* 无本地化购买图时改用的文字按钮（拉丁/日韩语言） */
+.p5r-hero__buynow--text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border: 2px solid var(--p5r-gold-light);
+  background: linear-gradient(150deg, #e60012 0%, #8a0009 100%);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+  transform: skewX(-8deg) rotate(-4deg);
+  text-decoration: none;
+}
+
+.p5r-hero__buynow--text > span {
+  display: block;
+  transform: skewX(8deg);
+  color: #fff;
+  font-size: clamp(13px, 1.15vw, 18px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.p5r-hero__buynow--text:hover {
+  transform: skewX(-8deg) rotate(-2deg) scale(1.05);
+  filter: brightness(1.12);
+}
+
+.p5r-pv {
   position: absolute;
-  left: 53px;
-  bottom: 0;
-  z-index: 7;
-  width: 339px;
-  height: 237px;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.85));
+  left: 2.5%;
+  bottom: 3.5%;
+  width: 21%;
+  aspect-ratio: 303 / 202;
+  background: url('/images/pv.webp') center / contain no-repeat;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+.p5r-pv:hover {
+  transform: scale(1.04);
+}
+
+.p5r-pv video {
+  position: absolute;
+  top: 26.2%;
+  left: 14.5%;
+  width: 82.8%;
+  height: 69.8%;
+  object-fit: cover;
+  pointer-events: none;
+  background: #000;
+}
+
+.p5r-float {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  animation: p5r-floaty 6s ease-in-out infinite;
+}
+
+.p5r-float--l {
+  left: 0;
+  top: 11%;
+  width: 28%;
+  height: auto;
+}
+
+.p5r-float--r {
+  right: 0;
+  top: 26%;
+  width: 19%;
+  height: auto;
+  animation-delay: 1.4s;
+}
+
+/* 非中文语言用官网 AVAILABLE NOW 角标替代「新价格/最新平台」大图 */
+.p5r-float--badge {
+  top: 15%;
+  width: 15%;
+}
+
+@keyframes p5r-floaty {
+  0%,
+  100% {
+    transform: translateY(-6px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-1deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .p5r-float {
+    display: none;
+  }
+
+  .p5r-hero {
+    /* 竖屏按高度铺满，左右少量裁切，避免整图缩得太小 */
+    aspect-ratio: auto;
+    height: min(68vh, 520px);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .p5r-hero__logo {
+    width: 42%;
+    bottom: 19%;
+  }
+
+  .p5r-hero__buynow {
+    width: 30%;
+    right: 2%;
+    bottom: 3%;
+  }
+
+  .p5r-pv {
+    left: 2%;
+    bottom: 2%;
+    width: 29%;
+  }
 }
 
 /* ---------- 预告片弹窗 ---------- */
