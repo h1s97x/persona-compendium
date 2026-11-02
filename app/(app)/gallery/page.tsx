@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { GALLERY_CATEGORIES, GALLERY_IMAGES } from '@/lib/constants';
 import type { GalleryCategory } from '@/types';
@@ -25,153 +25,172 @@ export default function GalleryPage() {
   const closeLightbox = () => setSelectedImage(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-p5r-dark to-black py-20 px-4">
-      <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-10"
-        >
-          <h1 className="text-5xl font-bold text-p5r-red mb-4">游戏画廊</h1>
-          <p className="text-white text-xl">点击图片查看大图</p>
-        </motion.div>
+    <div className="p5r-page">
+      <div className="p5r-page__head">
+        <h1 className="p5r-h2" style={{ fontSize: 'clamp(34px, 5vw, 62px)' }}>
+          GALLERY
+        </h1>
+        <p className="p5r-page__sub">
+          截取自游戏内的名场面与战斗演出。
+          <br />
+          点击图片查看大图，支持左右切换。
+        </p>
+      </div>
 
-        {/* 分类筛选 */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-          {GALLERY_CATEGORIES.map((cat) => (
-            <button
-              key={cat.value}
-              onClick={() => {
-                setCategory(cat.value);
-                setSelectedImage(null);
-              }}
-              className={`px-5 py-2 rounded-full border-2 text-sm font-bold transition-all ${
-                category === cat.value
-                  ? 'bg-p5r-red border-p5r-red text-white'
-                  : 'border-gray-600 text-gray-300 hover:border-p5r-red hover:text-p5r-red'
-              }`}
+      {/* 分类筛选 */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8, marginBottom: 34 }}>
+        {GALLERY_CATEGORIES.map((cat) => (
+          <button
+            key={cat.value}
+            type="button"
+            className="p5r-chip"
+            data-active={category === cat.value}
+            onClick={() => {
+              setCategory(cat.value);
+              setSelectedImage(null);
+            }}
+          >
+            <span>{cat.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* 分组展示 */}
+      {category === 'all' ? (
+        ['scene', 'battle'].map((cat) => (
+          <section key={cat} style={{ marginBottom: 44 }}>
+            <h2
+              className="p5r-h3"
+              style={{ transform: 'skewX(-6deg)', marginBottom: 16, paddingLeft: 4 }}
             >
-              {cat.label}
-            </button>
+              {CATEGORY_LABELS[cat as Exclude<CategoryValue, 'all'>]}
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
+              {GALLERY_IMAGES.filter((img) => img.category === cat).map((image) => {
+                const index = filteredImages.findIndex((img) => img.id === image.id);
+                return (
+                  <GalleryItem
+                    key={image.id}
+                    image={image}
+                    onClick={() => setSelectedImage(index < 0 ? 0 : index)}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        ))
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredImages.map((image, index) => (
+            <GalleryItem
+              key={image.id}
+              image={image}
+              onClick={() => setSelectedImage(index)}
+            />
           ))}
         </div>
+      )}
 
-        {/* 分组标题 */}
-        {category === 'all' &&
-          ['scene', 'battle'].map((cat) => (
-            <div key={cat} className="mb-10">
-              <h2 className="text-2xl font-bold text-p5r-red mb-6 tracking-wider">
-                {CATEGORY_LABELS[cat as Exclude<CategoryValue, 'all'>]}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredImages
-                  .filter((img) => img.category === cat)
-                  .map((image, index) => (
-                    <GalleryItem
-                      key={image.id}
-                      image={image}
-                      index={index}
-                      onClick={() => setSelectedImage(index)}
-                    />
-                  ))}
-              </div>
-            </div>
-          ))}
-
-        {/* 单分类模式 */}
-        {category !== 'all' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredImages.map((image, index) => (
-              <GalleryItem
-                key={image.id}
-                image={image}
-                index={index}
-                onClick={() => setSelectedImage(index)}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Lightbox */}
-        {selectedImage !== null && (
-          <div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
-            onClick={closeLightbox}
-          >
-            <button
-              onClick={closeLightbox}
-              className="absolute top-4 right-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
-              aria-label="关闭"
-            >
-              ×
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage((prev) => (prev! > 0 ? prev! - 1 : filteredImages.length - 1));
-              }}
-              className="absolute left-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
-              aria-label="上一张"
-            >
-              ‹
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage((prev) => (prev! < filteredImages.length - 1 ? prev! + 1 : 0));
-              }}
-              className="absolute right-4 text-white text-4xl hover:text-p5r-red transition-colors z-10"
-              aria-label="下一张"
-            >
-              ›
-            </button>
-
-            <div className="relative w-full max-w-5xl aspect-video">
-              <Image
-                src={filteredImages[selectedImage].src}
-                alt={filteredImages[selectedImage].alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 80vw"
-                className="object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-          </div>
-        )}
+      <div style={{ textAlign: 'center', marginTop: 40 }}>
+        <Link href="/buy" className="p5r-btn">
+          <span>前往购买</span>
+        </Link>
       </div>
+
+      {/* Lightbox */}
+      {selectedImage !== null && (
+        <div className="p5r-modal" onClick={closeLightbox} role="dialog" aria-modal="true">
+          <button
+            type="button"
+            onClick={closeLightbox}
+            aria-label="关闭"
+            className="p5r-modal__close"
+            style={{ top: -48, right: 0 }}
+          >
+            ✕
+          </button>
+
+          <button
+            type="button"
+            aria-label="上一张"
+            onClick={(event) => {
+              event.stopPropagation();
+              setSelectedImage((prev) => (prev! > 0 ? prev! - 1 : filteredImages.length - 1));
+            }}
+            className="p5r-modal__nav"
+            style={{ left: -6 }}
+          >
+            ‹
+          </button>
+
+          <button
+            type="button"
+            aria-label="下一张"
+            onClick={(event) => {
+              event.stopPropagation();
+              setSelectedImage((prev) => (prev! < filteredImages.length - 1 ? prev! + 1 : 0));
+            }}
+            className="p5r-modal__nav"
+            style={{ right: -6 }}
+          >
+            ›
+          </button>
+
+          <Image
+            src={filteredImages[selectedImage].src}
+            alt={filteredImages[selectedImage].alt}
+            width={1280}
+            height={720}
+            style={{
+              maxWidth: '92vw',
+              maxHeight: '84vh',
+              width: 'auto',
+              height: 'auto',
+              border: '3px solid var(--p5r-gold)',
+              boxShadow: '0 0 0 6px #000, 0 24px 60px rgba(0,0,0,0.8)',
+            }}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
 interface GalleryItemProps {
   image: (typeof GALLERY_IMAGES)[number];
-  index: number;
   onClick: () => void;
 }
 
-function GalleryItem({ image, index, onClick }: GalleryItemProps) {
+function GalleryItem({ image, onClick }: GalleryItemProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.05 }}
-      className="cursor-pointer"
+    <button
+      type="button"
       onClick={onClick}
+      className="p5r-card"
+      style={{ display: 'block', width: '100%', padding: 0, cursor: 'pointer', textAlign: 'left' }}
     >
-      <div className="relative h-64 bg-black border-2 border-p5r-red rounded-lg overflow-hidden">
+      <div style={{ position: 'relative', aspectRatio: '16 / 9' }}>
         <Image
           src={image.src}
           alt={image.alt}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover"
+          sizes="(max-width: 768px) 50vw, 33vw"
+          style={{ objectFit: 'cover', zIndex: 2 }}
         />
       </div>
-    </motion.div>
+      <p
+        style={{
+          padding: '10px 12px',
+          fontSize: 12,
+          color: '#cfc6b4',
+          borderTop: '1px solid rgba(216,180,95,0.25)',
+          position: 'relative',
+          zIndex: 3,
+        }}
+      >
+        {image.alt}
+      </p>
+    </button>
   );
 }
